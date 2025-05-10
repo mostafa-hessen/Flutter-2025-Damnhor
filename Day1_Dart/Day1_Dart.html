@@ -486,10 +486,70 @@
       .installation-steps {
         counter-reset: step;
       }
+      /* أنماط وسائل التواصل */
+.lecturer-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-link svg {
+    width: 16px;
+    height: 16px;
+}
+
+.social-link.github {
+    background-color: #333;
+    color: white;
+    border: 1px solid #333;
+}
+
+.social-link.github:hover {
+    background-color: #222;
+}
+
+.social-link.linkedin {
+    background-color: #0077b5;
+    color: white;
+    border: 1px solid #0077b5;
+}
+
+.social-link.linkedin:hover {
+    background-color: #006097;
+}
+
+/* تعديلات للجوال */
+@media (max-width: 768px) {
+    .social-links {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .social-link {
+        justify-content: center;
+    }
+}
     </style>
   </head>
   <body>
-    <header class="header">
+    <!-- <header class="header">
       <div class="container">
         <h1 class="lecture-title animate">المحاضرة الأولى: Flutter و Dart</h1>
         <p class="lecture-subtitle animate delay-1">
@@ -508,7 +568,46 @@
           </div>
         </div>
       </div>
-    </header>
+    </header> -->
+   
+    <header class="header">
+    <div class="container">
+        <h1 class="lecture-title animate">المحاضرة الأولى: Flutter و Dart</h1>
+        <p class="lecture-subtitle animate delay-1">
+            رحلة البداية في تطوير التطبيقات المتعددة المنصات
+        </p>
+
+        <div class="lecturer-info animate delay-2">
+            <img
+                src="https://i.ibb.co/Fbpfy9Y5/ITI2.jpg"
+                alt="المحاضر مصطفى حسين"
+                class="lecturer-img"
+            />
+            <div class="lecturer-details">
+                <p class="lecturer-name">مصطفى حسين</p>
+                <p class="lecturer-title">مطور ومحاضر Flutter</p>
+                
+                <div class="social-links">
+                    <a href="https://github.com/mostafa-hessen" target="_blank" class="social-link github">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                        GitHub
+                    </a>
+                    
+                    <a href="https://www.linkedin.com/in/mostafa-hussain-ramadan/" target="_blank" class="social-link linkedin">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
     <main class="container">
         <section class="day-overview">
           <h2 class="section-title">📅 محتوى اليوم</h2>
@@ -533,6 +632,13 @@
                 <li>المتغيرات وأنواع البيانات</li>
                 <li>العوامل Operators</li>
                 <li>جمل التحكم Control Flow</li>
+              </ul>
+            </div>
+            <div class="timeline-item">
+              <h3>الجزء الرابع:  التعامل مع النصوص </h3>
+              <ul>
+                <li>String methods</li>
+                
               </ul>
             </div>
           </div>
@@ -1252,6 +1358,150 @@
         </div>
       </section>
 
+      <!-- قسم String Methods -->
+<section class="card">
+    <h2 class="card-title">📜 String Methods في Dart</h2>
+    
+    <div class="content-section">
+        <h3 class="section-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path>
+                <path d="M18 14h-8"></path>
+                <path d="M15 18h-5"></path>
+                <path d="M10 6h8v4h-8V6Z"></path>
+            </svg>
+            أهم دوال النصوص (Strings)
+        </h3>
+        
+        <div class="method">
+            <h4>1. length - طول النص</h4>
+            <div class="code-block">
+                <span class="code-keyword">String</span> name = <span class="code-string">'Flutter'</span>;<br>
+                print(name.length); <span class="code-comment">// 7</span>
+            </div>
+        </div>
+        
+        <div class="method">
+            <h4>2. toUpperCase() / toLowerCase() - تحويل الحروف</h4>
+            <div class="code-block">
+                <span class="code-keyword">String</span> text = <span class="code-string">'Dart Programming'</span>;<br>
+                print(text.toUpperCase()); <span class="code-comment">// 'DART PROGRAMMING'</span><br>
+                print(text.toLowerCase()); <span class="code-comment">// 'dart programming'</span>
+            </div>
+        </div>
+        
+        <div class="method">
+            <h4>3. contains() - التحقق من وجود نص</h4>
+            <div class="code-block">
+                <span class="code-keyword">String</span> message = <span class="code-string">'Welcome to Flutter'</span>;<br>
+                print(message.contains(<span class="code-string">'Flutter'</span>)); <span class="code-comment">// true</span><br>
+                print(message.contains(<span class="code-string">'Dart'</span>)); <span class="code-comment">// false</span>
+            </div>
+        </div>
+        
+        <div class="method">
+            <h4>4. substring() - استخراج جزء من النص</h4>
+            <div class="code-block">
+                <span class="code-keyword">String</span> lang = <span class="code-string">'Dart Programming'</span>;<br>
+                print(lang.substring(5)); <span class="code-comment">// 'Programming'</span><br>
+                print(lang.substring(0, 4)); <span class="code-comment">// 'Dart'</span>
+            </div>
+        </div>
+        
+        <div class="method">
+            <h4>5. split() - تقسيم النص إلى قائمة</h4>
+            <div class="code-block">
+                <span class="code-keyword">String</span> fruits = <span class="code-string">'Apple,Banana,Orange'</span>;<br>
+                <span class="code-keyword">List</span>&lt;<span class="code-keyword">String</span>> fruitsList = fruits.split(<span class="code-string">','</span>);<br>
+                print(fruitsList); <span class="code-comment">// ['Apple', 'Banana', 'Orange']</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-section">
+        <h3 class="section-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path>
+                <path d="M18 14h-8"></path>
+                <path d="M15 18h-5"></path>
+                <path d="M10 6h8v4h-8V6Z"></path>
+            </svg>
+            دوال متقدمة للنصوص
+        </h3>
+        
+        <div class="method">
+            <h4>6. trim() - إزالة المسافات الزائدة</h4>
+            <div class="code-block">
+                <span class="code-keyword">String</span> spaced = <span class="code-string">'   Flutter   '</span>;<br>
+                print(spaced.trim()); <span class="code-comment">// 'Flutter'</span><br>
+                print(spaced.trimLeft()); <span class="code-comment">// 'Flutter   '</span><br>
+                print(spaced.trimRight()); <span class="code-comment">// '   Flutter'</span>
+            </div>
+        </div>
+        
+        <div class="method">
+            <h4>7. replaceAll() - استبدال النصوص</h4>
+            <div class="code-block">
+                <span class="code-keyword">String</span> text = <span class="code-string">'I like Java'</span>;<br>
+                <span class="code-keyword">String</span> newText = text.replaceAll(<span class="code-string">'Java'</span>, <span class="code-string">'Dart'</span>);<br>
+                print(newText); <span class="code-comment">// 'I like Dart'</span>
+            </div>
+        </div>
+        
+        <div class="method">
+            <h4>8. startsWith() / endsWith() - التحقق من البداية والنهاية</h4>
+            <div class="code-block">
+                <span class="code-keyword">String</span> url = <span class="code-string">'https://flutter.dev'</span>;<br>
+                print(url.startsWith(<span class="code-string">'https'</span>)); <span class="code-comment">// true</span><br>
+                print(url.endsWith(<span class="code-string">'.com'</span>)); <span class="code-comment">// false</span>
+            </div>
+        </div>
+        
+        <div class="method">
+            <h4>9. indexOf() / lastIndexOf() - البحث عن النصوص</h4>
+            <div class="code-block">
+                <span class="code-keyword">String</span> sentence = <span class="code-string">'Dart is awesome and Dart is fun'</span>;<br>
+                print(sentence.indexOf(<span class="code-string">'Dart'</span>)); <span class="code-comment">// 0</span><br>
+                print(sentence.lastIndexOf(<span class="code-string">'Dart'</span>)); <span class="code-comment">// 17</span><br>
+                print(sentence.indexOf(<span class="code-string">'Python'</span>)); <span class="code-comment">// -1 (غير موجود)</span>
+            </div>
+        </div>
+        
+        <div class="method">
+            <h4>10. padLeft() / padRight() - إضافة حشوة للنص</h4>
+            <div class="code-block">
+                <span class="code-keyword">String</span> num = <span class="code-string">'5'</span>;<br>
+                print(num.padLeft(3, <span class="code-string">'0'</span>)); <span class="code-comment">// '005'</span><br>
+                print(num.padRight(3, <span class="code-string">'*'</span>)); <span class="code-comment">// '5**'</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="exercise">
+        <h3 class="exercise-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            تمارين تطبيقية
+        </h3>
+        
+        <div class="task">
+            <h4>التمرين 1: عكس النصوص</h4>
+            <p>اكتب دالة تقبل نصًا وتعيده معكوسًا (مثال: "Flutter" تصبح "rettulF")</p>
+        </div>
+        
+        <div class="task">
+            <h4>التمرين 2: تحليل الجملة</h4>
+            <p>اكتب برنامج يحسب عدد الكلمات في جملة معينة (استخدم split و trim)</p>
+        </div>
+        
+        <div class="task">
+            <h4>التمرين 3: إخفاء البريد الإلكتروني</h4>
+            <p>اكتب دالة تخفي جزءًا من البريد الإلكتروني (مثال: "user@example.com" تصبح "us****@example.com")</p>
+        </div>
+    </div>
+</section>
+
    
       <!-- قسم الواجبات -->
 <section class="card assignments">
@@ -1298,6 +1548,43 @@
         <p>اكتب برنامج يطبع الأرقام من 1 إلى 100 لكن يتخطى الرقم 41:</p>
       
     </div>
+    <div class="assignment">
+        <h3>
+          الواجب 6
+                    اكتب برنامج يحسب الأعداد الأولية من 1 إلى 100 باستخدام الحلقات والشروط.
+</h3>
+        <p style="color: #e53e3e;">
+          
+تلميح
+العدد الأولي هو الذي لا يقبل القسمة إلا على نفسه وعلى 1.
+        </p>
+      
+    </div>
+    <!-- قسم تمارين String Methods -->
+    <h2 class="card-title">📝 تمارين تطبيقية على String Methods</h2>
+    
+    <div class="assignment">
+        <h3>التمرين 1: عكس النصوص (String Reversal)</h3>
+        <p>اكتب دالة تقبل نصًا وتعيده معكوسًا باستخدام دوال الـ String</p>
+       flutter => rettulf
+        <div class="hint">
+            <strong>تلميح:</strong> استخدم <span class="highlight">split()</span> و <span class="highlight">reversed</span> و <span class="highlight">join()</span>
+        </div>
+    </div>
+    
+    
+    
+   
+    <div class="assignment">
+        <h3>التمرين 2: إخفاء البريد الإلكتروني (Email Masking)</h3>
+        <p>اخفي الجزء الأول من البريد الإلكتروني باستخدام asterisks (*)</p>
+     
+        memo123@gmail.com => m****@gmail.com
+    </div>
+    
+  
+    
+  
 </section>
 
    <section class="resources">
