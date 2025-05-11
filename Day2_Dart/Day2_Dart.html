@@ -669,6 +669,310 @@ code {
   right: -15px;
   color: #e74c3c;
 }
+
+        .math-hero {
+            background: var(--gradient);
+            color: white;
+            padding: 3rem 1rem;
+            border-radius: 0 0 30px 30px;
+            text-align: center;
+            margin-bottom: 3rem;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .math-hero::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .math-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .math-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .math-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .math-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-header::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: -10px;
+            width: 100px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-header i {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-left: 15px;
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin: 0;
+        }
+
+        .math-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .math-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .math-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .math-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+        }
+
+        .math-card h3 {
+            color: var(--secondary);
+            font-size: 1.4rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .math-card h3 i {
+            margin-left: 10px;
+            color: var(--accent);
+        }
+
+        .code-container {
+            background: #1e1e3f;
+            color: #e1e1ff;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            overflow-x: auto;
+            margin: 15px 0;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .code-keyword {
+            color: #ff7edb;
+        }
+
+        .code-type {
+            color: #5ce7ff;
+        }
+
+        .code-string {
+            color: #f6ad55;
+        }
+
+        .code-comment {
+            color: #a0aec0;
+            font-style: italic;
+        }
+
+        .exercise-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .exercise-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .exercise-header i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-left: 15px;
+        }
+
+        .exercise-header h2 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin: 0;
+        }
+
+        .exercise-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .exercise-card {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(67, 97, 238, 0.1);
+        }
+
+        .exercise-card h3 {
+            color: var(--secondary);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .exercise-card h3 i {
+            margin-left: 10px;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .exercise-card p {
+            margin-bottom: 15px;
+        }
+
+        .hint {
+            background: rgba(72, 149, 239, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            border-right: 3px solid var(--accent);
+            margin-top: 15px;
+        }
+
+        .hint-title {
+            color: var(--primary);
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hint-title i {
+            margin-left: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .math-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .math-cards, .exercise-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .math-card, .exercise-section {
+                padding: 20px;
+            }
+        }
+.rotating-quotes {
+  background: linear-gradient(135deg, var(--flutter-blue), var(--flutter-teal));
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.rotating-quotes .quote {
+  display: none;
+  animation: fadeInOut 1.5s ease;
+}
+
+.rotating-quotes .quote.active {
+  display: block;
+}
+
+.rotating-quotes p {
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+}
+
+.dots span.active {
+  background: white;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
     </style>
 </head>
 
@@ -679,33 +983,7 @@ code {
             الدوال - هياكل البيانات - مقدمة في البرمجة الكائنية
         </p>
 
-        <!-- <div class="lecturer-info animate delay-2">
-        <img
-          src="https://i.ibb.co/Fbpfy9Y5/ITI2.jpg"
-          alt="صورة المحاضر"
-          class="lecturer-img"
-        />
-        <div>
-          <p class="lecturer-name">مصطفى حسين</p>
-          <div class="social-links">
-            <a
-              href="https://github.com/mostafa-hessen"
-              target="_blank"
-              style="color: white; margin-left: 10px"
-            >
-              <i class="fab fa-github"></i>
-            </a>
-            <a
-              href="https://github.com/mostafa-hessen"
-              target="_blank"
-              style="color: white"
-            >
-              <i class="fab fa-linkedin"></i>
-            </a>
-          </div>
-        </div>
-      </div> -->
-
+    
         <div class="lecturer-info animate delay-2">
             <img src="https://i.ibb.co/Fbpfy9Y5/ITI2.jpg" alt="المحاضر مصطفى حسين" class="lecturer-img">
             <div class="lecturer-details">
@@ -736,23 +1014,14 @@ code {
                     </a>
                 </div>
             </div>
+            
         </div>
+        
     </div>
 
     <div class="container">
-        <!-- عناصر المحاضرة
-        <div class="card animate delay-3">
-            <h2 class="card-title">عناصر المحاضرة</h2>
-            <ul class="feature-list">
-                <li>الدوال في Dart وأنواعها</li>
-                <li>معاملات الدوال (Named و Positional)</li>
-                <li>الدوال المجهولة (Anonymous) والدوال السهمية (Arrow)</li>
-                <li>نطاق المتغيرات (Scope) والدوال الرياضية</li>
-                <li>الدوال العليا (Higher Order): map, where, reduce</li>
-                <li>هياكل البيانات: List, Set, Map وطرقها المدمجة</li>
-                <li>مقدمة في البرمجة الكائنية: الكائنات والكلاسات</li>
-            </ul>
-        </div> -->
+      
+     
         <!-- عناصر المحاضرة - النسخة المعدلة -->
         <div class="card animate delay-3">
             <h2 class="card-title">
@@ -1177,6 +1446,143 @@ code {
                 </div>
             </div>
 
+<div class="dart-math-section">
+  <h2 class="section-title">
+    <i class="fas fa-square-root-alt"></i>
+    الرياضيات في Dart
+  </h2>
+
+  <div class="math-category">
+    <h3 class="category-title">
+      <i class="fas fa-calculator"></i>
+      الدوال الرياضية الأساسية
+    </h3>
+    
+    <div class="math-card">
+      <h4 class="math-title">الثوابت الرياضية</h4>
+      <div class="math-content">
+        <div class="code-example">
+          <pre><code class="language-dart">import 'dart:math';
+
+void main() {
+  print(pi); // 3.141592653589793
+  print(e); // 2.718281828459045
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="math-card">
+      <h4 class="math-title">العمليات الأساسية</h4>
+      <div class="math-content">
+        <div class="code-example">
+          <pre><code class="language-dart">// الجمع والطرح
+print(5 + 3); // 8
+print(5 - 3); // 2
+
+// الضرب والقسمة
+print(5 * 3); // 15
+print(5 / 3); // 1.666...
+print(5 ~/ 3); // 1 (قسمة صحيحة)
+
+// الباقي
+print(5 % 3); // 2</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="math-category">
+    <h3 class="category-title">
+      <i class="fas fa-function"></i>
+      دوال مكتبة math
+    </h3>
+    
+    <div class="math-card">
+      <h4 class="math-title">الدوال المثلثية</h4>
+      <div class="math-content">
+        <div class="code-example">
+          <pre><code class="language-dart">// الزوايا بالراديان
+print(sin(pi/2)); // 1.0
+print(cos(pi)); // -1.0
+print(tan(pi/4)); // ~1.0</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="math-card">
+      <h4 class="math-title">دوال التقريب</h4>
+      <div class="math-content">
+        <div class="code-example">
+          <pre><code class="language-dart">print(round(4.7)); // 5
+print(floor(4.7)); // 4
+print(ceil(4.2)); // 5
+print(truncate(4.7)); // 4 (قطع الكسور)</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="math-card">
+      <h4 class="math-title">الدوال الأسية واللوغاريتمية</h4>
+      <div class="math-content">
+        <div class="code-example">
+          <pre><code class="language-dart">print(exp(1)); // ~2.718 (e^1)
+print(log(e)); // 1.0 (ln(e))
+print(pow(2, 3)); // 8.0 (2^3)
+print(sqrt(16)); // 4.0</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="math-category">
+    <h3 class="category-title">
+      <i class="fas fa-random"></i>
+      توليد الأرقام العشوائية
+    </h3>
+    
+    <div class="math-card">
+      <div class="math-content">
+        <div class="code-example">
+          <pre><code class="language-dart">// رقم عشوائي بين 0 و1
+print(Random().nextDouble());
+
+// رقم عشوائي بين min وmax
+int randomInRange(int min, int max) {
+  return min + Random().nextInt(max - min);
+}
+
+// مثال: رقم بين 10 و20
+print(randomInRange(10, 20));</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exercises-section">
+    <h3 class="exercises-title">
+      <i class="fas fa-tasks"></i>
+      تمارين عملية
+    </h3>
+    
+    <div class="exercise-card">
+      <h4 class="exercise-title">التمرين 1: حساب مساحة الدائرة</h4>
+      <p>اكتب دالة تحسب مساحة دائرة بمعلومية نصف القطر</p>
+      <div class="hint">تلميح: استخدم pi من مكتبة math</div>
+    </div>
+
+    <div class="exercise-card">
+      <h4 class="exercise-title">التمرين 2: توليد كود تحقق</h4>
+      <p>اكتب دالة تولد كود تحقق عشوائي مكون من 6 أرقام</p>
+    </div>
+
+    <div class="exercise-card">
+      <h4 class="exercise-title">التمرين 3: حل معادلة من الدرجة الثانية</h4>
+      <p>اكتب دالة تحل المعادلة ax² + bx + c = 0</p>
+      <div class="hint">تلميح: استخدم sqrt من مكتبة math</div>
+    </div>
+  </div>
+</div>
 
             <div class="content-section">
                 <h2 class="card-title">
@@ -1606,7 +2012,7 @@ console.log(eid.getDay()); // 3 (يوم الأربعاء)</code></pre>
         </div>
 
         <!-- التمارين والواجبات -->
-        <div class="card">
+        <!-- <div class="card">
             <h2 class="card-title">تمارين وواجبات</h2>
 
             <div class="exercise">
@@ -1643,8 +2049,264 @@ console.log(eid.getDay()); // 3 (يوم الأربعاء)</code></pre>
                 <p>2. أضف دالة لطباعة معلومات الطالب.</p>
                 <p>3. أنشئ كائنين من هذا الكلاس واستدع الدالة لكل منهما.</p>
             </div>
-        </div>
+        </div> -->
+        
+        <div class="completion-quote ">
+  <div class="quote-content">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+    </svg>
+    <p class="quote-text"></p>
+  </div>
+</div>
 
+<section class="tasks-section">
+  <div class="container">
+    <h2 class="section-title animate">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+      </svg>
+      تمارين Dart التفاعلية
+    </h2>
+
+    
+    <!-- المستوى المبتدئ -->
+    <div class="card animate delay-1">
+        <h3 class="card-title">المهام</h3>
+        
+        <div class="exercise">
+            <h4 class="exercise-title">
+                <i class="fas fa-tasks"></i>
+                التمرين 1: الدوال
+            </h4>
+            <p>1. اكتب دالة تقبل رقمين وتعيد مجموعهما مع نوع محدد للدالة.</p>
+            <p>
+                2. اكتب دالة تقبل معاملات مسماة (named parameters) لإنشاء رسالة
+                ترحيب.
+                تقبل الاسم والرساله المراد ظهورها 
+                ملاحظه الاسم يجب ان يكون مطلوبا 
+                لكن الرساله اختياريه وتكون الرساله الافتراضيه 
+                wellcom
+            </p>
+           
+        </div>
+      <!-- تمرين البحث عن الأصدقاء -->
+      <div class="exercise">
+        <h4 class="exercise-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          مهمة البحث عن الأصدقاء في الفصل
+        </h4>
+        <div class="code-block">
+          <span class="code-keyword">void</span> <span class="code-type">main</span>() {<br>
+          &nbsp;&nbsp;<span class="code-keyword">List</span>&lt;<span class="code-keyword">String</span>&gt; class1 = [<span class="code-string">"Ahmed"</span>, <span class="code-string">"Mona"</span>, <span class="code-string">"Ali"</span>, <span class="code-string">"Nada"</span>, <span class="code-string">"Omar"</span>];<br>
+          &nbsp;&nbsp;<span class="code-keyword">List</span>&lt;<span class="code-keyword">String</span>&gt; class2 = [<span class="code-string">"Yara"</span>, <span class="code-string">"Hany"</span>, <span class="code-string">"Mona"</span>, <span class="code-string">"Kareem"</span>, <span class="code-string">"Lina"</span>];<br>
+          &nbsp;&nbsp;<span class="code-keyword">List</span>&lt;<span class="code-keyword">String</span>&gt; class3 = [<span class="code-string">"Ali"</span>, <span class="code-string">"Samir"</span>, <span class="code-string">"Nada"</span>, <span class="code-string">"Hana"</span>, <span class="code-string">"Youssef"</span>];<br><br>
+          &nbsp;&nbsp;<span class="code-comment">// اكتب دالة تبحث عن طالب وتخبرك في أي فصل موجود</span><br>
+          }<br><br>
+          <span class="code-comment">// مثال:</span><br>
+          print(findStudent(<span class="code-string">"Nada"</span>)); <span class="code-comment">// يجب أن تطبع: "Nada is in class1 at index 3 and class3 at index 2"</span>
+        </div>
+      </div>
+
+      <!-- تمرين أسماء المواليد -->
+      <div class="exercise">
+        <h4 class="exercise-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          مساعد اختيار أسماء المواليد
+        </h4>
+        <div class="code-block">
+          <span class="code-keyword">void</span> <span class="code-type">main</span>() {<br>
+          &nbsp;&nbsp;<span class="code-keyword">List</span>&lt;<span class="code-keyword">String</span>&gt; nameSuggestions = [<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Mohamed"</span>, <span class="code-string">"Ali"</span>, <span class="code-string">"Aya"</span>, <span class="code-string">"Ali"</span>, <br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Nour"</span>, <span class="code-string">"Mohamed"</span>, <span class="code-string">"Aya"</span>, <span class="code-string">"Omar"</span><br>
+          &nbsp;&nbsp;];<br><br>
+          &nbsp;&nbsp;<span class="code-comment">// اكتب دالة ترجع أسماء فريدة مرتبة أبجديًا</span><br>
+          }<br><br>
+          <span class="code-comment">// مثال:</span><br>
+          print(getUniqueNames()); <span class="code-comment">// ["Ali", "Aya", "Mohamed", "Nour", "Omar"]</span>
+        </div>
+      </div>
+
+  
+      <!-- تمرين درجات الطلاب -->
+      <div class="exercise">
+        <h4 class="exercise-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          حاسبة درجات الطلاب
+        </h4>
+        <div class="code-block">
+          <span class="code-keyword">void</span> <span class="code-type">main</span>() {<br>
+          &nbsp;&nbsp;<span class="code-keyword">Map</span>&lt;<span class="code-keyword">String</span>, <span class="code-keyword">int</span>&gt; studentGrades = {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Ahmed"</span>: <span class="code-number">85</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Mona"</span>: <span class="code-number">92</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Ali"</span>: <span class="code-number">78</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Nada"</span>: <span class="code-number">95</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Omar"</span>: <span class="code-number">88</span><br>
+          &nbsp;&nbsp;};<br><br>
+          &nbsp;&nbsp;<span class="code-comment">// 1. اكتب دالة لحساب متوسط الدرجات</span><br>
+          &nbsp;&nbsp;<span class="code-comment">// 2. اكتب دالة لإيجاد أعلى درجة</span><br>
+          }<br><br>
+          <span class="code-comment">// مثال:</span><br>
+          print(<span class="code-string">"Average: ${calculateAverage()}"</span>); <span class="code-comment">// 87.6</span><br>
+          print(<span class="code-string">"Top student: ${findTopStudent()}"</span>); <span class="code-comment">// Nada with 95</span>
+        </div>
+      </div>
+
+      <!-- تمرين تصفية المنتجات -->
+      <div class="exercise">
+        <h4 class="exercise-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="10" cy="20" r="1"></circle>
+            <circle cx="18" cy="20" r="1"></circle>
+            <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+          </svg>
+          نظام تصفية المنتجات
+        </h4>
+        <div class="code-block">
+          <span class="code-keyword">void</span> <span class="code-type">main</span>() {<br>
+          &nbsp;&nbsp;<span class="code-keyword">List</span>&lt;<span class="code-keyword">Map</span>&lt;<span class="code-keyword">String</span>, <span class="code-keyword">dynamic</span>&gt;&gt; products = [<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"name"</span>: <span class="code-string">"Laptop"</span>, <span class="code-string">"price"</span>: <span class="code-number">1200</span>, <span class="code-string">"category"</span>: <span class="code-string">"Electronics"</span>},<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"name"</span>: <span class="code-string">"Shirt"</span>, <span class="code-string">"price"</span>: <span class="code-number">25</span>, <span class="code-string">"category"</span>: <span class="code-string">"Clothing"</span>},<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"name"</span>: <span class="code-string">"Phone"</span>, <span class="code-string">"price"</span>: <span class="code-number">800</span>, <span class="code-string">"category"</span>: <span class="code-string">"Electronics"</span>},<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"name"</span>: <span class="code-string">"Pants"</span>, <span class="code-string">"price"</span>: <span class="code-number">40</span>, <span class="code-string">"category"</span>: <span class="code-string">"Clothing"</span>}<br>
+          &nbsp;&nbsp;];<br><br>
+          &nbsp;&nbsp;<span class="code-comment">// 1. اكتب دالة لتصفية المنتجات حسب الفئة</span><br>
+          &nbsp;&nbsp;<span class="code-comment">// 2. اكتب دالة لإيجاد المنتج الأعلى سعرًا</span><br>
+          }
+        </div>
+      </div>
+
+ 
+      <!-- تمرين Higher-Order Functions -->
+      <div class="exercise">
+        <h4 class="exercise-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+          محول الأرقام السحري
+        </h4>
+        <div class="code-block">
+          <span class="code-keyword">void</span> <span class="code-type">main</span>() {<br>
+          &nbsp;&nbsp;<span class="code-keyword">List</span>&lt;<span class="code-keyword">int</span>&gt; numbers = [<span class="code-number">1</span>, <span class="code-number">2</span>, <span class="code-number">3</span>, <span class="code-number">4</span>, <span class="code-number">5</span>];<br><br>
+          &nbsp;&nbsp;<span class="code-comment">// 1. استخدم Higher-Order Functions لتحويل الأرقام إلى مربعاتها</span><br>
+          &nbsp;&nbsp;<span class="code-comment">// 2. استخدم Higher-Order Functions لتصفية الأرقام الفردية فقط</span><br>
+          &nbsp;&nbsp;<span class="code-comment">// 3. استخدم reduce لحساب مجموع الأرقام</span><br>
+          }
+        </div>
+        <div class="note">
+          <div class="note-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            ملاحظة
+          </div>
+          <p>حاول مرة تستخدم الدوال الجاهزة ومرة تعمل الكود بنفسك بدون الاستعانة بدالة جاهزة</p>
+        </div>
+      </div>
+
+  
+
+
+
+      <!-- تمرين Guess the Number -->
+      <div class="exercise">
+        <h4 class="exercise-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+          لعبة Guess the Number
+        </h4>
+        <div class="code-block">
+          <span class="code-keyword">void</span> <span class="code-type">main</span>() {<br>
+          &nbsp;&nbsp;<span class="code-comment">// 1. اكتب دالة لتوليد رقم عشوائي بين 1-100</span><br>
+          &nbsp;&nbsp;<span class="code-comment">// 2. اكتب دالة لمقارنة تخمين المستخدم بالرقم</span><br>
+          &nbsp;&nbsp;<span class="code-comment">// 3. اكتب دالة لإعطاء تلميحات (أكبر/أصغر)</span><br>
+          }
+        </div>
+      </div>
+
+      <!-- تمرين الأذكار -->
+      <div class="exercise">
+        <h4 class="exercise-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          برنامج الأذكار
+        </h4>
+        <div class="code-block">
+          <span class="code-keyword">List</span>&lt;<span class="code-keyword">String</span>&gt; azkari = [<br>
+          &nbsp;&nbsp;<span class="code-string">"صلى الله عليه وسلم"</span>,<br>
+          &nbsp;&nbsp;<span class="code-string">"الحمد لله"</span>,<br>
+          &nbsp;&nbsp;<span class="code-string">"الله أكبر"</span>,<br>
+          &nbsp;&nbsp;<span class="code-string">"سبحان الله"</span>,<br>
+          &nbsp;&nbsp;<span class="code-string">"لا إله إلا الله"</span>,<br>
+          &nbsp;&nbsp;<span class="code-string">"لا إله إلا الله وحده لا شريك له، له الملك وله الحمد، وهو على كل شيء قدير"</span>,<br>
+          &nbsp;&nbsp;<span class="code-string">"أستغفر الله"</span>,<br>
+          &nbsp;&nbsp;<span class="code-string">"سبحان الله وبحمده، سبحان الله العظيم"</span>,<br>
+          &nbsp;&nbsp;<span class="code-string">"لا حول ولا قوة إلا بالله"</span>,<br>
+          &nbsp;&nbsp;<span class="code-string">"لا إله إلا انت سبحانك إني كنت من الظالمين"</span><br>
+          ];<br><br>
+          <span class="code-comment">// 1. اكتب دالة تعرض ذكر معين في كل مرة</span><br>
+          <span class="code-comment">// 2. اكتب دالة تستخدم named parameters:</span><br>
+          <span class="code-comment">//    - المعامل الأول: الذكر المراد إضافته (مطلوب)</span><br>
+          <span class="code-comment">//    - المعامل الثاني: مكان الإضافة في الـ List (اختياري - إذا لم يحدد يضاف في الأول)</span><br>
+        </div>
+      </div>
+
+
+          <!-- تمرين To-Do List -->
+      <div class="exercise">
+        <h4 class="exercise-title">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          نظام إدارة المهام 
+          <strong style="color: Red;">
+            هذا التمرين اضافي 
+          **bounus
+          </strong>
+        </h4>
+        <div class="code-block">
+          <span class="code-keyword">void</span> <span class="code-type">main</span>() {<br>
+          &nbsp;&nbsp;<span class="code-keyword">List</span>&lt;<span class="code-keyword">Map</span>&lt;<span class="code-keyword">String</span>, <span class="code-keyword">dynamic</span>&gt;&gt; tasks = [<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"title"</span>: <span class="code-string">"Learn Dart"</span>, <span class="code-string">"completed"</span>: <span class="code-keyword">false</span>},<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"title"</span>: <span class="code-string">"Build App"</span>, <span class="code-string">"completed"</span>: <span class="code-keyword">true</span>},<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-string">"title"</span>: <span class="code-string">"Write Blog"</span>, <span class="code-string">"completed"</span>: <span class="code-keyword">false</span>}<br>
+          &nbsp;&nbsp;];<br><br>
+          &nbsp;&nbsp;<span class="code-comment">// 1. اكتب دالة لإضافة مهمة جديدة</span><br>
+          &nbsp;&nbsp;<span class="code-comment">// 2. اكتب دالة لتغيير حالة المهمة</span><br>
+          &nbsp;&nbsp;<span class="code-comment">// 3. اكتب دالة لتصفية المهام المكتملة</span><br>
+          }
+        </div>
+      </div>
+  </div>
+  </div>
+</section>
         <!-- المصادر -->
         <div class="resources">
             <h3 class="resources-title">مصادر إضافية للتعلم</h3>
@@ -1696,7 +2358,9 @@ console.log(eid.getDay()); // 3 (يوم الأربعاء)</code></pre>
                 observer.observe(card);
             });
         });
-    </script>
+
+
+  </script>
 </body>
 
 </html>
