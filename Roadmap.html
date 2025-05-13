@@ -1,357 +1,0 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>خطة تدريب Flutter & Dart</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f9f9f9;
-      margin: 0;
-      padding: 20px;
-      line-height: 1.8;
-      direction: rtl;
-    }
-
-    h1, h2 {
-      text-align: center;
-      color: #2c3e50;
-    }
-
-    section {
-      background: #fff;
-      padding: 20px;
-      margin: 20px auto;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.08);
-      max-width: 900px;
-    }
-
-    h3 {
-      color: #16a085;
-      margin-top: 0;
-    }
-
-    ul {
-      padding-right: 20px;
-    }
-
-    ul li {
-      margin-bottom: 8px;
-    }
-
-    .tips, .resources {
-      background: #f1f1f1;
-      padding: 10px 15px;
-      margin-top: 10px;
-      border-right: 5px solid #3498db;
-      border-radius: 6px;
-    }
-
-    a {
-      color: #2980b9;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 40px;
-      color: #7f8c8d;
-    }
-
-    .day-title {
-      font-size: 1.3em;
-      font-weight: bold;
-      color: #2980b9;
-      margin-bottom: 10px;
-    }
-  </style>
-</head>
-<body>
-
-  <h1>🗂️ خطة التدريب الكاملة – Flutter & Dart Bootcamp</h1>
-  <h2>8 أيام × 6 ساعات يوميًا (3 شرح + 3 تطبيق عملي)</h2>
-
-  <section>
-    <div class="day-title">✅ اليوم الأول: مقدمة + أساسيات Dart</div>
-    <h3>🕐 الشرح (3 ساعات):</h3>
-    <ul>
-      <li>ما هو Flutter؟ ولماذا Flutter؟</li>
-      <li>مقدمة عن Dart ولماذا تُستخدم مع Flutter.</li>
-      <li>إعداد بيئة العمل (VS Code / Android Studio – Flutter SDK – Android Emulator).</li>
-      <li>أنواع البيانات، المتغيرات، العمليات الحسابية، السلاسل النصية.</li>
-      <li>جمل التحكم: <code>if</code>, <code>else</code>, <code>switch</code>, <code>for</code>, <code>while</code>.</li>
-    </ul>
-
-    <h3>🛠️ التطبيق (3 ساعات):</h3>
-    <ul>
-      <li>بناء تطبيق Console بسيط يحسب العمر أو يحول العملات باستخدام المتغيرات والشروط والحلقات.</li>
-    </ul>
-
-    <div class="tips">
-      <strong>📌 Tips:</strong>
-      <ul>
-        <li>استخدم live coding دائمًا مع الطلاب.</li>
-        <li>اربط المفاهيم بأمثلة من الحياة الحقيقية.</li>
-      </ul>
-    </div>
-
-    <div class="resources">
-      <strong>📚 مصادر:</strong>
-      <ul>
-        <li><a href="https://dartpad.dev/" target="_blank">DartPad.io</a></li>
-        <li><a href="https://dart.dev/guides/language/language-tour" target="_blank">Dart Language Tour</a></li>
-      </ul>
-    </div>
-  </section>
-
-
-  <section>
-    <div class="day-title">✅ اليوم الثاني: الدوال  Dart</div>
-    <h3>🕐 الشرح (3 ساعات):</h3>
-    <ul>
-      <li>الدوال: التعريف – المعاملات – القيم الافتراضية – الدوال بدون قيمة.</li>
-      
-    </ul>
-
-    <h3>🛠️ التطبيق (3 ساعات):</h3>
-  
-
-    <div class="tips">
-      <strong>📌 Tips:</strong>
-      <ul>
-        <li>أظهر الفرق بين <code>final</code>, <code>const</code>, <code>var</code>, <code>late</code>.</li>
-      </ul>
-    </div>
-
-     </section>
-
-
-  <section class="oop-summary">
-  <div class="day-title">✅ اليوم الثالث: تطبيق مفاهيم OOP في Dart</div>
-  
-  <div class="concept-card">
-    <h3>💡 النقاط الأساسية المغطاة:</h3>
-    <ul class="core-concepts">
-      <li><strong>التغليف (Encapsulation):</strong> حماية البيانات عبر خصائص خاصة (_private) مع واجهة تحكم عامة</li>
-      <li><strong>الوراثة (Inheritance):</strong> إنشاء علاقات Parent-Child بين الكلاسات باستخدام extends</li>
-      <li><strong>تعدد الأشكال (Polymorphism):</strong> تنفيذ نفس العملية بطرق مختلفة حسب نوع الكائن</li>
-      <li><strong>الواجهات (Interfaces):</strong> تعريف عقود عمل عبر abstract class أو implicit interfaces</li>
-      <li><strong>البنائين (Constructors):</strong> Default, Named, Factory وأنماط تهيئة الكائنات</li>
-    </ul>
-  </div>
-
-  
-
-  <div class="key-benefits">
-    <h3>✨ فوائد تطبيق OOP:</h3>
-    <ul>
-      <li>تنظيم الكود في وحدات منطقية</li>
-      <li>إعادة استخدام المكونات بسهولة</li>
-      <li>تسهيل الصيانة والتطوير المستقبلي</li>
-      <li>نمذجة أنظمة العالم الحقيقي بدقة</li>
-    </ul>
-  </div>
-</section>
-
-  <section>
-    <div class="day-title">✅ اليوم الرابع: مقدمة إلى Flutter Widgets</div>
-    <h3>🕐 الشرح (3 ساعات):</h3>
-    <ul>
-      <li>مفهوم Widget.</li>
-      <li>الفرق بين Stateless و Stateful Widgets.</li>
-      <li>Scaffold, AppBar, Text, Container, Row, Column, Icon, Image.</li>
-      <li>مفهوم Hot Reload / Hot Restart.</li>
-    </ul>
-    <h3>🛠️ التطبيق (3 ساعات):</h3>
-    <ul>
-      <li>تطبيق واجهة شاشة ترحيبية تحتوي على Text + Image + أزرار.</li>
-      <li>استخدام Widgets متعددة داخل Column و Row.</li>
-    </ul>
-    <div class="tips">
-      <strong>📌 Tips:</strong>
-      <ul>
-        <li>اعرض الUI على المحاكي مباشرة مع كل تعديل.</li>
-        <li>ركز على مبدأ الشجرة (Widget Tree).</li>
-      </ul>
-    </div>
-    <div class="resources">
-      <strong>📚 مصادر:</strong>
-      <ul>
-        <li><a href="https://flutter.dev/docs/development/ui/widgets/layout">Flutter Layout Widgets</a></li>
-        <li><a href="https://docs.flutter.dev/ui/widgets">Flutter Widget Catalog</a></li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <div class="day-title">✅ اليوم الرابع: تصميم تفاعلي باستخدام Inputs + Forms</div>
-    <h3>🕐 الشرح (3 ساعات):</h3>
-    <ul>
-      <li>TextField – TextEditingController.</li>
-      <li>Forms + validation.</li>
-      <li>ElevatedButton, DropdownButton, Checkbox, Switch.</li>
-      <li>الفرق بين Local state و Form state.</li>
-    </ul>
-    <h3>🛠️ التطبيق (3 ساعات):</h3>
-    <ul>
-      <li>إنشاء نموذج تسجيل بسيط (name, email, password).</li>
-      <li>التحقق من صحة المدخلات وإظهار رسالة.</li>
-    </ul>
-    <div class="tips">
-      <strong>📌 Tips:</strong>
-      <ul>
-        <li>وضح كيف تتحكم في النص باستخدام TextEditingController.</li>
-        <li>استخدم <code>Form</code> مع <code>GlobalKey&lt;FormState&gt;</code> بشكل مبسط.</li>
-      </ul>
-    </div>
-    <div class="resources">
-      <strong>📚 مصادر:</strong>
-      <ul>
-        <li><a href="https://flutter.dev/docs/cookbook/forms/validation">Flutter Forms & Validation – Official Docs</a></li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <div class="day-title">✅ اليوم الخامس: التفاعل بين الشاشات والتنقل</div>
-    <h3>🕐 الشرح (3 ساعات):</h3>
-    <ul>
-      <li>مفهوم Navigation.</li>
-      <li>Navigator.push / pop / named routes.</li>
-      <li>Passing data between screens.</li>
-    </ul>
-    <h3>🛠️ التطبيق (3 ساعات):</h3>
-    <ul>
-      <li>إنشاء تطبيق من شاشتين (شاشة مستخدم – شاشة تفاصيل).</li>
-      <li>تمرير بيانات بين الشاشات.</li>
-    </ul>
-    <div class="tips">
-      <strong>📌 Tips:</strong>
-      <ul>
-        <li>استخدم أمثلة مألوفة مثل "تفاصيل منتج".</li>
-        <li>درّب الطلاب على كتابة routes في <code>MaterialApp</code>.</li>
-      </ul>
-    </div>
-    <div class="resources">
-      <strong>📚 مصادر:</strong>
-      <ul>
-        <li><a href="https://flutter.dev/docs/cookbook/navigation">Navigation Cookbook – Flutter</a></li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <div class="day-title">✅ اليوم السادس: التعامل مع الملفات، الصور، الثيمات</div>
-    <h3>🕐 الشرح (3 ساعات):</h3>
-    <ul>
-      <li>التعامل مع <code>pubspec.yaml</code> لإضافة صور / خطوط.</li>
-      <li>تحميل صور من الأصول (Assets) والشبكة.</li>
-      <li>استخدام ThemeData و Custom Colors.</li>
-      <li>إدخال ملفات JSON محلية (assets/json).</li>
-    </ul>
-    <h3>🛠️ التطبيق (3 ساعات):</h3>
-    <ul>
-      <li>إنشاء شاشة تحتوي على صور وخطوط مخصصة.</li>
-      <li>تصميم واجهة غنية بالألوان والتنسيق.</li>
-    </ul>
-    <div class="tips">
-      <strong>📌 Tips:</strong>
-      <ul>
-        <li>نبّه الطلاب لضرورة عمل <code>flutter pub get</code> بعد التعديلات.</li>
-      </ul>
-    </div>
-    <div class="resources">
-      <strong>📚 مصادر:</strong>
-      <ul>
-        <li><a href="https://flutter.dev/docs/development/ui/assets-and-images">Using assets – Flutter Docs</a></li>
-        <li><a href="https://flutter.dev/docs/cookbook/design/themes">Themes in Flutter</a></li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <div class="day-title">✅ اليوم السابع: الشبكات و JSON</div>
-    <h3>🕐 الشرح (3 ساعات):</h3>
-    <ul>
-      <li>مفهوم Future – async/await.</li>
-      <li>استخدام حزمة <code>http</code>.</li>
-      <li>التعامل مع JSON (parse – deserialize).</li>
-      <li>عرض البيانات داخل ListView.</li>
-    </ul>
-    <h3>🛠️ التطبيق (3 ساعات):</h3>
-    <ul>
-      <li>استهلاك API مفتوحة مثل <a href="https://jsonplaceholder.typicode.com/users">jsonplaceholder</a>.</li>
-      <li>عرض قائمة المستخدمين في الواجهة.</li>
-    </ul>
-    <div class="tips">
-      <strong>📌 Tips:</strong>
-      <ul>
-        <li>اربط الداتا مباشرة بـ UI لشرح مفهوم "reactive programming".</li>
-      </ul>
-    </div>
-    <div class="resources">
-      <strong>📚 مصادر:</strong>
-      <ul>
-        <li><a href="https://pub.dev/packages/http">HTTP Package – pub.dev</a></li>
-        <li><a href="https://flutter.dev/docs/data-and-backend/json">Working with JSON – Flutter Docs</a></li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <div class="day-title">✅ اليوم الثامن: State Management + التخزين المحلي + Animation</div>
-    <h3>🕐 الشرح (3 ساعات):</h3>
-    <ul>
-      <li>مفهوم State Management – setState.</li>
-      <li>التخزين باستخدام <code>SharedPreferences</code>.</li>
-      <li>أساسيات Animation في Flutter.</li>
-      <li>مراجعة عامة لكل ما سبق.</li>
-    </ul>
-    <h3>🛠️ التطبيق (3 ساعات):</h3>
-    <ul>
-      <li>حفظ تفضيلات المستخدم بلغة أو اسم.</li>
-      <li>استخدام <code>AnimatedContainer</code>, <code>TweenAnimationBuilder</code>.</li>
-    </ul>
-    <div class="tips">
-      <strong>📌 Tips:</strong>
-      <ul>
-        <li>وضح كيف يتم حفظ البيانات حتى بعد إعادة التشغيل.</li>
-        <li>استخدم أمثلة مرئية لجذب انتباه الطلاب.</li>
-      </ul>
-    </div>
-    <div class="resources">
-      <strong>📚 مصادر:</strong>
-      <ul>
-        <li><a href="https://pub.dev/packages/shared_preferences">SharedPreferences Plugin</a></li>
-        <li><a href="https://flutter.dev/docs/development/ui/animations">Flutter Animation Guide</a></li>
-      </ul>
-    </div>
-  </section>
-
-  <section>
-    <h3>✅ ملاحظات ختامية:</h3>
-    <ul>
-      <li>✍️ اجعل المهام اليومية عملية ومرتبطة تمامًا بشرح اليوم.</li>
-      <li>🎯 في نهاية اليوم الثامن، يمكنك عمل مشروع صغير يجمع كل المفاهيم.</li>
-      <li>📌 كل يوم تأكد من تقييم الطلاب من خلال مهمة بسيطة قبل البدء في الشرح الجديد.</li>
-      <li>🎥 استخدم شروحات YouTube من قنوات مثل:
-        <ul>
-          <li><a href="https://youtube.com/playlist?list=PL4cUxeGkcC9jLYyp2Aoh6hcWuxFDX6PBJ">The Net Ninja – Flutter</a></li>
-          <li><a href="https://www.youtube.com/c/FlutterDev">Flutter on Google Developers</a></li>
-        </ul>
-      </li>
-    </ul>
-  </section>
-
-  <div class="footer">
-    &copy; 2025 خطة تدريبية بإعداد محاضر مصطفي حسين – Flutter & Dart Bootcamp
-  </div>
-
-</body>
-</html>
