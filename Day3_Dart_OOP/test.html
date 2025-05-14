@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dart OOP Tasks</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+            padding-left: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .task {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .objective {
+            font-weight: bold;
+            color: #16a085;
+            margin-bottom: 15px;
+        }
+        
+        .steps {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .steps ol {
+            padding-left: 20px;
+        }
+        
+        .steps li {
+            margin-bottom: 8px;
+        }
+        
+        .challenge {
+            background-color: #fffaf0;
+            padding: 12px;
+            border-left: 3px solid #f39c12;
+            margin-top: 15px;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .challenge-title {
+            font-weight: bold;
+            color: #e67e22;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        code {
+            background-color: #f5f5f5;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dart Programming Tasks - OOP Concepts</h1>
+    
+    <div class="task">
+        <h2>Task 1: Class and Object</h2>
+        <div class="objective">Objective: Create a class and instantiate objects.</div>
+        
+        <div class="steps">
+            <ol>
+                <li>Create a class called <code>Car</code> with the following properties:
+                    <ul>
+                        <li><code>brand</code> (String)</li>
+                        <li><code>model</code> (String)</li>
+                        <li><code>year</code> (int)</li>
+                    </ul>
+                </li>
+                <li>Create an object of the <code>Car</code> class and set values for the properties.</li>
+                <li>Print the values of the properties of the object.</li>
+            </ol>
+        </div>
+        
+        <div class="challenge">
+            <div class="challenge-title">Additional Challenge:</div>
+            Take object information <strong>once using a constructor</strong> and <strong>another time using ordinary assignment</strong>.
+        </div>
+    </div>
+    
+    <div class="task">
+        <h2>Task 2: Named and Optional Constructors</h2>
+        <div class="objective">Objective: Practice using named and optional constructors in Dart.</div>
+        
+        <div class="steps">
+            <ol>
+                <li>Create a class called <code>Book</code> with the following properties:
+                    <ul>
+                        <li><code>title</code> (String)</li>
+                        <li><code>author</code> (String)</li>
+                        <li><code>price</code> (double)</li>
+                    </ul>
+                </li>
+                <li>Create the following constructors:
+                    <ul>
+                        <li>A default constructor that initializes the properties with named parameters</li>
+                        <li>A named constructor called <code>discountedBook</code> that applies a 20% discount to the price</li>
+                    </ul>
+                </li>
+                <li>Instantiate objects using both constructors and print their details.</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="task">
+        <h2>Task 3: Encapsulation</h2>
+        <div class="objective">Objective: Practice encapsulation in Dart.</div>
+        
+        <div class="steps">
+            <ol>
+                <li>Create a class called <code>Student</code> with the following properties:
+                    <ul>
+                        <li><code>name</code> (String)</li>
+                        <li><code>age</code> (int)</li>
+                        <li><code>grade</code> (String)</li>
+                    </ul>
+                </li>
+                <li>Encapsulate the <code>age</code> property (make it private and provide getters/setters)</li>
+                <li>Create an object of <code>Student</code> and demonstrate encapsulation</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="task">
+        <h2>Task 4: Bank Account with Encapsulation</h2>
+        <div class="objective">Objective: Implement encapsulation with getters and setters.</div>
+        
+        <div class="steps">
+            <ol>
+                <li>Create a class called <code>BankAccount</code> with:
+                    <ul>
+                        <li><code>pass</code> (String)</li>
+                        <li><code>name</code> (String)</li>
+                        <li><code>adminName</code> (String, <strong>private</strong>)</li>
+                        <li><code>adminPass</code> (String, <strong>private</strong>)</li>
+                        <li><code>users</code> (List, <strong>private</strong>)</li>
+                    </ul>
+                </li>
+                <li>Encapsulate:
+                    <ul>
+                        <li><code>adminName</code>, <code>adminPass</code>, and <code>users</code></li>
+                        <li>Use a <strong>setter</strong> to add a user</li>
+                        <li>Use a <strong>getter</strong> to retrieve users</li>
+                    </ul>
+                </li>
+                <li>Implement two ways:
+                    <ul>
+                        <li>Using <strong>functions</strong> (e.g., <code>addUser()</code>, <code>getUsers()</code>)</li>
+                        <li>Using <strong>setters and getters</strong> (e.g., <code>set user</code>, <code>get users</code>)</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="task">
+        <h2>Task 5: Inheritance & Polymorphism (Animals Example)</h2>
+        <div class="objective">Objective: Apply OOP concepts with different animal behaviors.</div>
+        
+        <div class="steps">
+            <ol>
+                <li>Create classes for three animals:
+                    <ul>
+                        <li><code>Dog</code></li>
+                        <li><code>Fish</code></li>
+                        <li><code>Eagle</code></li>
+                    </ul>
+                </li>
+                <li>Common properties:
+                    <ul>
+                        <li><code>name</code> (String)</li>
+                        <li><code>age</code> (int)</li>
+                    </ul>
+                </li>
+                <li>Different behaviors:
+                    <ul>
+                        <li><code>walk()</code> (Dog)</li>
+                        <li><code>swim()</code> (Fish)</li>
+                        <li><code>fly()</code> (Eagle)</li>
+                    </ul>
+                </li>
+                <li>Implement inheritance (e.g., a base <code>Animal</code> class)</li>
+                <li>Use polymorphism to call different behaviors</li>
+            </ol>
+        </div>
+    </div>
+    
+    <div class="task">
+        <h2>Task 6: Method Overriding</h2>
+        <div class="objective">Objective: Practice inheritance and method overriding.</div>
+        
+        <div class="steps">
+            <ol>
+                <li>Create a class <code>Dad</code> with:
+                    <ul>
+                        <li>Properties: <code>name</code>, <code>familyName</code></li>
+                        <li>Method: <code>work()</code> → prints "Works as a banker"</li>
+                    </ul>
+                </li>
+                <li>Create a child class (e.g., <code>Son</code>) that:
+                    <ul>
+                        <li>Inherits all properties from <code>Dad</code></li>
+                        <li>Overrides the <code>work()</code> method → prints "Works as a Software Engineer"</li>
+                        <li>Modifies the <code>name</code> property (e.g., adds a nickname)</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+   <div class="card">
+      <div class="searched_Tasks">  
+        <h3 style="background: rgb(153, 138, 138);padding: 10px; border-radius: 20px;width: 300px;text-align: center;margin: auto;color: Red;">
+            هام جدا يجب البحث عن المفاهيم الاتيه
+        </h3>  
+        <ul>
+            <li>mixin</li>
+            <li>types of inheritance</li>
+            <li>setter and getter</li>
+            <li>enums</li>
+            <li>abstract</li>
+        </ul>
+
+    </div
+   </div>
+    
+    <div class="steps">
+        <h3>Instructions for Students:</h3>
+        <ul>
+            <li>Write clean, well-structured Dart code</li>
+            <li>Use comments to explain key steps</li>
+            <li>Test each task with example objects</li>
+            <li>Submit your solutions with proper formatting</li>
+        </ul>
+    </div>
+    
+
+   
+    <div class="footer">
+        Happy Coding! 🚀
+    </div>
+</body>
+</html>
