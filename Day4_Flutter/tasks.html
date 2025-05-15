@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>مهام البرمجة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --flutter-blue: #02569B;
+      --flutter-teal: #13B9FD;
+      --flutter-dark: #042B59;
+      --flutter-light: #E6F7FF;
+      --text-primary: #2D3748;
+      --text-secondary: #4A5568;
+      --success: #38A169;
+      --warning: #DD6B20;
+      --danger: #E53E3E;
+      --bg-light: #F7FAFC;
+      --bg-card: #FFFFFF;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Tajawal', sans-serif;
+      line-height: 1.8;
+      color: var(--text-primary);
+      background-color: var(--bg-light);
+      direction: rtl;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--flutter-blue), var(--flutter-teal));
+      color: white;
+      padding: 30px 20px;
+      border-radius: 0 0 20px 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-bottom: 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: "";
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 200px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+    .header::after {
+      content: "";
+      position: absolute;
+      bottom: -80px;
+      left: -30px;
+      width: 150px;
+      height: 150px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    .header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+    .card {
+      background-color: var(--bg-card);
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      padding: 25px 30px;
+      margin-bottom: 25px;
+      border-right: 4px solid var(--flutter-teal);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+    .card-title {
+      color: var(--flutter-blue);
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      position: relative;
+      padding-right: 15px;
+      font-weight: 700;
+    }
+    .card-title::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -8px;
+      width: 50px;
+      height: 3px;
+      background-color: var(--flutter-teal);
+      border-radius: 3px;
+    }
+    ul {
+      list-style: none;
+      margin: 15px 0 0 0;
+      padding-right: 15px;
+    }
+    ul li {
+      padding: 8px 0;
+      position: relative;
+      padding-right: 25px;
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+    ul li::before {
+      content: "→";
+      position: absolute;
+      right: 0;
+      color: var(--flutter-teal);
+      font-weight: bold;
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid var(--flutter-light);
+      margin: 40px 0;
+    }
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2rem;
+      }
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>مهام البرمجة</h1>
+      <p>مجموعة من التمارين والمهام البرمجية لتنمية مهاراتك</p>
+    </header>
+
+    <section class="card">
+      <h2 class="card-title">1. Mixins</h2>
+      <!-- <ul>
+        <li>أنشئ <strong>mixin</strong> اسمه <code>CanRun</code> يحتوي على دالة <code>run()</code> تطبع فيها: "I can run"</li>
+        <li>أنشئ كلاس <code>Animal</code> يحتوي على خاصية <code>name</code> من نوع <code>String</code>.</li>
+        <li>أنشئ كلاس <code>Dog</code> يرث من <code>Animal</code> ويستخدم الميكسين <code>CanRun</code>.</li>
+        <li>أنشئ كائن من <code>Dog</code> واطبع اسمه ثم استدعي دالة <code>run()</code>.</li>
+      </ul> -->
+
+         <div class="exercise">
+            <h3 class="exercise-title">التمرين 1: إنشاء Mixin للقدرات</h3>
+            <p>قم بإنشاء mixins للقدرات التالية:</p>
+            <ul>
+                <li><code>CanSwim</code> يحتوي على دالة <code>swim()</code></li>
+                <li><code>CanRun</code> يحتوي على دالة <code>run()</code></li>
+                <li><code>CanFly</code> يحتوي على دالة <code>fly()</code></li>
+            </ul>
+            <p>ثم أنشئ الكلاسات التالية:</p>
+            <ul>
+                <li><code>Duck</code> يستطيع السباحة والطيران والجري</li>
+                <li><code>Fish</code> يستطيع السباحة فقط</li>
+                <li><code>Eagle</code> يستطيع الطيران والجري</li>
+            </ul>
+        </div>
+        
+    </section>
+
+    <section class="card">
+      <h2 class="card-title">2. Abstract Class مع Extends</h2>
+      <ul>
+        <li>أنشئ <strong>abstract class</strong> اسمه <code>Shape</code> يحتوي على دالة <strong>abstract</strong> اسمها <code>area()</code> بدون تنفيذ.</li>
+        <li>أنشئ كلاس <code>Circle</code> يرث من <code>Shape</code> ويحتوي على خاصية <code>radius</code> ويحسب مساحة الدائرة (π × r²).</li>
+        <li>أنشئ كلاس <code>Rectangle</code> يرث من <code>Shape</code> ويحتوي على خصائص <code>width</code> و <code>height</code> ويحسب المساحة (العرض × الارتفاع).</li>
+        <li>أنشئ كائنات من <code>Circle</code> و <code>Rectangle</code> واستدعي دالة <code>area()</code> لكل منهما واطبع النتيجة.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2 class="card-title">3. Enums</h2>
+      <ul>
+        <li>أنشئ <strong>enum</strong> باسم <code>Days</code> يحتوي على أيام الأسبوع (مثل: Sunday, Monday, ...).</li>
+        <li>أنشئ دالة تستقبل متغير من نوع <code>Days</code> وتطبع إذا كان يوم عمل (مثلاً الأحد إلى الخميس) أو عطلة (الجمعة والسبت).</li>
+        <li>جرب استدعاء الدالة لكل يوم من أيام الأسبوع واطبع النتيجة.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2 class="card-title">4. Interface</h2>
+      <ul>
+        <li>أنشئ <strong>interface</strong> (عن طريق abstract class بدون تنفيذ) اسمه <code>Printable</code> يحتوي على دالة <code>printDetails()</code>.</li>
+        <li>أنشئ كلاس <code>Book</code> ينفذ <code>Printable</code> ويحتوي على خصائص <code>title</code> و <code>author</code>.</li>
+        <li>أنشئ كلاس <code>Magazine</code> ينفذ <code>Printable</code> ويحتوي على خصائص <code>issueName</code> و <code>issueNumber</code>.</li>
+        <li>نفذ دالة <code>printDetails()</code> في كلا الكلاسين لطباعة معلومات الكتاب والمجلة.</li>
+        <li>أنشئ كائنات من <code>Book</code> و <code>Magazine</code> واستدعي دالة <code>printDetails()</code> لكل منهما.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2 class="card-title">5. Extension Function: عكس النص (Reverse String)</h2>
+      <ul>
+        <li>أنشئ <strong>extension</strong> على نوع <code>String</code> تضيف دالة اسمها <code>reverse()</code> تعيد النص معكوسًا.</li>
+        <li>جرب استخدام الدالة على عدة نصوص مختلفة واطبع النتائج.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2 class="card-title">6. مهام أساسية في Flutter (Container, Text, Row)</h2>
+      <ul>
+        <li>أنشئ تطبيق Flutter يحتوي على:</li>
+        <ul>
+          <li><strong>Container</strong> بلون خلفية أحمر، بحجم 150×150 بكسل.</li>
+          <li>داخل الـ Container أضف <strong>Text</strong> مكتوب فيه "Hello Flutter".</li>
+          <li>استخدم <strong>Row</strong> لترتيب 3 أزرار (Buttons) أفقيًا، لكل زر لون مختلف (مثلًا: أحمر، أخضر، أزرق).</li>
+          <li>أضف <strong>Padding</strong> بين الأزرار لجعل المسافة بينها متساوية.</li>
+        </ul>
+        <li>جرّب تعديل خصائص الـ Container مثل اللون، الحجم، وإضافة حواف دائرية (Border Radius).</li>
+        <li>جرّب تعديل خصائص النص (Text) مثل حجم الخط، اللون، ونوع الخط.</li>
+      </ul>
+    </section>
+
+  </div>
+</body>
+</html>
