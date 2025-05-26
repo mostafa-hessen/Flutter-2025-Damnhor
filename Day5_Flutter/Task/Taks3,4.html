@@ -1,38 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flutter UI Tasks with Tailwind</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مهام تطوير واجهات Flutter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+        .task-card {
+            transition: all 0.3s ease;
+            border-top: 4px solid;
+        }
+        .task-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        img{
+            object-fit: cover;
+            object-position: center;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 p-6 space-y-10">
+<body class="bg-gradient-to-br from-gray-50 to-blue-50 p-6">
 
-  <!-- ✅ المهمة الأولى: ملف شخصي -->
-  <section class="max-w-md mx-auto bg-white shadow-xl rounded-xl p-6 text-center">
-    <img src="https://via.placeholder.com/150" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto">
-    <h2 class="text-2xl font-bold mt-4">أحمد محمد</h2>
-    <p class="text-gray-600">مبرمج تطبيقات فلاتر</p>
-    <div class="flex justify-center gap-6 mt-4 text-gray-700">
-      <div class="flex items-center gap-2">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5h2M3 10h2m-2 5h2m4 5h14M7 3h14M7 8h14M7 13h14M7 18h14"></path></svg>
-        <span>01123456789</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M16 12H8m0 0l4 4m-4-4l4-4m8 8V4a2 2 0 00-2-2H6a2 2 0 00-2 2v16a2 2 0 002 2h8"></path></svg>
-        <span>ahmed@email.com</span>
-      </div>
+    <!-- Header -->
+    <header class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">مهام تطوير واجهات Flutter</h1>
+        <p class="text-xl text-blue-600">تدريبات عملية على بناء واجهات المستخدم</p>
+        <div class="flex justify-center mt-6 space-x-4 space-x-reverse">
+            <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full flex items-center">
+                <span class="material-icons mr-2">widgets</span>
+                Widgets
+            </span>
+            <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full flex items-center">
+                <span class="material-icons mr-2">design_services</span>
+                Layouts
+            </span>
+        </div>
+    </header>
+
+    <!-- Tasks Container -->
+    <div class="max-w-4xl mx-auto space-y-8">
+
+        <!-- Task 1: Profile Card -->
+        <section class="task-card bg-white rounded-xl shadow-lg p-6 border-t-blue-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-100 p-3 rounded-full ml-4">
+                    <span class="material-icons text-blue-600">person</span>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">المهمة الأولى: بطاقة ملف شخصي</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">المتطلبات:</h3>
+                    <ul class="list-disc pr-5 space-y-3 text-gray-700">
+                        <li>صورة شخصية دائرية</li>
+                        <li>اسم المستخدم وعنوان الوظيفة</li>
+                        <li>معلومات الاتصال (هاتف، بريد إلكتروني)</li>
+                        <li>استخدام Column لترتيب العناصر</li>
+                        <li>استخدام Row لعرض معلومات الاتصال</li>
+                    </ul>
+                    
+                    <div class="mt-6 bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <h4 class="font-bold text-blue-800 mb-2">Widgets المستخدمة:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Column</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Row</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">CircleAvatar</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Text</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Icon</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white shadow-md rounded-xl p-6 text-center border border-gray-200">
+                    <img src="https://th.bing.com/th/id/OIP.BCkpODXjwF-xvWchOxI8gQHaE8?cb=iwc2&rs=1&pid=ImgDetMain" alt="Profile Picture" class="w-32 h-32 rounded-full mx-auto border-4 border-blue-100">
+                    <h2 class="text-2xl font-bold mt-4 text-gray-800">أحمد محمد</h2>
+                    <p class="text-gray-600">مبرمج تطبيقات فلاتر</p>
+                    <div class="flex justify-center gap-6 mt-4 text-gray-700">
+                        <div class="flex items-center gap-2">
+                            <span class="material-icons text-blue-500">phone</span>
+                            <span>01123456789</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="material-icons text-blue-500">email</span>
+                            <span>ahmed@email.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+          
+        </section>
+
+        <!-- Task 2: Product Card -->
+        <section class="task-card bg-white rounded-xl shadow-lg p-6 border-t-green-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-green-100 p-3 rounded-full ml-4">
+                    <span class="material-icons text-green-600">shopping_cart</span>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">المهمة الثانية: بطاقة منتج</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">المتطلبات:</h3>
+                    <ul class="list-disc pr-5 space-y-3 text-gray-700">
+                        <li>صورة للمنتج</li>
+                        <li>عنوان المنتج ووصف مختصر</li>
+                        <li>سعر المنتج</li>
+                        <li>زر "شراء الآن"</li>
+                        <li>استخدام Column لترتيب العناصر</li>
+                        <li>تنسيق زر تفاعلي</li>
+                    </ul>
+                    
+                    <div class="mt-6 bg-green-50 p-4 rounded-lg border border-green-200">
+                        <h4 class="font-bold text-green-800 mb-2">Widgets المستخدمة:</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Column</span>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Image</span>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Text</span>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">ElevatedButton</span>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">SizedBox</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white shadow-md rounded-xl overflow-hidden border border-gray-200">
+                    <img src="data:image/jpeg;base64,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" alt="Product" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-gray-800">سماعة بلوتوث</h3>
+                        <p class="text-gray-600 mt-2">سماعة عالية الجودة بعزل ضوضاء وتصميم مريح للأذن.</p>
+                        <p class="text-green-600 font-bold mt-2">السعر: 599 جنيه</p>
+                        <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition flex items-center justify-center">
+                            <span class="material-icons mr-2">shopping_cart</span>
+                            شراء الآن
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </section>
+
     </div>
-  </section>
 
-  <!-- ✅ المهمة الثانية: بطاقة منتج -->
-  <section class="max-w-sm mx-auto bg-white shadow-xl rounded-xl p-6">
-    <img src="https://via.placeholder.com/300x200" alt="Product" class="w-full h-48 object-cover rounded-md">
-    <h3 class="text-xl font-semibold mt-4">سماعة بلوتوث</h3>
-    <p class="text-gray-600 mt-2">سماعة عالية الجودة بعزل ضوضاء وتصميم مريح للأذن.</p>
-    <p class="text-green-600 font-bold mt-2">السعر: 599 جنيه</p>
-    <button class="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition">شراء الآن</button>
-  </section>
-
+ 
 </body>
 </html>
