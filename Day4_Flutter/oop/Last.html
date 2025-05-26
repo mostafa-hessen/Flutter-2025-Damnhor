@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعلم البرمجة كائنية التوجه بطريقة مبسطة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background-color: rgba(251, 191, 36, 0.3);
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+        
+        .highlight:hover:after {
+            height: 50%;
+            background-color: rgba(251, 191, 36, 0.5);
+        }
+        
+        .code-block {
+            font-family: 'Courier New', Courier, monospace;
+            background: #1e293b;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .car-animation {
+            animation: drive 12s linear infinite;
+        }
+        
+        @keyframes drive {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100vw); }
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        pre {
+            text-align: left;
+            direction: ltr;
+        }
+        
+        .scroll-container {
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #8b5cf6 #e2e8f0;
+        }
+        
+        .scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .scroll-container::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        
+        .scroll-container::-webkit-scrollbar-thumb {
+            background-color: #8b5cf6;
+            border-radius: 10px;
+        }
+        
+        .concept-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 28px;
+        }
+        
+        .concept-card {
+            transition: all 0.3s ease;
+            border-top: 4px solid transparent;
+        }
+        
+        .concept-card:hover {
+            border-top-color: #8b5cf6;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- شريط التنقل -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <div class="w-10 h-10 rounded-full hero-gradient flex items-center justify-center text-white font-bold text-xl">OOP</div>
+                <h1 class="text-xl font-bold text-gray-800">البرمجة الكائنية</h1>
+            </div>
+            <div class="hidden md:flex space-x-6 space-x-reverse">
+                <a href="#encapsulation" class="text-gray-700 hover:text-purple-600 font-medium">التغليف</a>
+                <a href="#inheritance" class="text-gray-700 hover:text-purple-600 font-medium">الوراثة</a>
+                <a href="#abstract" class="text-gray-700 hover:text-purple-600 font-medium">الكائنات المجردة</a>
+                <a href="#interface" class="text-gray-700 hover:text-purple-600 font-medium">الواجهات</a>
+                <a href="#static" class="text-gray-700 hover:text-purple-600 font-medium">الثوابت</a>
+            </div>
+            <button class="md:hidden text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- قسم البطل -->
+    <header class="hero-gradient text-white py-16">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0 animate__animated animate__fadeInRight">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">تعلم البرمجة الكائنية <span class="highlight">ببساطة</span></h1>
+                <p class="text-xl mb-6">أساسيات البرمجة الكائنية التوجه (OOP) مع أمثلة عملية بلغة Dart</p>
+                <div class="flex space-x-4 space-x-reverse">
+                    <a href="#encapsulation" class="bg-white text-purple-600 px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition">ابدأ التعلم</a>
+                    <a href="#exercises" class="border-2 border-white px-6 py-2 rounded-full font-bold hover:bg-white hover:text-purple-600 transition">تمارين عملية</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center animate__animated animate__fadeInLeft">
+                <div class="relative">
+                    <div class="w-64 h-64 bg-white bg-opacity-20 rounded-full absolute -top-10 -right-10"></div>
+                    <div class="w-64 h-64 bg-white bg-opacity-10 rounded-full absolute -bottom-10 -left-10"></div>
+                    <div class="relative z-10 floating">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1903/1903162.png" alt="OOP Illustration" class="w-64 h-64 object-contain">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- قسم المفاهيم الأساسية -->
+    <section class="py-16 bg-white" id="concepts">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">المفاهيم الأساسية للبرمجة الكائنية</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- بطاقة التغليف -->
+                <div class="concept-card bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md" id="encapsulation">
+                    <div class="concept-icon bg-purple-100 text-purple-600 mb-4">
+                        🔐
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center text-gray-800">التغليف (Encapsulation)</h3>
+                    <p class="text-gray-600 text-center">إخفاء البيانات وحمايتها من التعديل المباشر، والسماح بالوصول إليها فقط عبر واجهات محددة.</p>
+                </div>
+                
+                <!-- بطاقة الوراثة -->
+                <div class="concept-card bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md" id="inheritance">
+                    <div class="concept-icon bg-blue-100 text-blue-600 mb-4">
+                        🧬
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center text-gray-800">الوراثة (Inheritance)</h3>
+                    <p class="text-gray-600 text-center">إمكانية إنشاء كلاس جديد يرث خصائص ووظائف كلاس موجود بالفعل.</p>
+                </div>
+                
+                <!-- بطاقة تعدد الأشكال -->
+                <div class="concept-card bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md" id="polymorphism">
+                    <div class="concept-icon bg-green-100 text-green-600 mb-4">
+                        🎭
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center text-gray-800">تعدد الأشكال (Polymorphism)</h3>
+                    <p class="text-gray-600 text-center">إمكانية تنفيذ نفس الوظيفة بطرق مختلفة حسب الكائن الذي يستدعيها.</p>
+                </div>
+                
+                <!-- بطاقة التجريد -->
+                <div class="concept-card bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md" id="abstraction">
+                    <div class="concept-icon bg-yellow-100 text-yellow-600 mb-4">
+                        ✨
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center text-gray-800">التجريد (Abstraction)</h3>
+                    <p class="text-gray-600 text-center">إظهار الوظائف الأساسية فقط وإخفاء تفاصيل التنفيذ الداخلية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم شرح التغليف -->
+    <section class="py-16 bg-gray-50" id="encapsulation-details">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 text-xl mr-4">
+                            🔐
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">التغليف (Encapsulation)</h2>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">🎈 تخيل إن معاك "محفظة إلكترونية" زي Vodafone Cash:</h3>
+                        <ul class="list-disc pr-5 space-y-2 text-gray-600">
+                            <li>فيها فلوس (balance)</li>
+                            <li>تقدر تحط فلوس (deposit)</li>
+                            <li>تقدر تسحب (withdraw)</li>
+                            <li>بس <span class="font-bold">ماينفعش أي حد يغير الرصيد من بره الكلاس</span>!</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-8 p-4 bg-yellow-50 border-r-4 border-yellow-400 rounded">
+                        <h3 class="text-lg font-semibold mb-2 text-gray-700">✨ يعني إيه Encapsulation؟</h3>
+                        <p class="text-gray-600">يعني نغلف البيانات ونحميها، ونخلي الناس تتعامل معاها من <span class="font-bold">بوابات معينة (getters & setters)</span> بس.</p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">🏦 مثال بسيط على <span class="highlight">محفظة إلكترونية</span>:</h3>
+                        <div class="code-block scroll-container">
+                            <pre class="p-4 text-gray-200"><code>class Wallet {
+  String _owner; // خاص - برا الكلاس مش شايفه
+  double _balance = 0; // خاص - محدش يقدر يعدله مباشرة
+
+  Wallet(this._owner);
+
+  // Getter لعرض الرصيد
+  double get balance => _balance;
+
+  // إيداع
+  void deposit(double amount) {
+    if (amount > 0) {
+      _balance += amount;
+      print("تم إضافة $amount جنيه. الرصيد الحالي: $_balance");
+    } else {
+      print("المبلغ غير صحيح");
+    }
+  }
+
+  // سحب
+  void withdraw(double amount) {
+    if (amount <= _balance) {
+      _balance -= amount;
+      print("تم سحب $amount جنيه. الرصيد الحالي: $_balance");
+    } else {
+      print("رصيد غير كافي");
+    }
+  }
+}
+
+void main() {
+  Wallet myWallet = Wallet("مصطفى");
+
+  myWallet.deposit(200);
+  myWallet.withdraw(50);
+  print("الرصيد النهائي: ${myWallet.balance}");
+
+  // محاولة لتعديل الرصيد من بره (مش هتشتغل)
+  // myWallet._balance = 100000; ❌
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">🧠 ليه ده مهم؟</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-purple-700 mb-2">أمان</h4>
+                                <p class="text-gray-600">محدش يعدل البيانات بطريقه غلط.</p>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-blue-700 mb-2">تحكم</h4>
+                                <p class="text-gray-600">تقدر تضيف شروط وقت السحب أو الإيداع.</p>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-green-700 mb-2">تنظيم</h4>
+                                <p class="text-gray-600">الكود شكله شيك وسهل تتبعه.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التمرين العملي -->
+    <section class="py-16 bg-white" id="exercises">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-xl mr-4">
+                        🏧
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">تمرين عملي: ماكينة ATM</h2>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-700">✍️ المطلوب منك:</h3>
+                    <p class="text-gray-600 mb-4">اعمل كلاس <code class="bg-gray-200 px-2 py-1 rounded">ATM</code> فيه:</p>
+                    <ul class="list-disc pr-5 space-y-2 text-gray-600">
+                        <li>بيانات خاصة: <code class="bg-gray-200 px-2 py-1 rounded">_balance</code></li>
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">deposit(amount)</code></li>
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">withdraw(amount)</code></li>
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">checkBalance()</code></li>
+                        <li>مفيش حد يعدل الرصيد مباشرة</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-700">✅ مثال لحله:</h3>
+                    <div class="code-block scroll-container">
+                        <pre class="p-4 text-gray-200"><code>class ATM {
+  double _balance = 1000;
+
+  double get balance => _balance;
+
+  void deposit(double amount) {
+    if (amount > 0) {
+      _balance += amount;
+      print("تم إيداع $amount. الرصيد الحالي: $_balance");
+    } else {
+      print("قيمة الإيداع غير صحيحة");
+    }
+  }
+
+  void withdraw(double amount) {
+    if (amount <= _balance) {
+      _balance -= amount;
+      print("تم سحب $amount. الرصيد الحالي: $_balance");
+    } else {
+      print("رصيد غير كافي");
+    }
+  }
+
+  void checkBalance() {
+    print("رصيدك الحالي: $_balance");
+  }
+}
+
+void main() {
+  ATM atm = ATM();
+  atm.checkBalance();
+  atm.deposit(500);
+  atm.withdraw(200);
+  atm.checkBalance();
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الوراثة -->
+    <section class="py-16 bg-gray-50" id="inheritance">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xl mr-4">
+                            🧬
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">الوراثة (Inheritance)</h2>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">التعريف</h3>
+                        <p class="text-gray-600">الوراثة معناها إن كلاس (فئة) جديدة تقدر ترث الخصائص والدوال من كلاس موجود أصلاً، وبكده تقدر تستخدم وتعدل أو تضيف عليها بدون ما تعيد كتابة نفس الكود.</p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">مثال واقعي</h3>
+                        <p class="text-gray-600 mb-4">فكر معايا في حياة الطلبة:</p>
+                        <ul class="list-disc pr-5 space-y-2 text-gray-600">
+                            <li>عندنا فئة عامة اسمها <span class="font-bold">"موظف"</span> (Employee).</li>
+                            <li>عندنا فئات فرعية زي <span class="font-bold">"طالب دوام جزئي"</span> و <span class="font-bold">"طالب دوام كامل"</span> اللي هما أنواع موظفين، كل واحد ليه وظائف وخصائص معينة.</li>
+                            <li>كل هؤلاء الموظفين يشتركوا في خصائص عامة (اسم، رقم تعريف، راتب)، لكن في نفس الوقت عندهم تصرفات مختلفة.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">مثال برمجي (Dart)</h3>
+                        <div class="code-block scroll-container">
+                            <pre class="p-4 text-gray-200"><code>class Employee {
+  String name;
+  double salary;
+
+  Employee(this.name, this.salary);
+
+  void work() {
+    print("$name يعمل براتب $salary");
+  }
+}
+
+class PartTimeStudent extends Employee {
+  int hours;
+
+  PartTimeStudent(String name, double salary, this.hours) : super(name, salary);
+
+  void study() {
+    print("$name يدرس $hours ساعات في الأسبوع");
+  }
+
+  @override
+  void work() {
+    print("$name يعمل دوام جزئي براتب $salary");
+  }
+}
+
+void main() {
+  PartTimeStudent ali = PartTimeStudent("علي", 5000, 20);
+  ali.work();   // علي يعمل دوام جزئي براتب 5000
+  ali.study();  // علي يدرس 20 ساعات في الأسبوع
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8 p-4 bg-blue-50 border-r-4 border-blue-400 rounded">
+                        <h3 class="text-lg font-semibold mb-2 text-gray-700">الفائدة العملية</h3>
+                        <p class="text-gray-600">في شغلك أو مشروعك، بدل ما تكتب كود مكرر لكل نوع موظف أو كائن مختلف، تستخدم الوراثة عشان تعيد استخدام الكود وتنظمه.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الكلاسات المجردة -->
+    <section class="py-16 bg-white" id="abstract">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 text-xl mr-4">
+                            ✨
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">Abstract Class مع Extends (الكلاس المجرد + الوراثة)</h2>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">التعريف</h3>
+                        <p class="text-gray-600">الكلاس المجرد هو قالب لا يمكن إنشاء كائن منه مباشرة، لكنه يحدد دوال يجب أن تُنفذ في الكلاسات اللي تورثه.</p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">مثال واقعي</h3>
+                        <p class="text-gray-600 mb-4">تخيل عندك تطبيق بنظام توصيل طلبات:</p>
+                        <ul class="list-disc pr-5 space-y-2 text-gray-600">
+                            <li>عندك كلاس مجرد اسمه <span class="font-bold">DeliveryPerson</span> يعرف وظيفة أساسية وهي التوصيل <code class="bg-gray-200 px-2 py-1 rounded">deliver()</code>.</li>
+                            <li>عندك كلاس فرعي مثل <span class="font-bold">BikeCourier</span> و <span class="font-bold">CarCourier</span> كل واحد منهم له طريقة مختلفة للتوصيل.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">مثال برمجي (Dart)</h3>
+                        <div class="code-block scroll-container">
+                            <pre class="p-4 text-gray-200"><code>abstract class DeliveryPerson {
+  String name;
+
+  DeliveryPerson(this.name);
+
+  void deliver();  // دالة مجردة لازم تنفذ في الكلاسات الفرعية
+}
+
+class BikeCourier extends DeliveryPerson {
+  BikeCourier(String name) : super(name);
+
+  @override
+  void deliver() {
+    print("$name يوصل الطلب بالدراجة");
+  }
+}
+
+class CarCourier extends DeliveryPerson {
+  CarCourier(String name) : super(name);
+
+  @override
+  void deliver() {
+    print("$name يوصل الطلب بالسيارة");
+  }
+}
+
+void main() {
+  List&lt;DeliveryPerson&gt; couriers = [BikeCourier("أحمد"), CarCourier("محمود")];
+  
+  for (var courier in couriers) {
+    courier.deliver();
+  }
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8 p-4 bg-yellow-50 border-r-4 border-yellow-400 rounded">
+                        <h3 class="text-lg font-semibold mb-2 text-gray-700">الفائدة العملية</h3>
+                        <p class="text-gray-600">تقدر تنشئ نظام معياري، تعرف فيه الوظائف الأساسية وتترك التفاصيل للكلاسات المتخصصة، وهذا يسهل صيانة الكود وتطويره.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الواجهات -->
+    <section class="py-16 bg-gray-50" id="interface">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xl mr-4">
+                            📜
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">Interface (الواجهة)</h2>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">التعريف</h3>
+                        <p class="text-gray-600">الواجهة هي عقد يحدد مجموعة من الدوال التي يجب على الكلاس الذي ينفذها (implements) أن يقدمها.
+                        في Dart، الواجهات تتحقق باستخدام <code class="bg-gray-200 px-2 py-1 rounded">abstract class</code> أو <code class="bg-gray-200 px-2 py-1 rounded">class</code> مع <code class="bg-gray-200 px-2 py-1 rounded">implements</code>.</p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">مثال واقعي</h3>
+                        <p class="text-gray-600 mb-4">تخيل نظام للدفع في متجر إلكتروني:</p>
+                        <ul class="list-disc pr-5 space-y-2 text-gray-600">
+                            <li>عندنا واجهة <span class="font-bold">PaymentMethod</span> تحتوي على دالة <code class="bg-gray-200 px-2 py-1 rounded">pay(amount)</code></li>
+                            <li>هناك عدة طرق دفع: بطاقة ائتمان، PayPal، ومحفظة إلكترونية. كل طريقة تنفيذ مختلف.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">مثال برمجي (Dart)</h3>
+                        <div class="code-block scroll-container">
+                            <pre class="p-4 text-gray-200"><code>abstract class PaymentMethod {
+  void pay(double amount);
+}
+
+class CreditCard implements PaymentMethod {
+  @override
+  void pay(double amount) {
+    print("تم الدفع $amount باستخدام بطاقة الائتمان");
+  }
+}
+
+class PayPal implements PaymentMethod {
+  @override
+  void pay(double amount) {
+    print("تم الدفع $amount باستخدام PayPal");
+  }
+}
+
+void main() {
+  PaymentMethod method = CreditCard();
+  method.pay(150.0);  // تم الدفع 150 باستخدام بطاقة الائتمان
+
+  method = PayPal();
+  method.pay(200.0);  // تم الدفع 200 باستخدام PayPal
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8 p-4 bg-green-50 border-r-4 border-green-400 rounded">
+                        <h3 class="text-lg font-semibold mb-2 text-gray-700">الفائدة العملية</h3>
+                        <p class="text-gray-600">لو انت بتبني نظام فيه أكثر من طريقة لتنفيذ وظيفة واحدة (مثل الدفع، الإشعارات، أو تسجيل الدخول)، بتستخدم الواجهات لتوحيد الكود مع السماح بتنفيذات مختلفة.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الثوابت -->
+    <section class="py-16 bg-white" id="static">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-xl mr-4">
+                            ⚡
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">Static (المتغيرات والدوال الثابتة)</h2>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">التعريف</h3>
+                        <p class="text-gray-600">المتغير أو الدالة الثابتة هي شيء مشترك بين كل الكائنات ولا يحتاج إنشاء كائن للوصول إليه. تستخدم لحفظ بيانات أو وظائف عامة.</p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">مثال واقعي</h3>
+                        <p class="text-gray-600 mb-4">في تطبيق Flutter: عندك <span class="font-bold">ثيم ثابت</span> لكل التطبيق أو <span class="font-bold">اعدادات عامة</span>:</p>
+                        <ul class="list-disc pr-5 space-y-2 text-gray-600">
+                            <li>ثابت لتحديد الهوامش (padding)</li>
+                            <li>ثابت لعنوان URL لواجهة برمجة التطبيقات</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">مثال Flutter عملي</h3>
+                        <div class="code-block scroll-container">
+                            <pre class="p-4 text-gray-200"><code>class AppSettings {
+  static const double defaultPadding = 16.0;
+  static const String apiEndpoint = "https://api.myapp.com";
+  
+  static void printSettings() {
+    print("Padding: $defaultPadding, API URL: $apiEndpoint");
+  }
+}
+
+void main() {
+  print(AppSettings.defaultPadding);   // 16.0
+  AppSettings.printSettings();          // Padding: 16.0, API URL: https://api.myapp.com
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8 p-4 bg-red-50 border-r-4 border-red-400 rounded">
+                        <h3 class="text-lg font-semibold mb-2 text-gray-700">الفائدة العملية</h3>
+                        <p class="text-gray-600">لو عندك قيمة أو وظيفة مش بتتغير أو تخص التطبيق كله مش كائن معين، تستخدم <code class="bg-gray-200 px-2 py-1 rounded">static</code> علشان توفر الموارد وتسهّل الاستخدام.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الخلاصة -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">خلاصة ربط كل مفهوم بالواقع العملي</h2>
+                
+                <div class="overflow-x-auto scroll-container">
+                    <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                        <thead class="bg-purple-600 text-white">
+                            <tr>
+                                <th class="py-3 px-4 text-right">المفهوم</th>
+                                <th class="py-3 px-4 text-right">مثال عملي من حياة الطلبة/العمل</th>
+                                <th class="py-3 px-4 text-right">كيف تستفيد منه في برمجتك</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr>
+                                <td class="py-3 px-4 font-semibold">Inheritance</td>
+                                <td class="py-3 px-4">أنواع موظفين في شركة (دوام جزئي/كامل)</td>
+                                <td class="py-3 px-4">إعادة استخدام الكود والتنظيم</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-semibold">Abstract + Extends</td>
+                                <td class="py-3 px-4">التوصيل بأنواع مختلفة (دراجة/سيارة)</td>
+                                <td class="py-3 px-4">بناء أنظمة
+
+                                    </td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </section>
+                                    </body>
+                                    </html>

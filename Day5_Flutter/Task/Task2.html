@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشروع ورشة السيارات - تطبيق مبادئ OOP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+        .code-block {
+            font-family: 'Courier New', monospace;
+        }
+        .task-card {
+            transition: all 0.3s ease;
+        }
+        .task-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-8 shadow-lg">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2">مشروع نظام إدارة ورشة السيارات</h1>
+            <p class="text-lg text-blue-100">تطبيق مبادئ البرمجة الكائنية (OOP) في مشروع عملي</p>
+            <div class="mt-4 flex justify-center space-x-2 space-x-reverse">
+                <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">التغليف</span>
+                <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm">الوراثة</span>
+                <span class="bg-purple-500 text-white px-3 py-1 rounded-full text-sm">تعدد الأشكال</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Project Description -->
+        <section class="mb-10 bg-white rounded-xl shadow-md p-6 border-l-4 border-blue-500">
+            <div class="flex items-center mb-4">
+                <div class="bg-blue-100 p-3 rounded-full ml-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-semibold text-gray-800">وصف المشروع</h2>
+            </div>
+            <p class="text-gray-700 mb-4">بناء نظام لإدارة ورشة سيارات باستخدام مفاهيم البرمجة الكائنية، حيث يتعامل النظام مع:</p>
+            <ul class="list-disc pr-5 space-y-2 text-gray-700">
+                <li>المركبات بأنواعها (سيارات، شاحنات)</li>
+                <li>الميكانيكيين العاملين في الورشة</li>
+                <li>عمليات الصيانة والإصلاح</li>
+            </ul>
+        </section>
+
+        <!-- Classes Structure -->
+        <section class="mb-10 bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-purple-100 p-3 rounded-full ml-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-semibold text-gray-800">هيكل الكلاسات</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4">
+                <!-- Vehicle Class -->
+                <div class="task-card bg-blue-50 p-4 rounded-lg border border-blue-200">
+                    <h3 class="font-bold text-lg text-blue-800 mb-3">كلاس Vehicle</h3>
+                    <ul class="space-y-2 text-blue-700">
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            <span>make (الماركة)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            <span>model (الموديل)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            <span>year (سنة الصنع)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-500 mr-2">•</span>
+                            <span>displayInfo()</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Car Class -->
+                <div class="task-card bg-green-50 p-4 rounded-lg border border-green-200">
+                    <h3 class="font-bold text-lg text-green-800 mb-3">كلاس Car</h3>
+                    <ul class="space-y-2 text-green-700">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">•</span>
+                            <span>يرث من Vehicle</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">•</span>
+                            <span>numberOfDoors (عدد الأبواب)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">•</span>
+                            <span>تعديل displayInfo()</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Truck Class -->
+                <div class="task-card bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                    <h3 class="font-bold text-lg text-yellow-800 mb-3">كلاس Truck</h3>
+                    <ul class="space-y-2 text-yellow-700">
+                        <li class="flex items-start">
+                            <span class="text-yellow-500 mr-2">•</span>
+                            <span>يرث من Vehicle</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-yellow-500 mr-2">•</span>
+                            <span>loadCapacity (الحمولة)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-yellow-500 mr-2">•</span>
+                            <span>تعديل displayInfo()</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Mechanic Class -->
+                <div class="task-card bg-red-50 p-4 rounded-lg border border-red-200">
+                    <h3 class="font-bold text-lg text-red-800 mb-3">كلاس Mechanic</h3>
+                    <ul class="space-y-2 text-red-700">
+                        <li class="flex items-start">
+                            <span class="text-red-500 mr-2">•</span>
+                            <span>name (الاسم)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-500 mr-2">•</span>
+                            <span>employeeId (الرقم الوظيفي)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-500 mr-2">•</span>
+                            <span>repair() (إصلاح مركبة)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Workshop Class -->
+                <div class="task-card bg-purple-50 p-4 rounded-lg border border-purple-200">
+                    <h3 class="font-bold text-lg text-purple-800 mb-3">كلاس Workshop</h3>
+                    <ul class="space-y-2 text-purple-700">
+                        <li class="flex items-start">
+                            <span class="text-purple-500 mr-2">•</span>
+                            <span>vehicles (قائمة المركبات)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-purple-500 mr-2">•</span>
+                            <span>mechanics (قائمة الميكانيكيين)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-purple-500 mr-2">•</span>
+                            <span>إضافة وعرض المركبات</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-purple-500 mr-2">•</span>
+                            <span>إضافة وعرض الميكانيكيين</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Code Example -->
+        <section class="mb-10 bg-white rounded-xl shadow-md overflow-hidden">
+            <div class="bg-gray-800 text-white px-4 py-3 flex justify-between items-center">
+                <h3 class="font-medium">مثال الكود (Dart)</h3>
+                <button class="text-gray-300 hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                        <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                    </svg>
+                </button>
+            </div>
+
+        </section>
+
+        <!-- Main Function Tasks -->
+        <section class="mb-10 bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-green-100 p-3 rounded-full ml-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-semibold text-gray-800">المطلوب في الدالة main</h2>
+            </div>
+            <ol class="list-decimal pr-5 space-y-3 text-gray-700">
+                <li>إنشاء كائن من Workshop</li>
+                <li>إنشاء عدة سيارات وشاحنات وإضافتها للورشة</li>
+                <li>إنشاء ميكانيكيين وإضافتهم للورشة</li>
+                <li>عرض جميع المركبات والميكانيكيين</li>
+                <li>جعل أحد الميكانيكيين يصلح مركبة معينة</li>
+            </ol>
+        </section>
+
+        <!-- OOP Principles -->
+        <section class="mb-10 bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-indigo-100 p-3 rounded-full ml-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-semibold text-gray-800">تطبيق مبادئ OOP</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                    <h3 class="font-bold text-lg text-blue-800 mb-2">الوراثة (Inheritance)</h3>
+                    <p class="text-blue-700">كل من Car و Truck يرثان من Vehicle، مما يسمح بمشاركة الخصائص المشتركة.</p>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+                    <h3 class="font-bold text-lg text-green-800 mb-2">تعدد الأشكال (Polymorphism)</h3>
+                    <p class="text-green-700">دالة displayInfo() تتصرف بشكل مختلف حسب نوع المركبة.</p>
+                </div>
+                <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+                    <h3 class="font-bold text-lg text-purple-800 mb-2">التغليف (Encapsulation)</h3>
+                    <p class="text-purple-700">خصائص كل كلاس محمية وتتعامل معها عبر دوال.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bonus Tasks -->
+        <section class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl shadow-md p-6 border border-blue-200">
+            <div class="flex items-center mb-4">
+                <div class="bg-yellow-100 p-3 rounded-full ml-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m8-8v7m-16-7v7m8-12v13m-4-8v7m12-5v7m-8-5v7" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-semibold text-gray-800">تحديات إضافية</h2>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-blue-100">
+                    <h4 class="font-medium text-blue-800 mb-2">اضافي</h4>
+                    <p class="text-gray-700">إضافة نوع جديد من المركبات (مثل دراجات نارية)</p>
+                </div>
+          
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-blue-100">
+                    <h4 class="font-medium text-blue-800 mb-2">ااضافي</h4>
+                    <p class="text-gray-700">
+                            اضاافه سيارات اخري كهرباء او غاز تعتمد علي ال class car
+
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+   
+</body>
+</html>

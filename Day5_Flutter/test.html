@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقارنة البرمجة الإجرائية والكائنية | مصنع السيارات</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+        }
+        .code-block {
+            direction: ltr;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+        }
+        .gradient-header {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+        .procedural-card {
+            border-top: 4px solid #ef4444;
+        }
+        .oop-card {
+            border-top: 4px solid #10b981;
+        }
+        .feature-icon {
+            transition: all 0.3s ease;
+        }
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+        .glow {
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="gradient-header text-white py-12 px-4">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-black mb-4 animate-pulse">مصنع السيارات البرمجي</h1>
+            <h2 class="text-2xl md:text-3xl font-bold mb-6">مقارنة بين البرمجة الإجرائية والكائنية</h2>
+            <div class="w-20 h-1 bg-white mx-auto mt-6"></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 -mt-10">
+        <!-- Intro Cards -->
+        <div class="grid md:grid-cols-2 gap-8 mb-16">
+            <div class="bg-white rounded-xl shadow-xl overflow-hidden procedural-card transform hover:-translate-y-2 transition duration-500">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-red-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-code text-red-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-red-600">البرمجة الإجرائية</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">نهج تقليدي يعتمد على سلسلة من الإجراءات والتعليمات المتسلسلة، حيث يتم التركيز على "كيف" يتم تنفيذ المهام.</p>
+                    <div class="flex items-center text-sm text-red-500 font-medium">
+                        <span>Procedural Programming</span>
+                        <i class="fas fa-arrow-left ml-2"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-xl overflow-hidden oop-card transform hover:-translate-y-2 transition duration-500">
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-cubes text-green-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-green-600">البرمجة الكائنية</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">نهج حديث يعتمد على الكائنات والتفاعل بينها، حيث يتم التركيز على "ماذا" نريد أن نفعل بدلاً من "كيف".</p>
+                    <div class="flex items-center text-sm text-green-500 font-medium">
+                        <span>Object-Oriented Programming</span>
+                        <i class="fas fa-arrow-left ml-2"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Comparison -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold text-center mb-12 relative">
+                <span class="relative z-10 px-4 bg-gradient-to-r from-indigo-100 to-purple-100">مقارنة الكود</span>
+                <span class="absolute h-1 w-full bg-gray-200 top-1/2 left-0 transform -translate-y-1/2 z-0"></span>
+            </h3>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Procedural Code -->
+                <div class="bg-gray-900 rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-gray-800 px-4 py-3 flex items-center">
+                        <div class="flex space-x-2 mr-3">
+                            <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                        </div>
+                        <h4 class="text-red-400 font-bold">procedural.dart</h4>
+                    </div>
+                    <div class="p-4 overflow-x-auto">
+                        <pre class="code-block text-gray-300 text-sm"><code>
+<span class="text-purple-400">// بيانات متفرقة</span>
+<span class="text-blue-400">List</span>&lt;<span class="text-blue-400">String</span>&gt; brands = [];
+<span class="text-blue-400">List</span>&lt;<span class="text-blue-400">String</span>&gt; models = [];
+<span class="text-blue-400">List</span>&lt;<span class="text-blue-400">int</span>&gt; years = [];
+<span class="text-blue-400">List</span>&lt;<span class="text-blue-400">int</span>&gt; speeds = [];
+
+<span class="text-purple-400">// إضافة سيارة</span>
+<span class="text-blue-400">void</span> <span class="text-yellow-400">addCar</span>(<span class="text-blue-400">String</span> brand, <span class="text-blue-400">String</span> model, <span class="text-blue-400">int</span> year) {
+  brands.<span class="text-yellow-400">add</span>(brand);
+  models.<span class="text-yellow-400">add</span>(model);
+  years.<span class="text-yellow-400">add</span>(year);
+  speeds.<span class="text-yellow-400">add</span>(<span class="text-green-400">0</span>);
+}
+
+<span class="text-purple-400">// عرض التفاصيل</span>
+<span class="text-blue-400">void</span> <span class="text-yellow-400">display</span>(<span class="text-blue-400">int</span> index) {
+  <span class="text-blue-400">print</span>(<span class="text-orange-400">'Brand: ${brands[index]}'</span>);
+  <span class="text-blue-400">print</span>(<span class="text-orange-400">'Model: ${models[index]}'</span>);
+  <span class="text-blue-400">print</span>(<span class="text-orange-400">'Year: ${years[index]}'</span>);
+  <span class="text-blue-400">print</span>(<span class="text-orange-400">'Speed: ${speeds[index]} km/h'</span>);
+}
+                        </code></pre>
+                    </div>
+                    <div class="bg-gray-800 px-4 py-2 text-red-400 text-sm font-mono">
+                        <i class="fas fa-exclamation-triangle mr-2"></i> مشاكل: بيانات متفرقة - صعوبة التوسع - محدودية إعادة الاستخدام
+                    </div>
+                </div>
+
+                <!-- OOP Code -->
+                <div class="bg-gray-900 rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-gray-800 px-4 py-3 flex items-center">
+                        <div class="flex space-x-2 mr-3">
+                            <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                        </div>
+                        <h4 class="text-green-400 font-bold">oop.dart</h4>
+                    </div>
+                    <div class="p-4 overflow-x-auto">
+                        <pre class="code-block text-gray-300 text-sm"><code>
+<span class="text-purple-400">// تعريف الكلاس</span>
+<span class="text-blue-400">class</span> <span class="text-yellow-400">Car</span> {
+  <span class="text-blue-400">String</span> brand;
+  <span class="text-blue-400">String</span> model;
+  <span class="text-blue-400">int</span> year;
+  <span class="text-blue-400">int</span> speed = <span class="text-green-400">0</span>;
+
+  <span class="text-yellow-400">Car</span>(<span class="text-blue-400">this</span>.brand, <span class="text-blue-400">this</span>.model, <span class="text-blue-400">this</span>.year);
+
+  <span class="text-purple-400">// تسريع السيارة</span>
+  <span class="text-blue-400">void</span> <span class="text-yellow-400">accelerate</span>(<span class="text-blue-400">int</span> amount) {
+    speed += amount;
+  }
+
+  <span class="text-purple-400">// عرض التفاصيل</span>
+  <span class="text-blue-400">void</span> <span class="text-yellow-400">display</span>() {
+    <span class="text-blue-400">print</span>(<span class="text-orange-400">'Brand: $brand'</span>);
+    <span class="text-blue-400">print</span>(<span class="text-orange-400">'Model: $model'</span>);
+    <span class="text-blue-400">print</span>(<span class="text-orange-400">'Year: $year'</span>);
+    <span class="text-blue-400">print</span>(<span class="text-orange-400">'Speed: $speed km/h'</span>);
+  }
+}
+                        </code></pre>
+                    </div>
+                    <div class="bg-gray-800 px-4 py-2 text-green-400 text-sm font-mono">
+                        <i class="fas fa-check-circle mr-2"></i> مزايا: بيانات مجمعة - سهولة التوسع - إعادة استخدام الكود
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Comparison -->
+        <section class="mb-16">
+            <h3 class="text-3xl font-bold text-center mb-12 relative">
+                <span class="relative z-10 px-4 bg-gradient-to-r from-indigo-100 to-purple-100">المقارنة التفصيلية</span>
+                <span class="absolute h-1 w-full bg-gray-200 top-1/2 left-0 transform -translate-y-1/2 z-0"></span>
+            </h3>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                    <div class="feature-icon bg-indigo-100 text-indigo-600 w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-layer-group text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-center mb-3">تنظيم البيانات</h4>
+                    <div class="text-center">
+                        <p class="text-red-500 font-medium mb-2"><i class="fas fa-times-circle mr-2"></i>متفرقة في قوائم متعددة</p>
+                        <p class="text-green-500 font-medium"><i class="fas fa-check-circle mr-2"></i>مجمعة في كائن واحد</p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                    <div class="feature-icon bg-indigo-100 text-indigo-600 w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-expand-arrows-alt text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-center mb-3">التوسع</h4>
+                    <div class="text-center">
+                        <p class="text-red-500 font-medium mb-2"><i class="fas fa-times-circle mr-2"></i>يتطلب تعديلات كثيرة</p>
+                        <p class="text-green-500 font-medium"><i class="fas fa-check-circle mr-2"></i>سهل وسريع</p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                    <div class="feature-icon bg-indigo-100 text-indigo-600 w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-copy text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-center mb-3">إعادة الاستخدام</h4>
+                    <div class="text-center">
+                        <p class="text-red-500 font-medium mb-2"><i class="fas fa-times-circle mr-2"></i>محدودة</p>
+                        <p class="text-green-500 font-medium"><i class="fas fa-check-circle mr-2"></i>عالية (الوراثة)</p>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                    <div class="feature-icon bg-indigo-100 text-indigo-600 w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-lock text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-center mb-3">حماية البيانات</h4>
+                    <div class="text-center">
+                        <p class="text-red-500 font-medium mb-2"><i class="fas fa-times-circle mr-2"></i>غير موجودة</p>
+                        <p class="text-green-500 font-medium"><i class="fas fa-check-circle mr-2"></i>متاحة (التغليف)</p>
+                    </div>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                    <div class="feature-icon bg-indigo-100 text-indigo-600 w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-project-diagram text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-center mb-3">العلاقات</h4>
+                    <div class="text-center">
+                        <p class="text-red-500 font-medium mb-2"><i class="fas fa-times-circle mr-2"></i>غير واضحة</p>
+                        <p class="text-green-500 font-medium"><i class="fas fa-check-circle mr-2"></i>واضحة (الوراثة)</p>
+                    </div>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                    <div class="feature-icon bg-indigo-100 text-indigo-600 w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-shapes text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-center mb-3">تعدد الأشكال</h4>
+                    <div class="text-center">
+                        <p class="text-red-500 font-medium mb-2"><i class="fas fa-times-circle mr-2"></i>غير متاح</p>
+                        <p class="text-green-500 font-medium"><i class="fas fa-check-circle mr-2"></i>متاح (Polymorphism)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real World Example -->
+        <section class="bg-white rounded-xl shadow-xl overflow-hidden mb-16 glow">
+            <div class="md:flex">
+                <div class="md:w-1/2 bg-indigo-600 p-8 text-white flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold mb-4">💡 مثال عملي من مصنع السيارات</h3>
+                    <p class="mb-4">لنفترض أننا نريد إضافة نوع خاص من السيارات (كهربائية) مع خاصية إضافية (مستوى البطارية):</p>
+                    
+                    <div class="bg-indigo-700 p-4 rounded-lg">
+                        <h4 class="font-bold mb-2">في البرمجة الإجرائية:</h4>
+                        <p class="text-sm">- نضيف List جديدة للبطارية<br>- نعدل جميع الدوال لتأخذ في الاعتبار هذه الخاصية الجديدة</p>
+                    </div>
+
+                    <div class="bg-indigo-800 p-4 rounded-lg mt-4">
+                        <h4 class="font-bold mb-2">في البرمجة الكائنية:</h4>
+                        <p class="text-sm">- ننشئ كلاس جديد ElectricCar يرث من Car<br>- نضيف الخاصية الجديدة والسلوك المطلوب فقط</p>
+                    </div>
+                </div>
+                <div class="md:w-1/2 p-8">
+                    <pre class="code-block bg-gray-900 text-gray-300 p-4 rounded-lg text-sm"><code>
+<span class="text-blue-400">class</span> <span class="text-yellow-400">ElectricCar</span> <span class="text-blue-400">extends</span> <span class="text-yellow-400">Car</span> {
+  <span class="text-blue-400">double</span> batteryLevel = <span class="text-green-400">100</span>;
+
+  <span class="text-yellow-400">ElectricCar</span>(<span class="text-blue-400">String</span> brand, <span class="text-blue-400">String</span> model, <span class="text-blue-400">int</span> year)
+      : <span class="text-blue-400">super</span>(brand, model, year);
+
+  <span class="text-blue-400">void</span> <span class="text-yellow-400">charge</span>(<span class="text-blue-400">double</span> amount) {
+    batteryLevel = batteryLevel + amount > <span class="text-green-400">100</span> 
+        ? <span class="text-green-400">100</span> 
+        : batteryLevel + amount;
+  }
+
+  <span class="text-blue-400">void</span> <span class="text-yellow-400">display</span>() {
+    <span class="text-blue-400">super</span>.<span class="text-yellow-400">display</span>();
+    <span class="text-blue-400">print</span>(<span class="text-orange-400">'Battery: $batteryLevel%'</span>);
+  }
+}
+                    </code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl shadow-2xl p-8 transform hover:scale-[1.01] transition duration-500">
+            <div class="max-w-3xl mx-auto text-center">
+                <i class="fas fa-gem text-4xl mb-6"></i>
+                <h3 class="text-3xl font-bold mb-6">الخلاصة النهائية</h3>
+                <p class="text-xl mb-6">البرمجة الكائنية توفر حلولًا أكثر قوة ومرونة للمشاريع البرمجية المعقدة، خاصة عند الحاجة إلى:</p>
+                <div class="grid md:grid-cols-3 gap-4 mb-8">
+                    <div class="bg-white bg-opacity-10 p-4 rounded-lg backdrop-blur-sm">
+                        <i class="fas fa-sitemap text-2xl mb-2"></i>
+                        <p>تنظيم الكود</p>
+                    </div>
+                    <div class="bg-white bg-opacity-10 p-4 rounded-lg backdrop-blur-sm">
+                        <i class="fas fa-expand text-2xl mb-2"></i>
+                        <p>سهولة التوسع</p>
+                    </div>
+                    <div class="bg-white bg-opacity-10 p-4 rounded-lg backdrop-blur-sm">
+                        <i class="fas fa-shield-alt text-2xl mb-2"></i>
+                        <p>حماية البيانات</p>
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-20 p-4 rounded-lg inline-block">
+                    <p class="font-bold">" البرمجة الكائنية تجعل البرمجيات أكثر قربًا من العالم الحقيقي "</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-gray-400 hover:text-white text-xl">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white text-xl">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white text-xl">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+            <p class="text-gray-400">© 2023 مصنع السيارات البرمجي. كل الحقوق محفوظة.</p>
+        </div>
+    </footer>
+</body>
+</html>
