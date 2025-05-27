@@ -1,0 +1,367 @@
+1. ThemeData
+<section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-indigo-500"> <div class="flex items-center mb-6"> <div class="bg-indigo-100 p-4 rounded-full ml-4"> <span class="material-icons text-indigo-600 text-3xl">palette</span> </div> <h2 class="text-3xl font-bold text-gray-800">ThemeData في Flutter</h2> </div>
+<p class="text-xl text-gray-700 mb-8 leading-relaxed">
+    الـ <span class="font-bold text-indigo-600">ThemeData</span> هو كائن يحدد المظهر العام لتطبيق Flutter، حيث يحتوي على جميع الإعدادات المتعلقة بالألوان، الخطوط، الأشكال، وغيرها من الخصائص المرئية.
+</p>
+
+<div class="grid md:grid-cols-2 gap-8">
+    <div>
+        <div class="bg-indigo-50 p-6 rounded-lg border border-indigo-200 mb-6">
+            <h3 class="font-bold text-lg text-indigo-800 mb-3 flex items-center">
+                <span class="material-icons mr-2">info</span>
+                الخصائص الرئيسية
+            </h3>
+            <ul class="list-disc pr-5 space-y-2 text-indigo-700">
+                <li><span class="font-semibold">colorScheme</span>: مجموعة الألوان الأساسية للتطبيق</li>
+                <li><span class="font-semibold">textTheme</span>: أنماط النصوص المستخدمة في التطبيق</li>
+                <li><span class="font-semibold">appBarTheme</span>: إعدادات شريط التطبيق</li>
+                <li><span class="font-semibold">buttonTheme</span>: إعدادات الأزرار</li>
+                <li><span class="font-semibold">inputDecorationTheme</span>: إعدادات حقول الإدخال</li>
+            </ul>
+        </div>
+        
+        <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+            <h4 class="font-semibold text-yellow-800 mb-2 flex items-center">
+                <span class="material-icons mr-2">lightbulb</span>
+                كيفية الاستخدام
+            </h4>
+            <p class="text-gray-700">يتم تمرير ThemeData إلى widget MaterialApp ليطبق على كامل التطبيق:</p>
+            <div class="bg-gray-800 p-3 rounded mt-2 text-sm text-white">
+                MaterialApp(<br>
+                &nbsp;&nbsp;theme: ThemeData(<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;// إعدادات المظهر هنا<br>
+                &nbsp;&nbsp;),<br>
+                )
+            </div>
+        </div>
+    </div>
+    
+    <div>
+        <div class="bg-gray-900 p-4 rounded-lg mb-4">
+            <div class="code-block text-gray-100 overflow-x-auto">
+                <pre><code>// مثال شامل لـ ThemeData
+ThemeData(
+colorScheme: ColorScheme.light(
+primary: Colors.blue,
+secondary: Colors.green,
+),
+textTheme: TextTheme(
+headline1: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+bodyText1: TextStyle(fontSize: 16, color: Colors.black87),
+),
+appBarTheme: AppBarTheme(
+color: Colors.blue,
+titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+),
+elevatedButtonTheme: ElevatedButtonThemeData(
+style: ElevatedButton.styleFrom(
+primary: Colors.blue,
+padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+),
+),
+inputDecorationTheme: InputDecorationTheme(
+border: OutlineInputBorder(),
+filled: true,
+fillColor: Colors.grey[100],
+),
+)</code></pre>
+</div>
+</div>
+
+        <div class="bg-white p-4 rounded-lg border border-gray-300">
+            <h4 class="font-semibold text-gray-800 mb-2">فوائد استخدام ThemeData</h4>
+            <ul class="list-disc pr-5 space-y-1 text-gray-700">
+                <li>تطبيق مظهر موحد على كامل التطبيق</li>
+                <li>سهولة تغيير المظهر العام من مكان واحد</li>
+                <li>توفير الوقت في تكرار إعدادات المظهر</li>
+                <li>دعم أفضل لوضع الظلام (Dark Mode)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+</section>
+2. Buttons in Flutter (جميع الأنواع)
+<section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-blue-500"> <div class="flex items-center mb-6"> <div class="bg-blue-100 p-4 rounded-full ml-4"> <span class="material-icons text-blue-600 text-3xl">smart_button</span> </div> <h2 class="text-3xl font-bold text-gray-800">أزرار Flutter - جميع الأنواع</h2> </div>
+<p class="text-xl text-gray-700 mb-8 leading-relaxed">
+    يوفر Flutter عدة أنواع من الأزرار لكل منها استخدام محدد ومظهر مختلف. فيما يلي الأنواع الرئيسية للأزرار في Flutter:
+</p>
+
+<div class="grid md:grid-cols-3 gap-6">
+    <!-- ElevatedButton -->
+    <div class="widget-card bg-blue-50 p-6 rounded-lg border-l-blue-400">
+        <div class="flex items-center mb-4">
+            <span class="material-icons text-blue-500 text-3xl mr-3">arrow_upward</span>
+            <h3 class="text-xl font-bold text-blue-800">ElevatedButton</h3>
+        </div>
+        <p class="text-gray-700 mb-4">زر مرتفع مع ظل، يستخدم للإجراءات الرئيسية في التطبيق.</p>
+        <div class="bg-white p-3 rounded flex justify-center">
+            <button class="bg-blue-500 text-white px-4 py-2 rounded shadow">زر مرتفع</button>
+        </div>
+        <div class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs">
+            ElevatedButton(onPressed: () {}, child: Text('زر'))
+        </div>
+    </div>
+    
+    <!-- TextButton -->
+    <div class="widget-card bg-green-50 p-6 rounded-lg border-l-green-400">
+        <div class="flex items-center mb-4">
+            <span class="material-icons text-green-500 text-3xl mr-3">text_fields</span>
+            <h3 class="text-xl font-bold text-green-800">TextButton</h3>
+        </div>
+        <p class="text-gray-700 mb-4">زر نصي بدون ارتفاع، يستخدم للإجراءات الثانوية.</p>
+        <div class="bg-white p-3 rounded flex justify-center">
+            <button class="text-green-600 px-4 py-2 rounded">زر نصي</button>
+        </div>
+        <div class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs">
+            TextButton(onPressed: () {}, child: Text('زر'))
+        </div>
+    </div>
+    
+    <!-- OutlinedButton -->
+    <div class="widget-card bg-purple-50 p-6 rounded-lg border-l-purple-400">
+        <div class="flex items-center mb-4">
+            <span class="material-icons text-purple-500 text-3xl mr-3">crop_square</span>
+            <h3 class="text-xl font-bold text-purple-800">OutlinedButton</h3>
+        </div>
+        <p class="text-gray-700 mb-4">زر بإطار، يجمع بين ميزات ElevatedButton و TextButton.</p>
+        <div class="bg-white p-3 rounded flex justify-center">
+            <button class="border border-purple-500 text-purple-600 px-4 py-2 rounded">زر بإطار</button>
+        </div>
+        <div class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs">
+            OutlinedButton(onPressed: () {}, child: Text('زر'))
+        </div>
+    </div>
+</div>
+
+<div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+        <span class="material-icons mr-2 text-blue-500">compare</span>
+        مقارنة بين أنواع الأزرار
+    </h3>
+    
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-200">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">النوع</th>
+                    <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">الاستخدام</th>
+                    <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">المظهر</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">ElevatedButton</td>
+                    <td class="py-3 px-4 border-b">الإجراءات الرئيسية والأكثر أهمية</td>
+                    <td class="py-3 px-4 border-b">خلفية ملونة مع ظل</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">TextButton</td>
+                    <td class="py-3 px-4 border-b">الإجراءات الثانوية والأقل أهمية</td>
+                    <td class="py-3 px-4 border-b">نص فقط بدون خلفية</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">OutlinedButton</td>
+                    <td class="py-3 px-4 border-b">إجراءات متوسطة الأهمية</td>
+                    <td class="py-3 px-4 border-b">إطار مع نص بدون خلفية</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">IconButton</td>
+                    <td class="py-3 px-4 border-b">أزرار الأيقونات في AppBar</td>
+                    <td class="py-3 px-4 border-b">أيقونة فقط</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">FloatingActionButton</td>
+                    <td class="py-3 px-4 border-b">الإجراء الأساسي في الشاشة</td>
+                    <td class="py-3 px-4 border-b">زر دائري عائم</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</section>
+3. Expanded
+<section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-red-500"> <div class="flex items-center mb-6"> <div class="bg-red-100 p-4 rounded-full ml-4"> <span class="material-icons text-red-600 text-3xl">expand</span> </div> <h2 class="text-3xl font-bold text-gray-800">Expanded في Flutter</h2> </div>
+<p class="text-xl text-gray-700 mb-8 leading-relaxed">
+    الـ <span class="font-bold text-red-600">Expanded</span> هو widget يستخدم داخل Column أو Row لملء المساحة المتاحة، حيث يأخذ الطفل المساحة المتبقية بناءً على عامل التمدد (flex factor).
+</p>
+
+<div class="grid md:grid-cols-2 gap-8">
+    <div>
+        <div class="bg-red-50 p-6 rounded-lg border border-red-200 mb-6">
+            <h3 class="font-bold text-lg text-red-800 mb-3 flex items-center">
+                <span class="material-icons mr-2">info</span>
+                الخصائص الرئيسية
+            </h3>
+            <ul class="list-disc pr-5 space-y-2 text-red-700">
+                <li><span class="font-semibold">child</span>: الـ Widget الذي سيتم توسيعه</li>
+                <li><span class="font-semibold">flex</span>: عامل التمدد (يحدد نسبة المساحة التي سيأخذها)</li>
+            </ul>
+        </div>
+        
+        <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+            <h4 class="font-semibold text-blue-800 mb-2 flex items-center">
+                <span class="material-icons mr-2">lightbulb</span>
+                حالات الاستخدام الشائعة
+            </h4>
+            <ul class="list-disc pr-5 space-y-1 text-blue-700">
+                <li>عندما تريد أن يأخذ عنصر مساحة أكبر من العناصر الأخرى</li>
+                <li>لتوزيع المساحة بين عدة عناصر بنسب مختلفة</li>
+                <li>لضمان استغلال كامل المساحة المتاحة</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div>
+        <div class="bg-gray-900 p-4 rounded-lg mb-4">
+            <div class="code-block text-gray-100 overflow-x-auto">
+                <pre><code>// أمثلة على استخدام Expanded
+// 1. توزيع المساحة بالتساوي
+Row(
+children: [
+Expanded(child: Container(color: Colors.red, height: 100)),
+Expanded(child: Container(color: Colors.green, height: 100)),
+Expanded(child: Container(color: Colors.blue, height: 100)),
+],
+)
+
+// 2. توزيع المساحة بنسب مختلفة
+Column(
+children: [
+Expanded(
+flex: 2, // يأخذ ضعف المساحة
+child: Container(color: Colors.amber),
+),
+Expanded(
+flex: 1, // يأخذ نصف المساحة
+child: Container(color: Colors.purple),
+),
+],
+)</code></pre>
+</div>
+</div>
+
+        <div class="bg-white p-4 rounded-lg border border-gray-300">
+            <h4 class="font-semibold text-gray-800 mb-2">الفرق بين Expanded و Flexible</h4>
+            <p class="text-gray-700">Expanded هو نوع من Flexible مع ضبط fit ليكون FlexFit.tight (يأخذ كل المساحة المتاحة)، بينما Flexible يمكن ضبطه ليكون FlexFit.loose (لا يأخذ كل المساحة بالضرورة).</p>
+        </div>
+    </div>
+</div>
+</section>
+4. ListTile
+<section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-green-500"> <div class="flex items-center mb-6"> <div class="bg-green-100 p-4 rounded-full ml-4"> <span class="material-icons text-green-600 text-3xl">list</span> </div> <h2 class="text-3xl font-bold text-gray-800">ListTile في Flutter</h2> </div>
+<p class="text-xl text-gray-700 mb-8 leading-relaxed">
+    الـ <span class="font-bold text-green-600">ListTile</span> هو Widget متخصص لعرض صفوف في القوائم، يوفر تخطيطًا قياسيًا للعناصر مع أيقونة وعنوان ووصف فرعي.
+</p>
+
+<div class="grid md:grid-cols-2 gap-8">
+    <div>
+        <div class="bg-green-50 p-6 rounded-lg border border-green-200 mb-6">
+            <h3 class="font-bold text-lg text-green-800 mb-3 flex items-center">
+                <span class="material-icons mr-2">info</span>
+                الخصائص الرئيسية
+            </h3>
+            <ul class="list-disc pr-5 space-y-2 text-green-700">
+                <li><span class="font-semibold">leading</span>: عنصر في البداية (عادة أيقونة)</li>
+                <li><span class="font-semibold">title</span>: النص الرئيسي للعنصر</li>
+                <li><span class="font-semibold">subtitle</span>: النص الثانوي (اختياري)</li>
+                <li><span class="font-semibold">trailing</span>: عنصر في النهاية (عادة أيقونة)</li>
+                <li><span class="font-semibold">onTap</span>: دالة عند النقر على العنصر</li>
+            </ul>
+        </div>
+        
+        <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+            <h4 class="font-semibold text-purple-800 mb-2 flex items-center">
+                <span class="material-icons mr-2">star</span>
+                مميزات ListTile
+            </h4>
+            <ul class="list-disc pr-5 space-y-1 text-purple-700">
+                <li>تخطيط متوافق مع إرشادات Material Design</li>
+                <li>دعم جيد لإمكانية الوصول (Accessibility)</li>
+                <li>تفاعل افتراضي عند النقر (ripple effect)</li>
+                <li>سهولة في إنشاء قوائم متسقة</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div>
+        <div class="bg-gray-900 p-4 rounded-lg mb-4">
+            <div class="code-block text-gray-100 overflow-x-auto">
+                <pre><code>// أمثلة على استخدام ListTile
+// 1. عنصر قائمة أساسي
+ListTile(
+leading: Icon(Icons.email),
+title: Text('البريد الإلكتروني'),
+subtitle: Text('user@example.com'),
+trailing: Icon(Icons.arrow_forward),
+onTap: () {
+// تنفيذ إجراء عند النقر
+},
+)
+
+// 2. قائمة إعدادات
+Column(
+children: [
+ListTile(
+leading: Icon(Icons.settings),
+title: Text('الإعدادات'),
+),
+ListTile(
+leading: Icon(Icons.notifications),
+title: Text('الإشعارات'),
+trailing: Switch(value: true, onChanged: (v) {}),
+),
+ListTile(
+leading: Icon(Icons.help),
+title: Text('المساعدة'),
+),
+],
+)</code></pre>
+</div>
+</div>
+
+        <div class="bg-white p-4 rounded-lg border border-gray-300">
+            <h4 class="font-semibold text-gray-800 mb-2">مثال مرئي</h4>
+            <div class="space-y-2">
+                <div class="flex items-center p-3 border rounded">
+                    <span class="material-icons text-gray-500 mr-3">email</span>
+                    <div class="flex-grow">
+                        <p class="font-medium">البريد الإلكتروني</p>
+                        <p class="text-sm text-gray-500">user@example.com</p>
+                    </div>
+                    <span class="material-icons text-gray-400">chevron_right</span>
+                </div>
+                <div class="flex items-center p-3 border rounded">
+                    <span class="material-icons text-gray-500 mr-3">phone</span>
+                    <div class="flex-grow">
+                        <p class="font-medium">الهاتف</p>
+                        <p class="text-sm text-gray-500">+966501234567</p>
+                    </div>
+                    <span class="material-icons text-gray-400">chevron_right</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+        <span class="material-icons mr-2 text-green-500">compare</span>
+        متى تستخدم ListTile؟
+    </h3>
+    
+    <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-blue-50 p-4 rounded-lg">
+            <h4 class="font-semibold text-blue-800 mb-2">القوائم</h4>
+            <p class="text-gray-700">إعدادات التطبيق، قوائم التنقل، قوائم الاختيارات</p>
+        </div>
+        <div class="bg-green-50 p-4 rounded-lg">
+            <h4 class="font-semibold text-green-800 mb-2">عرض البيانات</h4>
+            <p class="text-gray-700">عرض معلومات المستخدم، عناصر البريد، الإشعارات</p>
+        </div>
+        <div class="bg-purple-50 p-4 rounded-lg">
+            <h4 class="font-semibold text-purple-800 mb-2">النماذج</h4>
+            <p class="text-gray-700">عناصر مع خيارات تفاعلية مثل مفاتيح التبديل</p>
+        </div>
+    </div>
+</div>
+</section>
