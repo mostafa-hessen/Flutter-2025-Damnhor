@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>دليل Flutter: الحوارات، الإشعارات، والعمليات غير المتزامنة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Tajawal", sans-serif;
+      }
+      .code-block {
+        font-family: "Fira Code", monospace;
+      }
+      .widget-card {
+        transition: all 0.3s ease;
+        border-left: 4px solid;
+      }
+      .widget-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+      pre {
+        direction: ltr;
+        text-align: left;
+      }
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+        .code-block {
+            font-family: 'Fira Code', monospace;
+        }
+        .widget-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid;
+        }
+        .widget-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        pre{
+            direction: ltr;
+            text-align: left;
+        }
+        .architecture-diagram {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+    </style>
+  </head>
+  <body class="bg-gradient-to-br from-gray-50 to-blue-50 text-gray-800">
+    <!-- Header -->
+    <header
+      class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12 shadow-xl"
+    >
+      <div class="container mx-auto px-4 text-center">
+        <div class="inline-block mb-6">
+          <span class="material-icons text-6xl text-yellow-300">code</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          أدوات Flutter الأساسية
+        </h1>
+        <p class="text-xl text-blue-100">
+          الحوارات، الإشعارات، والعمليات غير المتزامنة
+        </p>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+      <section class="
+      mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-purple-500">
+        <div
+          class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm"
+        >
+          <h3
+            class="text-xl font-semibold text-gray-800 mb-4 flex items-center"
+          >
+            <span class="material-icons mr-2 text-purple-500">alt_route</span>
+            إعداد الطرق المسماة (Named Routes)
+          </h3>
+
+          <div
+            class="bg-purple-50 p-6 rounded-lg border border-purple-200 mb-6"
+          >
+            <ul class="list-disc pr-5 space-y-3 text-purple-700">
+              <li class="font-semibold">
+                المزايا
+                <p class="text-gray-700 font-normal">
+                  تنظيم أفضل، إمكانية الانتقال من أي مكان، تمرير وسائط
+                </p>
+              </li>
+              <li class="font-semibold">
+                الإعداد
+                <p class="text-gray-700 font-normal">
+                  في MaterialApp أو WidgetApp باستخدام routes
+                </p>
+              </li>
+              <li class="font-semibold">
+                الوسائط
+                <p class="text-gray-700 font-normal">
+                  يمكن استقبالها عبر ModalRoute.of(context)!.settings.arguments
+                </p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="bg-gray-900 p-4 rounded-lg">
+            <div class="code-block text-gray-100 overflow-x-auto">
+              <pre><code>// إعداد الطرق المسماة في MaterialApp
+MaterialApp(
+  title: 'My App',
+  initialRoute: '/',
+  routes: {
+    '/': (context) =&gt; HomeScreen(),
+    '/login': (context) =&gt; LoginScreen(),
+    '/profile': (context) =&gt; ProfileScreen(),
+    '/details': (context) {
+      // استقبال الوسائط
+      final args = ModalRoute.of(context)!.settings.arguments as Map;
+      return DetailsScreen(id: args['id']);
+    },
+  },
+);
+
+// الانتقال باستخدام الطرق المسماة
+Navigator.pushNamed(
+  context,
+  '/details',
+  arguments: {'id': 123},
+);</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Section 1: ShowDialog -->
+      <section
+        class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-blue-500"
+      >
+        <div class="flex items-center mb-6">
+          <div class="bg-blue-100 p-4 rounded-full ml-4">
+            <span class="material-icons text-blue-600 text-3xl">chat</span>
+          </div>
+          <h2 class="text-3xl font-bold text-gray-800">ShowDialog</h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <p class="text-xl text-gray-700 mb-6 leading-relaxed">
+              ShowDialog هي وظيفة في Flutter تستخدم لعرض
+              <span class="font-bold text-blue-600">نافذة حوار</span> فوق
+              الواجهة الحالية. تستخدم لعرض رسائل مهمة أو طلب إدخال من المستخدم.
+            </p>
+
+            <div class="bg-blue-50 p-6 rounded-lg border border-blue-200 mb-6">
+              <h3
+                class="font-bold text-lg text-blue-800 mb-3 flex items-center"
+              >
+                <span class="material-icons mr-2">info</span>
+                خصائص ShowDialog
+              </h3>
+              <ul class="list-disc pr-5 space-y-2 text-blue-700">
+                <li>
+                  <span class="font-semibold">context</span>: السياق الحالي
+                  (مطلوب)
+                </li>
+                <li>
+                  <span class="font-semibold">builder</span>: دالة تبني محتوى
+                  الحوار
+                </li>
+                <li>
+                  <span class="font-semibold">barrierDismissible</span>: هل يمكن
+                  إغلاق الحوار بالنقر خارجها؟
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+              <h4 class="font-semibold text-green-800 mb-2 flex items-center">
+                <span class="material-icons mr-2">lightbulb</span>
+                حالات الاستخدام
+              </h4>
+              <ul class="list-disc pr-5 space-y-1 text-green-700">
+                <li>عرض رسائل تأكيد</li>
+                <li>طلب إدخال بيانات من المستخدم</li>
+                <li>إظهار تفاصيل إضافية</li>
+                <li>عرض أخطاء أو تحذيرات</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-gray-900 p-4 rounded-lg">
+            <div class="code-block text-gray-100 overflow-x-auto">
+              <pre><code>// مثال على ShowDialog بسيط
+showDialog(
+  context: context,
+  builder: (BuildContext context) {
+    return AlertDialog(
+      title: Text('تنبيه'),
+      content: Text('هل أنت متأكد من حذف هذا العنصر؟'),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text('إلغاء'),
+        ),
+        TextButton(
+          onPressed: () {
+            // تنفيذ الحذف
+            Navigator.pop(context);
+          },
+          child: Text('حذف'),
+        ),
+      ],
+    );
+  },
+);
+
+// حوار مخصص
+showDialog(
+  context: context,
+  builder: (context) => Dialog(
+    child: Container(
+      padding: EdgeInsets.all(20),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text('محتوى مخصص'),
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('موافق'),
+          ),
+        ],
+      ),
+    ),
+  ),
+);</code></pre>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm"
+        >
+          <h3
+            class="text-xl font-semibold text-gray-800 mb-4 flex items-center"
+          >
+            <span class="material-icons mr-2 text-blue-500">visibility</span>
+            تمثيل مرئي للحوار
+          </h3>
+
+          <div
+            class="relative h-64 bg-gray-100 rounded-lg border border-gray-300 flex items-center justify-center"
+          >
+            <div class="bg-white w-80 rounded-lg shadow-xl">
+              <div class="p-4 border-b">
+                <h4 class="font-bold">تنبيه</h4>
+              </div>
+              <div class="p-4">
+                <p>هل أنت متأكد من حذف هذا العنصر؟</p>
+              </div>
+              <div class="p-4 border-t flex justify-end space-x-3">
+                <button class="text-blue-500 px-3 py-1">إلغاء</button>
+                <button class="text-red-500 px-3 py-1">حذف</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: SnackBar -->
+      <section
+        class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-green-500"
+      >
+        <div class="flex items-center mb-6">
+          <div class="bg-green-100 p-4 rounded-full ml-4">
+            <span class="material-icons text-green-600 text-3xl"
+              >notification_important</span
+            >
+          </div>
+          <h2 class="text-3xl font-bold text-gray-800">SnackBar</h2>
+        </div>
+
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          SnackBar هي
+          <span class="font-bold text-green-600">رسالة عابرة</span> تظهر في أسفل
+          الشاشة لتقديم ملاحظات للمستخدم حول عملية ما. تختفي تلقائيًا بعد فترة
+          زمنية قصيرة.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3
+              class="text-2xl font-semibold text-gray-800 mb-4 flex items-center"
+            >
+              <span class="material-icons mr-2 text-green-500">info</span>
+              خصائص SnackBar
+            </h3>
+
+            <div
+              class="bg-green-50 p-6 rounded-lg border border-green-200 mb-6"
+            >
+              <ul class="list-disc pr-5 space-y-2 text-green-700">
+                <li>
+                  <span class="font-semibold">content</span>: محتوى الرسالة
+                  (عادة Text Widget)
+                </li>
+                <li>
+                  <span class="font-semibold">duration</span>: مدة عرض الرسالة
+                  (مثال: Duration(seconds: 3))
+                </li>
+                <li>
+                  <span class="font-semibold">action</span>: زر إجراء إضافي
+                  (اختياري)
+                </li>
+                <li>
+                  <span class="font-semibold">backgroundColor</span>: لون خلفية
+                  الرسالة
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+              <h4 class="font-semibold text-yellow-800 mb-2 flex items-center">
+                <span class="material-icons mr-2">warning</span>
+                ملاحظات مهمة
+              </h4>
+              <ul class="list-disc pr-5 space-y-1 text-yellow-700">
+                <li>
+                  يجب أن يكون هناك Scaffold في شجرة الـ Widgetات لتعمل SnackBar
+                </li>
+                <li>
+                  لإظهار SnackBar، نستخدم
+                  ScaffoldMessenger.of(context).showSnackBar()
+                </li>
+                <li>تستخدم للرسائل غير الحرجة التي لا تتطلب تدخل المستخدم</li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <h3
+              class="text-2xl font-semibold text-gray-800 mb-4 flex items-center"
+            >
+              <span class="material-icons mr-2 text-green-500">code</span>
+              أمثلة على SnackBar
+            </h3>
+
+            <div class="bg-gray-900 p-4 rounded-lg">
+              <div class="code-block text-gray-100 overflow-x-auto">
+                <pre><code>// مثال بسيط
+ScaffoldMessenger.of(context).showSnackBar(
+  SnackBar(
+    content: Text('تم الحفظ بنجاح!'),
+    duration: Duration(seconds: 2),
+  ),
+);
+
+// مع زر إجراء
+ScaffoldMessenger.of(context).showSnackBar(
+  SnackBar(
+    content: Text('تم حذف العنصر'),
+    duration: Duration(seconds: 4),
+    action: SnackBarAction(
+      label: 'تراجع',
+      onPressed: () {
+        // تنفيذ التراجع عن الحذف
+      },
+    ),
+  ),
+);
+
+// مخصص
+ScaffoldMessenger.of(context).showSnackBar(
+  SnackBar(
+    content: Row(
+      children: [
+        Icon(Icons.check, color: Colors.white),
+        SizedBox(width: 8),
+        Text('تمت العملية بنجاح'),
+      ],
+    ),
+    backgroundColor: Colors.green,
+    duration: Duration(seconds: 3),
+  ),
+);</code></pre>
+              </div>
+            </div>
+
+            <div class="mt-4 bg-white p-6 rounded-lg border border-gray-300">
+              <h4 class="font-semibold text-gray-800 mb-2">
+                تمثيل مرئي لـ SnackBar
+              </h4>
+              <div class="relative h-20 bg-gray-100 rounded">
+                <div
+                  class="absolute bottom-0 left-0 right-0 bg-gray-800 text-white p-4 flex justify-between items-center"
+                >
+                  <span>تم الحفظ بنجاح!</span>
+                  <button class="text-blue-300">تراجع</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+ <!-- Section 1: ListView -->
+      <section
+        class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-blue-500"
+      >
+        <div class="flex items-center mb-6">
+          <div class="bg-blue-100 p-4 rounded-full ml-4">
+            <span class="material-icons text-blue-600 text-3xl"
+              >list</span
+            >
+          </div>
+          <h2 class="text-3xl font-bold text-gray-800">ListView</h2>
+        </div>
+
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          ListView هو Widget يستخدم لعرض قائمة من العناصر التي يمكن التمرير فيها رأسيًا (أو أفقيًا). 
+          يأتي ListView بعدة أشكال لتناسب احتياجات التطبيق المختلفة.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- ListView Types -->
+          <div>
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+              <span class="material-icons mr-2 text-blue-500">format_list_bulleted</span>
+              أنواع ListView
+            </h3>
+
+            <div class="bg-blue-50 p-6 rounded-lg border border-blue-200 mb-6">
+              <ul class="list-disc pr-5 space-y-3 text-blue-700">
+                <li class="font-semibold">
+                  ListView (العادي)
+                  <p class="text-gray-700 font-normal">عرض قائمة من العناصر المحددة مسبقًا</p>
+                </li>
+                <li class="font-semibold">
+                  ListView.builder
+                  <p class="text-gray-700 font-normal">عرض قائمة ديناميكية بناءً على مصدر بيانات</p>
+                </li>
+                <li class="font-semibold">
+                  ListView.separated
+                  <p class="text-gray-700 font-normal">مثل builder مع إمكانية إضافة فواصل مخصصة</p>
+                </li>
+                <li class="font-semibold">
+                  ListView.custom
+                  <p class="text-gray-700 font-normal">للتحكم الكامل في كيفية عرض العناصر</p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+              <h4 class="font-semibold text-gray-800 mb-4 flex items-center">
+                <span class="material-icons mr-2 text-blue-500">compare</span>
+                مقارنة بين أنواع ListView
+              </h4>
+              <table class="min-w-full bg-white border border-gray-200">
+                <thead class="bg-gray-100">
+                  <tr>
+                    <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">النوع</th>
+                    <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">الاستخدام</th>
+                    <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">الأداء</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">ListView</td>
+                    <td class="py-3 px-4 border-b">عند وجود عدد صغير من العناصر الثابتة</td>
+                    <td class="py-3 px-4 border-b">يحمّل كل العناصر مرة واحدة</td>
+                  </tr>
+                  <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">ListView.builder</td>
+                    <td class="py-3 px-4 border-b">للبيانات الديناميكية أو الكبيرة</td>
+                    <td class="py-3 px-4 border-b">يحمّل العناصر عند الحاجة فقط (Lazy Loading)</td>
+                  </tr>
+                  <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">ListView.separated</td>
+                    <td class="py-3 px-4 border-b">عند الحاجة لفاصل مخصص بين العناصر</td>
+                    <td class="py-3 px-4 border-b">مثل builder مع تحكم إضافي</td>
+                  </tr>
+                  <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">ListView.custom</td>
+                    <td class="py-3 px-4 border-b">للحالات المتقدمة التي تحتاج تحكم كامل</td>
+                    <td class="py-3 px-4 border-b">يعتمد على التطبيق</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ListView Examples -->
+          <div>
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+              <span class="material-icons mr-2 text-blue-500">code</span>
+              أمثلة تطبيقية
+            </h3>
+
+            <div class="bg-blue-50 p-6 rounded-lg border border-blue-200 mb-6">
+              <h4 class="font-semibold text-blue-800 mb-3">1. ListView عادي</h4>
+              <div class="bg-gray-900 p-4 rounded-lg">
+                <div class="code-block text-gray-100 overflow-x-auto text-sm">
+                  <pre>ListView(
+  children: [
+    ListTile(title: Text('عنصر 1')),
+    ListTile(title: Text('عنصر 2')),
+    ListTile(title: Text('عنصر 3')),
+    // ...
+  ],
+)</pre>
+                </div>
+              </div>
+              <div class="mt-4 bg-white p-3 rounded border border-gray-200">
+                <div class="h-40 overflow-y-auto">
+                  <div class="list-item p-3 border-b border-gray-100">عنصر 1</div>
+                  <div class="list-item p-3 border-b border-gray-100">عنصر 2</div>
+                  <div class="list-item p-3 border-b border-gray-100">عنصر 3</div>
+                  <div class="list-item p-3 border-b border-gray-100">عنصر 4</div>
+                  <div class="list-item p-3">عنصر 5</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-blue-50 p-6 rounded-lg border border-blue-200">
+              <h4 class="font-semibold text-blue-800 mb-3">2. ListView.builder</h4>
+              <div class="bg-gray-900 p-4 rounded-lg">
+                <div class="code-block text-gray-100 overflow-x-auto text-sm">
+                  <pre>ListView.builder(
+  itemCount: 100,
+  itemBuilder: (context, index) {
+    return ListTile(
+      title: Text('عنصر ${index + 1}'),
+    );
+  },
+)</pre>
+                </div>
+              </div>
+              <div class="mt-4 bg-white p-3 rounded border border-gray-200">
+                <div class="h-40 overflow-y-auto">
+                  <div class="list-item p-3 border-b border-gray-100">عنصر 1</div>
+                  <div class="list-item p-3 border-b border-gray-100">عنصر 2</div>
+                  <div class="list-item p-3 border-b border-gray-100">عنصر 3</div>
+                  <div class="text-center text-gray-500 py-2">... (عناصر إضافية)</div>
+                  <div class="list-item p-3">عنصر 100</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+            <span class="material-icons mr-2 text-blue-500">tune</span>
+            خصائص ListView الأساسية
+          </h3>
+
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+              <h4 class="font-semibold text-blue-800 mb-2">scrollDirection</h4>
+              <p class="text-gray-700">تحديد اتجاه التمرير (عمودي/أفقي)</p>
+              <div class="mt-2 bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                scrollDirection: Axis.vertical, // أو Axis.horizontal
+              </div>
+            </div>
+            <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+              <h4 class="font-semibold text-blue-800 mb-2">physics</h4>
+              <p class="text-gray-700">تحكم في سلوك التمرير (مثل BouncingScrollPhysics)</p>
+              <div class="mt-2 bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                physics: BouncingScrollPhysics(),
+              </div>
+            </div>
+            <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+              <h4 class="font-semibold text-blue-800 mb-2">padding</h4>
+              <p class="text-gray-700">هوامش داخلية للقائمة</p>
+              <div class="mt-2 bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                padding: EdgeInsets.all(8),
+              </div>
+            </div>
+            <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+              <h4 class="font-semibold text-blue-800 mb-2">shrinkWrap</h4>
+              <p class="text-gray-700">يحدد حجم القائمة بناءً على محتواها</p>
+              <div class="mt-2 bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                shrinkWrap: true,
+              </div>
+            </div>
+            <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+              <h4 class="font-semibold text-blue-800 mb-2">itemExtent</h4>
+              <p class="text-gray-700">تحديد ارتفاع ثابت لكل عنصر (يحسن الأداء)</p>
+              <div class="mt-2 bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                itemExtent: 56.0,
+              </div>
+            </div>
+            <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+              <h4 class="font-semibold text-blue-800 mb-2">controller</h4>
+              <p class="text-gray-700">للتحكم في موضع التمرير برمجيًا</p>
+              <div class="mt-2 bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                controller: ScrollController(),
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+            <span class="material-icons mr-2 text-blue-500">settings</span>
+            ListView.separated متقدم
+          </h3>
+
+          <div class="bg-gray-900 p-4 rounded-lg">
+            <div class="code-block text-gray-100 overflow-x-auto">
+              <pre><code>ListView.separated(
+  itemCount: 50,
+  separatorBuilder: (context, index) {
+    // فصل مخصص بين العناصر
+    return Divider(
+      color: index % 2 == 0 ? Colors.blue : Colors.green,
+      thickness: 2,
+    );
+  },
+  itemBuilder: (context, index) {
+    // عنصر القائمة
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Text(
+        'عنصر ${index + 1}',
+        style: TextStyle(fontSize: 18),
+      ),
+    );
+  },
+)</code></pre>
+            </div>
+          </div>
+          <div class="mt-4 bg-white p-3 rounded border border-gray-200">
+            <div class="h-40 overflow-y-auto">
+              <div class="p-4">عنصر 1</div>
+              <div class="h-1 bg-blue-500"></div>
+              <div class="p-4">عنصر 2</div>
+              <div class="h-1 bg-green-500"></div>
+              <div class="p-4">عنصر 3</div>
+              <div class="h-1 bg-blue-500"></div>
+              <div class="text-center text-gray-500 py-2">... (عناصر إضافية)</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: GridView -->
+      <section
+        class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-green-500"
+      >
+        <div class="flex items-center mb-6">
+          <div class="bg-green-100 p-4 rounded-full ml-4">
+            <span class="material-icons text-green-600 text-3xl"
+              >grid_on</span
+            >
+          </div>
+          <h2 class="text-3xl font-bold text-gray-800">GridView</h2>
+        </div>
+
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          GridView هو Widget يستخدم لعرض العناصر في تخطيط شبكي (Grid) مع إمكانية التمرير. 
+          مثالي لعرض مجموعات من العناصر المتشابهة مثل الصور أو المنتجات.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- GridView Types -->
+          <div>
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+              <span class="material-icons mr-2 text-green-500">grid_view</span>
+              أنواع GridView
+            </h3>
+
+            <div class="bg-green-50 p-6 rounded-lg border border-green-200 mb-6">
+              <ul class="list-disc pr-5 space-y-3 text-green-700">
+                <li class="font-semibold">
+                  GridView (العادي)
+                  <p class="text-gray-700 font-normal">عرض شبكة من العناصر المحددة مسبقًا</p>
+                </li>
+                <li class="font-semibold">
+                  GridView.builder
+                  <p class="text-gray-700 font-normal">عرض شبكة ديناميكية بناءً على مصدر بيانات</p>
+                </li>
+                <li class="font-semibold">
+                  GridView.count
+                  <p class="text-gray-700 font-normal">يحدد عدد الأعمدة مباشرة</p>
+                </li>
+                <li class="font-semibold">
+                  GridView.extent
+                  <p class="text-gray-700 font-normal">يحدد أقصى عرض للعمود</p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+              <h4 class="font-semibold text-gray-800 mb-4 flex items-center">
+                <span class="material-icons mr-2 text-green-500">compare</span>
+                مقارنة بين أنواع GridView
+              </h4>
+              <table class="min-w-full bg-white border border-gray-200">
+                <thead class="bg-gray-100">
+                  <tr>
+                    <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">النوع</th>
+                    <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">الاستخدام</th>
+                    <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">المميزات</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">GridView</td>
+                    <td class="py-3 px-4 border-b">عند وجود عدد صغير من العناصر الثابتة</td>
+                    <td class="py-3 px-4 border-b">بسيط وسهل للشبكات الصغيرة</td>
+                  </tr>
+                  <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">GridView.builder</td>
+                    <td class="py-3 px-4 border-b">للبيانات الديناميكية أو الكبيرة</td>
+                    <td class="py-3 px-4 border-b">يحمّل العناصر عند الحاجة فقط</td>
+                  </tr>
+                  <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">GridView.count</td>
+                    <td class="py-3 px-4 border-b">عند الحاجة لعدد ثابت من الأعمدة</td>
+                    <td class="py-3 px-4 border-b">سهل لتحديد عدد الأعمدة مباشرة</td>
+                  </tr>
+                  <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">GridView.extent</td>
+                    <td class="py-3 px-4 border-b">عند الحاجة لعرض ثابت للعناصر</td>
+                    <td class="py-3 px-4 border-b">يضمن أن كل العناصر بنفس العرض</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- GridView Examples -->
+          <div>
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+              <span class="material-icons mr-2 text-green-500">code</span>
+              أمثلة تطبيقية
+            </h3>
+
+            <div class="bg-green-50 p-6 rounded-lg border border-green-200 mb-6">
+              <h4 class="font-semibold text-green-800 mb-3">1. GridView.count</h4>
+              <div class="bg-gray-900 p-4 rounded-lg">
+                <div class="code-block text-gray-100 overflow-x-auto text-sm">
+                  <pre>GridView.count(
+  crossAxisCount: 2, // عدد الأعمدة
+  children: List.generate(10, (index) {
+    return Card(
+      child: Center(child: Text('عنصر ${index + 1}')),
+    );
+  }),
+)</pre>
+                </div>
+              </div>
+              <div class="mt-4 bg-white p-3 rounded border border-gray-200">
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="grid-item bg-green-100 p-4 rounded text-center">عنصر 1</div>
+                  <div class="grid-item bg-green-100 p-4 rounded text-center">عنصر 2</div>
+                  <div class="grid-item bg-green-100 p-4 rounded text-center">عنصر 3</div>
+                  <div class="grid-item bg-green-100 p-4 rounded text-center">عنصر 4</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+              <h4 class="font-semibold text-green-800 mb-3">2. GridView.builder</h4>
+              <div class="bg-gray-900 p-4 rounded-lg">
+                <div class="code-block text-gray-100 overflow-x-auto text-sm">
+                  <pre>GridView.builder(
+  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 3, // عدد الأعمدة
+    childAspectRatio: 1, // نسبة العرض إلى الارتفاع
+  ),
+  itemCount: 20,
+  itemBuilder: (context, index) {
+    return Card(
+      child: Center(child: Text('عنصر ${index + 1}')),
+    );
+  },
+)</pre>
+                </div>
+              </div>
+              <div class="mt-4 bg-white p-3 rounded border border-gray-200">
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="grid-item bg-green-100 p-3 rounded text-center">عنصر 1</div>
+                  <div class="grid-item bg-green-100 p-3 rounded text-center">عنصر 2</div>
+                  <div class="grid-item bg-green-100 p-3 rounded text-center">عنصر 3</div>
+                  <div class="grid-item bg-green-100 p-3 rounded text-center">عنصر 4</div>
+                  <div class="grid-item bg-green-100 p-3 rounded text-center">عنصر 5</div>
+                  <div class="grid-item bg-green-100 p-3 rounded text-center">عنصر 6</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+            <span class="material-icons mr-2 text-green-500">tune</span>
+            خصائص GridView الأساسية
+          </h3>
+
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+              <h4 class="font-semibold text-green-800 mb-2">gridDelegate</h4>
+              <p class="text-gray-700">يحدد تخطيط الشبكة وخصائصها</p>
+              <div class="mt-2 bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount()
+              </div>
+            </div>
+            <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+              <h4 class="font-semibold text-green-800 mb-2">crossAxisCount</h4>
+              <p class="text-gray-700">عدد الأعمدة في الشبكة</p>
+              <div class="mt-2 bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                crossAxisCount: 2,
+              </div>
+            </div>
+            <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+              <h4 class="font-semibold text-green-800 mb-2">childAspectRatio</h4>
+              <p class="text-gray-700">نسبة العرض إلى الارتفاع لكل عنصر</p>
+              <div class="mt-2 bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                childAspectRatio: 1.5,
+              </div>
+            </div>
+            <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+              <h4 class="font-semibold text-green-800 mb-2">mainAxisSpacing</h4>
+              <p class="text-gray-700">المسافة بين العناصر عموديًا</p>
+              <div class="mt-2 bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                mainAxisSpacing: 8,
+              </div>
+            </div>
+            <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+              <h4 class="font-semibold text-green-800 mb-2">crossAxisSpacing</h4>
+              <p class="text-gray-700">المسافة بين العناصر أفقيًا</p>
+              <div class="mt-2 bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                crossAxisSpacing: 8,
+              </div>
+            </div>
+            <div class="bg-green-50 p-4 rounded-lg border border-green-200">
+              <h4 class="font-semibold text-green-800 mb-2">padding</h4>
+              <p class="text-gray-700">هوامش داخلية للشبكة</p>
+              <div class="mt-2 bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                padding: EdgeInsets.all(8),
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+            <span class="material-icons mr-2 text-green-500">settings</span>
+            GridView متقدم مع صور
+          </h3>
+
+          <div class="bg-gray-900 p-4 rounded-lg">
+            <div class="code-block text-gray-100 overflow-x-auto">
+              <pre><code>GridView.builder(
+  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+    maxCrossAxisExtent: 200, // أقصى عرض للعمود
+    childAspectRatio: 3 / 4, // نسبة العرض إلى الارتفاع
+    crossAxisSpacing: 10, // مسافة أفقية
+    mainAxisSpacing: 10, // مسافة عمودية
+  ),
+  itemCount: 20,
+  itemBuilder: (context, index) {
+    return Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: ClipRRect(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+              child: Image.network(
+                'https://picsum.photos/300/200?random=$index',
+                fit: BoxFit.cover,
+                width: double.infinity,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(8),
+            child: Text('صورة ${index + 1}'),
+          ),
+        ],
+      ),
+    );
+  },
+)</code></pre>
+            </div>
+          </div>
+          <div class="mt-4 bg-white p-3 rounded border border-gray-200">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <div class="grid-item overflow-hidden rounded-lg shadow">
+                <img src="https://picsum.photos/300/200?random=1" class="w-full h-24 object-cover">
+                <div class="p-2 text-center">صورة 1</div>
+              </div>
+              <div class="grid-item overflow-hidden rounded-lg shadow">
+                <img src="https://picsum.photos/300/200?random=2" class="w-full h-24 object-cover">
+                <div class="p-2 text-center">صورة 2</div>
+              </div>
+              <div class="grid-item overflow-hidden rounded-lg shadow">
+                <img src="https://picsum.photos/300/200?random=3" class="w-full h-24 object-cover">
+                <div class="p-2 text-center">صورة 3</div>
+              </div>
+              <div class="grid-item overflow-hidden rounded-lg shadow">
+                <img src="https://picsum.photos/300/200?random=4" class="w-full h-24 object-cover">
+                <div class="p-2 text-center">صورة 4</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Comparison -->
+      <section
+        class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-purple-500"
+      >
+        <div class="flex items-center mb-6">
+          <div class="bg-purple-100 p-4 rounded-full ml-4">
+            <span class="material-icons text-purple-600 text-3xl"
+              >compare</span
+            >
+          </div>
+          <h2 class="text-3xl font-bold text-gray-800">مقارنة بين ListView و GridView</h2>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white border border-gray-200">
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">المعيار</th>
+                <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">ListView</th>
+                <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">GridView</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b">التخطيط</td>
+                <td class="py-3 px-4 border-b">قائمة عمودية/أفقية</td>
+                <td class="py-3 px-4 border-b">شبكة بأعمدة وصفوف</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b">الاستخدام الأمثل</td>
+                <td class="py-3 px-4 border-b">لعرض قوائم طويلة من البيانات</td>
+                <td class="py-3 px-4 border-b">لعرض مجموعات من العناصر المتشابهة</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b">الأداء</td>
+                <td class="py-3 px-4 border-b">ممتاز للقوائم الطويلة (مع builder)</td>
+                <td class="py-3 px-4 border-b">جيد لكن يستهلك ذاكرة أكثر للعناصر المرئية</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b">التخصيص</td>
+                <td class="py-3 px-4 border-b">سهل لعرض عناصر مختلفة الأشكال</td>
+                <td class="py-3 px-4 border-b">أفضل لعرض عناصر متساوية في الحجم</td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="py-3 px-4 border-b">حالات الاستخدام</td>
+                <td class="py-3 px-4 border-b">قوائم المحادثات، الإعدادات، القوائم</td>
+                <td class="py-3 px-4 border-b">معارض الصور، المنتجات، الأيقونات</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+            <span class="material-icons mr-2 text-purple-500">help</span>
+            متى تستخدم ListView ومتى تستخدم GridView؟
+          </h3>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-purple-50 p-6 rounded-lg border border-purple-200">
+              <h4 class="font-semibold text-purple-800 mb-3 flex items-center">
+                <span class="material-icons mr-2">list</span>
+                استخدم ListView عندما:
+              </h4>
+              <ul class="list-disc pr-5 space-y-2 text-purple-700">
+                <li>تحتاج عرض قائمة طويلة من العناصر</li>
+                <li>العناصر لها ارتفاعات مختلفة</li>
+                <li>تحتاج تمريرًا سلسًا في اتجاه واحد</li>
+                <li>تعرض بيانات نصية أو عناصر معقدة</li>
+                <li>تحتاج إلى تفاعلات فردية مع كل عنصر</li>
+              </ul>
+            </div>
+            <div class="bg-purple-50 p-6 rounded-lg border border-purple-200">
+              <h4 class="font-semibold text-purple-800 mb-3 flex items-center">
+                <span class="material-icons mr-2">grid_on</span>
+                استخدم GridView عندما:
+              </h4>
+              <ul class="list-disc pr-5 space-y-2 text-purple-700">
+                <li>تعرض مجموعات من العناصر المتشابهة</li>
+                <li>كل العناصر لها نفس الحجم تقريبًا</li>
+                <li>تحتاج عرضًا مرئيًا منظمًا في شبكة</li>
+                <li>تعرض صورًا أو منتجات أو أيقونات</li>
+                <li>تحتاج استغلال المساحة بشكل أفضل</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Section 3: Future in Flutter -->
+      <section
+        class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-purple-500"
+      >
+        <div class="flex items-center mb-6">
+          <div class="bg-purple-100 p-4 rounded-full ml-4">
+            <span class="material-icons text-purple-600 text-3xl"
+              >schedule</span
+            >
+          </div>
+          <h2 class="text-3xl font-bold text-gray-800">Future في Flutter</h2>
+        </div>
+
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          Future تمثل
+          <span class="font-bold text-purple-600">عملية غير متزامنة</span>
+          (Asynchronous) قد تكتمل الآن أو في المستقبل. تستخدم للعمليات التي
+          تستغرق وقتًا مثل جلب البيانات من الإنترنت أو قراءة الملفات.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3
+              class="text-2xl font-semibold text-gray-800 mb-4 flex items-center"
+            >
+              <span class="material-icons mr-2 text-purple-500">info</span>
+              المفاهيم الأساسية
+            </h3>
+
+            <div
+              class="bg-purple-50 p-6 rounded-lg border border-purple-200 mb-6"
+            >
+              <ul class="list-disc pr-5 space-y-3 text-purple-700">
+                <li class="font-semibold">
+                  Future.delayed
+                  <p class="text-gray-700 font-normal">
+                    تنفيذ كود بعد تأخير زمني
+                  </p>
+                </li>
+                <li class="font-semibold">
+                  async/await
+                  <p class="text-gray-700 font-normal">
+                    لجعل الكود يبدو متزامنًا مع الحفاظ على عدم التزامن
+                  </p>
+                </li>
+                <li class="font-semibold">
+                  then/catchError
+                  <p class="text-gray-700 font-normal">
+                    طريقة بديلة للتعامل مع Future
+                  </p>
+                </li>
+                <li class="font-semibold">
+                  Future.any
+                  <p class="text-gray-700 font-normal">
+                    تنفيذ عدة Futures وأخذ أول نتيجة تكتمل
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+              <h4 class="font-semibold text-blue-800 mb-2 flex items-center">
+                <span class="material-icons mr-2">lightbulb</span>
+                لماذا نستخدم Future؟
+              </h4>
+              <ul class="list-disc pr-5 space-y-1 text-blue-700">
+                <li>لعدم تجميد واجهة المستخدم أثناء انتظار العمليات الطويلة</li>
+                <li>للتعامل مع العمليات غير المؤكدة النجاح</li>
+                <li>لتنفيذ مهام في الخلفية</li>
+                <li>للتعامل مع البيانات التي تحتاج وقتًا للتحميل</li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <h3
+              class="text-2xl font-semibold text-gray-800 mb-4 flex items-center"
+            >
+              <span class="material-icons mr-2 text-purple-500">code</span>
+              أمثلة أساسية
+            </h3>
+
+            <div class="bg-gray-900 p-4 rounded-lg mb-4">
+              <div class="code-block text-gray-100 overflow-x-auto">
+                <pre><code>// مثال 1: Future.delayed
+void main() {
+  print("مرحبًا");
+  Future.delayed(Duration(seconds: 2), () => print("هذا يظهر بعد ثانيتين"));
+  print("مع السلامة");
+}
+
+// مثال 2: Future في دالة
+Future myAsyncFunction() {
+  return Future.delayed(Duration(seconds: 2), () {
+    print('هذه رسالة بعد انتظار لمدة ثانيتين.');
+  });
+}
+
+void main() {
+  print("بداية البرنامج");
+  myAsyncFunction();
+  print("نهاية البرنامج");
+}</code></pre>
+              </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg border border-gray-300">
+              <h4 class="font-semibold text-gray-800 mb-2">مخرجات المثال 1:</h4>
+              <div class="bg-gray-100 p-3 rounded font-mono">
+                <p>مرحبًا</p>
+                <p>مع السلامة</p>
+                <p>هذا يظهر بعد ثانيتين</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm"
+        >
+          <h3
+            class="text-xl font-semibold text-gray-800 mb-4 flex items-center"
+          >
+            <span class="material-icons mr-2 text-purple-500">compare</span>
+            async/await vs then/catchError
+          </h3>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-bold text-blue-800 mb-2">باستخدام async/await</h4>
+              <div class="bg-gray-900 p-4 rounded-lg">
+                <div class="code-block text-gray-100 overflow-x-auto">
+                  <pre><code>Future&lt;int&gt; fetchNumber() async {
+  await Future.delayed(Duration(seconds: 2));
+  return 42;
+}
+
+void main() async {
+  print('بدء التنفيذ');
+  int number = await fetchNumber();
+  print('القيمة التي تم جلبها: $number');
+  print('إنهاء التنفيذ');
+}</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-green-800 mb-2">
+                باستخدام then/catchError
+              </h4>
+              <div class="bg-gray-900 p-4 rounded-lg">
+                <div class="code-block text-gray-100 overflow-x-auto">
+                  <pre><code>Future&lt;int&gt; fetchNumber() {
+  return Future.delayed(Duration(seconds: 2), () => 42);
+}
+
+void main() {
+  print('بدء التنفيذ');
+  fetchNumber().then((number) {
+    print('القيمة التي تم جلبها: $number');
+    print('إنهاء التنفيذ');
+  });
+}</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="mt-6 bg-yellow-50 p-4 rounded-lg border border-yellow-200"
+          >
+            <h4 class="font-semibold text-yellow-800 mb-2 flex items-center">
+              <span class="material-icons mr-2">warning</span>
+              مشكلة شائعة وحلها
+            </h4>
+            <p class="text-yellow-700">
+              عند محاولة تعيين Future إلى متغير مباشرة دون await، ستحصل على
+              Future بدلاً من القيمة الفعلية. الحل هو استخدام async/await.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm"
+        >
+          <h3
+            class="text-xl font-semibold text-gray-800 mb-4 flex items-center"
+          >
+            <span class="material-icons mr-2 text-purple-500">star</span>
+            Future.any - مثال متقدم
+          </h3>
+
+          <div class="bg-gray-900 p-4 rounded-lg">
+            <div class="code-block text-gray-100 overflow-x-auto">
+              <pre><code>Future&lt;String&gt; loadFromCache() async {
+  await Future.delayed(Duration(seconds: 1));
+  return 'بيانات من الكاش';
+}
+
+Future&lt;String&gt; loadFromApi() async {
+  await Future.delayed(Duration(seconds: 3));
+  return 'بيانات من السيرفر';
+}
+
+Future&lt;String&gt; loadFromBackup() async {
+  await Future.delayed(Duration(seconds: 2));
+  return 'بيانات من السيرفر الاحتياطي';
+}
+
+void main() async {
+  print('جاري تحميل البيانات...');
+  var result = await Future.any([
+    loadFromCache(),
+    loadFromApi(),
+    loadFromBackup(),
+  ]);
+  print('أسرع نتيجة: $result');
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="mt-4 bg-white p-4 rounded-lg border border-gray-300">
+            <h4 class="font-semibold text-gray-800 mb-2">مخرجات الكود:</h4>
+            <div class="bg-gray-100 p-3 rounded font-mono">
+              <p>جاري تحميل البيانات...</p>
+              <p>أسرع نتيجة: بيانات من الكاش</p>
+            </div>
+            <p class="text-gray-600 mt-2">
+              (لأن loadFromCache هي الأسرع بزمن 1 ثانية)
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm"
+        >
+          <h3
+            class="text-xl font-semibold text-gray-800 mb-4 flex items-center"
+          >
+            <span class="material-icons mr-2 text-purple-500"
+              >phone_android</span
+            >
+            مثال حقيقي: شاشة التحميل (Splash Screen)
+          </h3>
+
+          <div class="bg-gray-900 p-4 rounded-lg">
+            <div class="code-block text-gray-100 overflow-x-auto">
+              <pre><code>import 'package:flutter/material.dart';
+import 'dart:async';
+
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State&lt;SplashScreen&gt; {
+  @override
+  void initState() {
+    super.initState();
+    // انتظار 3 ثواني ثم الانتقال
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.of(context).pushReplacementNamed("/home");
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.deepPurple,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.flutter_dash, size: 100, color: Colors.white),
+            SizedBox(height: 20),
+            Text(
+              'Welcome to My App',
+              style: TextStyle(
+                fontSize: 24,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10),
+            CircularProgressIndicator(color: Colors.white),
+          ],
+        ),
+      ),
+    );
+  }
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+ 
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12 shadow-xl">
+        <div class="container mx-auto px-4 text-center">
+            <div class="floating inline-block mb-6">
+                <span class="material-icons text-6xl text-yellow-300">http</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">دليل APIs و HTTP في Flutter</h1>
+            <p class="text-xl text-blue-100">كيفية التعامل مع واجهات برمجة التطبيقات وطلبات الشبكة</p>
+        </div>
+    </header>
+
+        <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-blue-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-blue-600 text-3xl">api</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">ما هي API؟</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="text-xl text-gray-700 mb-6 leading-relaxed">
+                        API (واجهة برمجة التطبيقات) هي مجموعة من القواعد والبروتوكولات التي تسمح للتطبيقات بالتواصل مع بعضها البعض. في تطبيقات الهاتف، نستخدم APIs للتفاعل مع الخوادم البعيدة والحصول على البيانات أو تعديلها.
+                    </p>
+                    
+                    <div class="bg-blue-50 p-6 rounded-lg border border-blue-200 mb-6">
+                        <h3 class="font-bold text-lg text-blue-800 mb-3 flex items-center">
+                            <span class="material-icons mr-2">layers</span>
+                            مهام API الرئيسية
+                        </h3>
+                        <ul class="list-disc pr-5 space-y-2 text-blue-700">
+                            <li>جلب البيانات من الخادم (GET)</li>
+                            <li>إرسال بيانات جديدة للخادم (POST)</li>
+                            <li>تحديث بيانات موجودة على الخادم (PUT/PATCH)</li>
+                            <li>حذف بيانات من الخادم (DELETE)</li>
+                            <li>المصادقة والتحقق من الهوية</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="architecture-diagram">
+                    <div class="flex flex-col items-center">
+                        <!-- Client -->
+                        <div class="w-full bg-blue-100 p-3 rounded-t-lg border border-blue-200">
+                            <div class="flex items-center justify-center">
+                                <span class="material-icons text-blue-600 mr-2">phone_iphone</span>
+                                <span class="font-semibold">تطبيق Flutter</span>
+                            </div>
+                        </div>
+                        
+                        <!-- API -->
+                        <div class="w-11/12 bg-green-100 p-3 border border-green-200">
+                            <div class="flex items-center justify-center">
+                                <span class="material-icons text-green-600 mr-2">api</span>
+                                <span class="font-semibold">واجهة API</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Server -->
+                        <div class="w-10/12 bg-purple-100 p-3 rounded-b-lg border border-purple-200">
+                            <div class="flex items-center justify-center">
+                                <span class="material-icons text-purple-600 mr-2">storage</span>
+                                <span class="font-semibold">قاعدة البيانات</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 bg-gray-900 p-4 rounded-lg">
+                        <div class="code-block text-gray-100 overflow-x-auto">
+                            <pre><code>// مثال على طلب API
+GET https://api.example.com/users
+POST https://api.example.com/users
+PUT https://api.example.com/users/1
+DELETE https://api.example.com/users/1</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <span class="material-icons mr-2 text-blue-500">compare</span>
+                    أنواع طلبات HTTP
+                </h3>
+                
+                <div class="grid md:grid-cols-4 gap-4">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-blue-800 mb-2">GET</h4>
+                        <p class="text-gray-700">لجلب البيانات من الخادم</p>
+                        <div class="mt-2 code-block bg-gray-800 text-gray-100 p-1 rounded text-xs">
+                            await http.get(uri);
+                        </div>
+                    </div>
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-green-800 mb-2">POST</h4>
+                        <p class="text-gray-700">لإرسال بيانات جديدة</p>
+                        <div class="mt-2 code-block bg-gray-800 text-gray-100 p-1 rounded text-xs">
+                            await http.post(uri, body: data);
+                        </div>
+                    </div>
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-yellow-800 mb-2">PUT</h4>
+                        <p class="text-gray-700">لتحديث بيانات موجودة</p>
+                        <div class="mt-2 code-block bg-gray-800 text-gray-100 p-1 rounded text-xs">
+                            await http.put(uri, body: data);
+                        </div>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-red-800 mb-2">DELETE</h4>
+                        <p class="text-gray-700">لحذف بيانات</p>
+                        <div class="mt-2 code-block bg-gray-800 text-gray-100 p-1 rounded text-xs">
+                            await http.delete(uri);
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: HTTP in Flutter -->
+        <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-green-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-green-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-green-600 text-3xl">http</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">حزمة HTTP في Flutter</h2>
+            </div>
+            
+            <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                حزمة HTTP في Flutter تمكننا من إرسال طلبات الشبكة إلى الخوادم البعيدة. إليك كيفية إضافتها واستخدامها في مشروعك.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-green-500">download</span>
+                        طرق إضافة حزمة HTTP
+                    </h3>
+                    
+                    <div class="bg-green-50 p-6 rounded-lg border border-green-200 mb-6">
+                        <h4 class="font-bold text-green-800 mb-3">الطريقة الأولى: باستخدام الأمر</h4>
+                        <div class="bg-gray-800 text-gray-100 p-3 rounded mb-4">
+                            <div class="code-block overflow-x-auto">
+                                <pre><code>flutter pub add http</code></pre>
+                            </div>
+                        </div>
+                        <p class="text-gray-700">هذا الأمر سيضيف الحزمة تلقائيًا إلى ملف pubspec.yaml</p>
+                        
+                        <h4 class="font-bold text-green-800 mt-6 mb-3">الطريقة الثانية: يدويًا</h4>
+                        <p class="text-gray-700 mb-2">1. افتح ملف pubspec.yaml</p>
+                        <p class="text-gray-700 mb-2">2. أضف تحت dependencies:</p>
+                        <div class="bg-gray-800 text-gray-100 p-3 rounded mb-2">
+                            <div class="code-block overflow-x-auto">
+                                <pre><code>dependencies:
+  http: ^0.13.4</code></pre>
+                            </div>
+                        </div>
+                        <p class="text-gray-700">3. ثم نفذ الأمر في Terminal:</p>
+                        <div class="bg-gray-800 text-gray-100 p-3 rounded">
+                            <div class="code-block overflow-x-auto">
+                                <pre><code>flutter pub get</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-green-500">code</span>
+                        كيفية استخدام الحزمة
+                    </h3>
+                    
+                    <div class="bg-gray-900 p-4 rounded-lg">
+                        <div class="code-block text-gray-100 overflow-x-auto">
+                            <pre><code>// 1. استيراد الحزمة
+import 'package:http/http.dart' as http;
+
+// 2. إرسال طلب GET
+Future<void> fetchData() async {
+  final response = await http.get(
+    Uri.parse('https://api.example.com/data'),
+  );
+  
+  if (response.statusCode == 200) {
+    // معالجة البيانات
+    print(response.body);
+  } else {
+    // معالجة الخطأ
+    throw Exception('Failed to load data');
+  }
+}
+
+// 3. إرسال طلب POST
+Future<void> sendData() async {
+  final response = await http.post(
+    Uri.parse('https://api.example.com/data'),
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode({'key': 'value'}),
+  );
+  
+  if (response.statusCode == 201) {
+    print('Data sent successfully');
+  }
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                        <h4 class="font-semibold text-yellow-800 mb-2 flex items-center">
+                            <span class="material-icons mr-2">warning</span>
+                            ملاحظات مهمة
+                        </h4>
+                        <ul class="list-disc pr-5 space-y-1 text-yellow-700">
+                            <li>تأكد من وجود اتصال بالإنترنت قبل إرسال الطلبات</li>
+                            <li>استخدم try-catch للتعامل مع الأخطاء المحتملة</li>
+                            <li>تحقق دائمًا من statusCode قبل معالجة الاستجابة</li>
+                            <li>استخدم async/await للتعامل مع العمليات غير المتزامنة</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Practical Example -->
+        <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-purple-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-purple-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-purple-600 text-3xl">article</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">مثال تطبيقي: تطبيق إدارة المشاركات</h2>
+            </div>
+            
+            <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                سنقوم بتحليل مثال كامل لإدارة المشاركات يتضمن جميع عمليات CRUD (إنشاء، قراءة، تحديث، حذف) باستخدام API.
+            </p>
+            
+            <div class="bg-gray-900 p-6 rounded-xl mb-8">
+                <div class="code-block text-gray-100 overflow-x-auto">
+                    <pre><code>import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;</code></pre>
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">1. بنية الصفحة الرئيسية</h3>
+            <div class="bg-gray-900 p-4 rounded-lg mb-6">
+                <div class="code-block text-gray-100 overflow-x-auto">
+                    <pre><code>class PostsPage extends StatefulWidget {
+  @override
+  State&lt;PostsPage&gt; createState() => _PostsPageState();
+}
+
+class _PostsPageState extends State&lt;PostsPage&gt; {
+  List posts = [];
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchPosts(); // جلب البيانات عند بدء التشغيل
+  }
+
+  // ... سندرج الدوال الأخرى هنا
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("المشاركات")),
+      body: isLoading
+          ? Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: posts.length,
+              itemBuilder: (context, index) {
+                final post = posts[index];
+                return Card(
+                  child: ListTile(
+                    title: Text(post['title']),
+                    subtitle: Text(post['body']),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.edit),
+                          onPressed: () => showEditDialog(post['id'], post['title'], post['body']),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () => deletePost(post['id']),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+    );
+  }
+}</code></pre>
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">2. دالة جلب المشاركات (GET)</h3>
+            <div class="bg-gray-900 p-4 rounded-lg mb-6">
+                <div class="code-block text-gray-100 overflow-x-auto">
+                    <pre><code>Future<void> fetchPosts() async {
+  setState(() => isLoading = true);
+  final response = await http.get(
+    Uri.parse('https://jsonplaceholder.typicode.com/posts')
+  );
+
+  if (response.statusCode == 200) {
+    setState(() {
+      posts = json.decode(response.body);
+      isLoading = false;
+    });
+    debugPrint('تم تحميل ${posts.length} مشاركات');
+  } else {
+    setState(() => isLoading = false);
+    showError('فشل في جلب البيانات');
+  }
+}</code></pre>
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">3. دالة إنشاء مشاركة جديدة (POST)</h3>
+            <div class="bg-gray-900 p-4 rounded-lg mb-6">
+                <div class="code-block text-gray-100 overflow-x-auto">
+                    <pre><code>Future<void> createPost(String title, String body) async {
+  final response = await http.post(
+    Uri.parse('https://jsonplaceholder.typicode.com/posts'),
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode({
+      'title': title,
+      'body': body,
+      'userId': 1,
+    }),
+  );
+
+  if (response.statusCode == 201) {
+    setState(() {
+      posts.insert(0, json.decode(response.body));
+    });
+    debugPrint('تمت إضافة مشاركة جديدة');
+  } else {
+    showError('فشل في إضافة المشاركة');
+  }
+}</code></pre>
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">4. دالة تعديل مشاركة (PUT)</h3>
+            <div class="bg-gray-900 p-4 rounded-lg mb-6">
+                <div class="code-block text-gray-100 overflow-x-auto">
+                    <pre><code>Future<void> updatePost(int id, String newTitle, String newBody) async {
+  final response = await http.put(
+    Uri.parse('https://jsonplaceholder.typicode.com/posts/$id'),
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode({
+      'id': id,
+      'title': newTitle,
+      'body': newBody,
+      'userId': 1,
+    }),
+  );
+
+  if (response.statusCode == 200) {
+    setState(() {
+      int index = posts.indexWhere((post) => post['id'] == id);
+      if (index != -1) posts[index] = json.decode(response.body);
+    });
+  } else {
+    showError('فشل في تعديل المشاركة');
+  }
+}</code></pre>
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">5. دالة حذف مشاركة (DELETE)</h3>
+            <div class="bg-gray-900 p-4 rounded-lg mb-6">
+                <div class="code-block text-gray-100 overflow-x-auto">
+                    <pre><code>Future<void> deletePost(int id) async {
+  // طلب تأكيد من المستخدم قبل الحذف
+  bool confirm = await showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text('تأكيد الحذف'),
+      content: Text('هل أنت متأكد من حذف هذه المشاركة؟'),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context, false),
+          child: Text('إلغاء'),
+        ),
+        ElevatedButton(
+          onPressed: () => Navigator.pop(context, true),
+          child: Text('حذف'),
+        ),
+      ],
+    ),
+  );
+
+  if (confirm != true) return;
+
+  final response = await http.delete(
+    Uri.parse('https://jsonplaceholder.typicode.com/posts/$id')
+  );
+
+  if (response.statusCode == 200) {
+    setState(() => posts.removeWhere((post) => post['id'] == id));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('تم الحذف بنجاح')),
+    );
+  } else {
+    showError('فشل في حذف المشاركة');
+  }
+}</code></pre>
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">6. دوال عرض الحوارات</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gray-900 p-4 rounded-lg">
+                    <div class="code-block text-gray-100 overflow-x-auto">
+                        <pre><code>// حوار إضافة مشاركة جديدة
+void showAddPostDialog() {
+  final titleController = TextEditingController();
+  final bodyController = TextEditingController();
+
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text('إضافة مشاركة جديدة'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            controller: titleController,
+            decoration: InputDecoration(labelText: 'العنوان'),
+          ),
+          TextField(
+            controller: bodyController,
+            decoration: InputDecoration(labelText: 'النص'),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text('إلغاء'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            if (titleController.text.isNotEmpty && 
+                bodyController.text.isNotEmpty) {
+              createPost(titleController.text, bodyController.text);
+              Navigator.pop(context);
+            } else {
+              showError('يرجى ملء جميع الحقول');
+            }
+          },
+          child: Text('إضافة'),
+        ),
+      ],
+    ),
+  );
+}</code></pre>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-900 p-4 rounded-lg">
+                    <div class="code-block text-gray-100 overflow-x-auto">
+                        <pre><code>// حوار تعديل مشاركة
+void showEditDialog(int id, String currentTitle, String currentBody) {
+  final titleController = TextEditingController(text: currentTitle);
+  final bodyController = TextEditingController(text: currentBody);
+
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text('تعديل المشاركة'),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            controller: titleController,
+            decoration: InputDecoration(labelText: 'العنوان'),
+          ),
+          TextField(
+            controller: bodyController,
+            decoration: InputDecoration(labelText: 'النص'),
+          ),
+        ],
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text('إلغاء'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            if (titleController.text.isNotEmpty && 
+                bodyController.text.isNotEmpty) {
+              updatePost(id, titleController.text, bodyController.text);
+              Navigator.pop(context);
+            } else {
+              showError('يرجى ملء جميع الحقول');
+            }
+          },
+          child: Text('حفظ'),
+        ),
+      ],
+    ),
+  );
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-semibold text-gray-800 mt-8 mb-4">7. دالة عرض الأخطاء</h3>
+            <div class="bg-gray-900 p-4 rounded-lg">
+                <div class="code-block text-gray-100 overflow-x-auto">
+                    <pre><code>void showError(String message) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text(message)),
+  );
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Summary -->
+        <section class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-8 border border-blue-200">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-blue-600 text-3xl">summarize</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">ملخص النقاط الرئيسية</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="font-bold text-blue-800 mb-3 flex items-center">
+                        <span class="material-icons mr-2 text-blue-500">api</span>
+                        APIs
+                    </h3>
+                    <ul class="list-disc pr-5 space-y-2 text-gray-700">
+                        <li>واجهة للتواصل بين التطبيق والخادم</li>
+                        <li>أنواع الطلبات: GET, POST, PUT, DELETE</li>
+                        <li>تستخدم JSON كتنسيق رئيسي للبيانات</li>
+                        <li>تحتاج إلى معالجة الأخطاء دائمًا</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="font-bold text-green-800 mb-3 flex items-center">
+                        <span class="material-icons mr-2 text-green-500">http</span>
+                        حزمة HTTP
+                    </h3>
+                    <ul class="list-disc pr-5 space-y-2 text-gray-700">
+                        <li>إضافتها عبر: flutter pub add http</li>
+                        <li>استيرادها: import 'package:http/http.dart'</li>
+                        <li>الدوال الرئيسية: get(), post(), put(), delete()</li>
+                        <li>تتعامل مع العمليات غير المتزامنة</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="font-bold text-purple-800 mb-3 flex items-center">
+                        <span class="material-icons mr-2 text-purple-500">code</span>
+                        أفضل الممارسات
+                    </h3>
+                    <ul class="list-disc pr-5 space-y-2 text-gray-700">
+                        <li>تحقق دائمًا من statusCode</li>
+                        <li>استخدم async/await للعمليات غير المتزامنة</li>
+                        <li>أضف تحميل أثناء انتظار الاستجابة</li>
+                        <li>أضف معالجة للأخطاء باستخدام try-catch</li>
+                        <li>استخدم Model classes لتنظيم البيانات</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+  
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+      <div class="container mx-auto px-4 text-center">
+        <p class="mb-2">
+          دليل Flutter: الحوارات، الإشعارات، والعمليات غير المتزامنة
+        </p>
+        <p class="text-gray-400 text-sm">
+          تم تصميم الصفحة باستخدام Tailwind CSS و Material Icons
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
