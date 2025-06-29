@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دورة Flutter و Dart - مصطفى حسين</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fa-brands fa-flutter"></i>
+            <span>دورة Flutter و Dart</span>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="active">الرئيسية</a>
+            <a href="#days">الأيام التعليمية</a>
+            <a href="#resources">المصادر</a>
+            <a href="#about">عن المدرب</a>
+            <a href="#contact">تواصل معنا</a>
+        </div>
+        <button class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="lecture-title animate">دورة تطوير تطبيقات Flutter و Dart</h1>
+            <p class="lecture-subtitle animate delay-1">
+                رحلة احترافية لبناء تطبيقات متعددة المنصات من الصفر
+            </p>
+
+            <div class="lecturer-info animate delay-2">
+                <img src="https://i.ibb.co/Fbpfy9Y5/ITI2.jpg" alt="المحاضر مصطفى حسين" class="lecturer-img">
+                <div class="lecturer-details">
+                    <p class="lecturer-name">مصطفى حسين</p>
+                    <p class="lecturer-title">مطور ومحاضر Flutter</p>
+                    
+                    <div class="social-links">
+                        <a href="https://github.com/mostafa-hessen" target="_blank" class="social-link">
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </a>
+                        
+                        <a href="https://www.linkedin.com/in/mostafa-hussain-ramadan/" target="_blank" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                            LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Dashboard Grid -->
+        <section id="days" class="dashboard">
+            <!-- Day 1 Card -->
+            <div class="day-card animate">
+                <div class="day-number">1</div>
+                <h3 class="day-title">مقدمة في Flutter و Dart</h3>
+                <ul class="day-topics">
+                    <li>ما هو Flutter ولماذا نستخدمه</li>
+                    <li>مقارنة بين Cross-Platform و Native</li>
+                    <li>تثبيت البيئة وتجهيز الأدوات</li>
+                    <li>أساسيات لغة Dart</li>
+                    <li>إنشاء أول تطبيق Flutter</li>
+                </ul>
+                <div class="day-actions">
+                    <a href="./days/day1/Day1_Dart.html" class="btn btn-primary">
+                        <i class="fas fa-book-open"></i> المحتوى
+                    </a>
+                    <a href="#" class="btn btn-outline">
+                        <i class="fas fa-tasks"></i> الواجبات
+                    </a>
+                </div>
+            </div>
+
+            <!-- Day 2 Card -->
+            <div class="day-card animate delay-1">
+                <div class="day-number">2</div>
+                <h3 class="day-title">واجهة المستخدم في Flutter</h3>
+                <ul class="day-topics">
+                    <li>فهم Widgets وعلاقتها بـ UI</li>
+                    <li>تصميم Layouts باستخدام Rows و Columns</li>
+                    <li>الأنماط والتنسيقات في Flutter</li>
+                    <li>التعامل مع الصور والنصوص</li>
+                    <li>التصميم المتجاوب Responsive Design</li>
+                </ul>
+                <div class="day-actions">
+                    <a href="./days/Day2_Dart.html" class="btn btn-primary">
+                        <i class="fas fa-book-open"></i> المحتوى
+                    </a>
+                    <a href="#" class="btn btn-outline">
+                        <i class="fas fa-tasks"></i> الواجبات
+                    </a>
+                </div>
+            </div>
+
+            <!-- Day 3 Card -->
+            <div class="day-card animate delay-2">
+                <div class="day-number">3</div>
+                <h3 class="day-title">الحالة State Management</h3>
+                <ul class="day-topics">
+                    <li>فهم State وطرق إدارته</li>
+                    <li>مقارنة بين Stateful و Stateless Widgets</li>
+                    <li>إدارة الحالة باستخدام Provider</li>
+                    <li>حزمة Riverpod للتحكم المتقدم</li>
+                    <li>حالة التطبيق على مستوى التطبيق</li>
+                </ul>
+                <div class="day-actions">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-book-open"></i> المحتوى
+                    </a>
+                    <a href="#" class="btn btn-outline">
+                        <i class="fas fa-tasks"></i> الواجبات
+                    </a>
+                </div>
+            </div>
+
+            <!-- Day 4 Card -->
+            <div class="day-card animate delay-3">
+                <div class="day-number">4</div>
+                <h3 class="day-title">التنقل والروابط Navigation</h3>
+                <ul class="day-topics">
+                    <li>أنظمة التنقل في Flutter</li>
+                    <li>التنقل بين الشاشات (Screens)</li>
+                    <li>تمرير البيانات بين الشاشات</li>
+                    <li>الروابط العميقة Deep Linking</li>
+                    <li>تحسين تجربة المستخدم في التنقل</li>
+                </ul>
+                <div class="day-actions">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-book-open"></i> المحتوى
+                    </a>
+                    <a href="#" class="btn btn-outline">
+                        <i class="fas fa-tasks"></i> الواجبات
+                    </a>
+                </div>
+            </div>
+
+            <!-- Day 5 Card -->
+            <div class="day-card animate delay-4">
+                <div class="day-number">5</div>
+                <h3 class="day-title">الوصول للبيانات Networking</h3>
+                <ul class="day-topics">
+                    <li>الوصول إلى واجهات برمجة التطبيقات API</li>
+                    <li>حزمة http للاتصال بالخوادم</li>
+                    <li>جلب وإرسال البيانات (GET/POST)</li>
+                    <li>تحليل JSON وحزم العمل معها</li>
+                    <li>إدارة حالة التحميل والأخطاء</li>
+                </ul>
+                <div class="day-actions">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-book-open"></i> المحتوى
+                    </a>
+                    <a href="#" class="btn btn-outline">
+                        <i class="fas fa-tasks"></i> الواجبات
+                    </a>
+                </div>
+            </div>
+
+            <!-- Day 6 Card -->
+            <div class="day-card animate delay-5">
+                <div class="day-number">6</div>
+                <h3 class="day-title">التخزين المحلي Persistence</h3>
+                <ul class="day-topics">
+                    <li>تخزين البيانات باستخدام Shared Preferences</li>
+                    <li>قواعد البيانات المحلية SQLite</li>
+                    <li>حزمة Hive للتخزين السريع</li>
+                    <li>التخزين المؤقت Caching</li>
+                    <li>مزامنة البيانات مع الخادم</li>
+                </ul>
+                <div class="day-actions">
+                    <a href="#" class="btn btn-primary">
+                        <i class="fas fa-book-open"></i> المحتوى
+                    </a>
+                    <a href="#" class="btn btn-outline">
+                        <i class="fas fa-tasks"></i> الواجبات
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="resources-section">
+            <h2 class="section-title">
+                <i class="fas fa-book"></i> مصادر تعليمية مفيدة
+            </h2>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-code"></i>
+                    </div>
+                    <h3 class="resource-title">وثائق Flutter الرسمية</h3>
+                    <p>المرجع الشامل لجميع جوانب Flutter مع أمثلة عملية وتفاصيل تقنية دقيقة.</p>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="resource-title">قناة Flutter الرسمية</h3>
+                    <p>فيديوهات تعليمية من فريق Flutter في جوجل تغطي آخر الميزات وأفضل الممارسات.</p>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="resource-title">كتاب Flutter في العمق</h3>
+                    <p>دليل شامل يغطي مفاهيم متقدمة وأنماط تصميم وتقنيات لحل المشاكل الشائعة.</p>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <h3 class="resource-title">مشاريع نموذجية</h3>
+                    <p>مستودع GitHub يحتوي على تطبيقات كاملة لدراسة البنية البرمجية وتطبيق المفاهيم.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 class="footer-title">عن الدورة</h3>
+                    <p>دورة احترافية لتعلم تطوير تطبيقات Flutter و Dart من الصفر إلى الاحتراف. تغطي جميع المفاهيم الأساسية والمتقدمة لبناء تطبيقات احترافية متعددة المنصات.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3 class="footer-title">روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">الرئيسية</a></li>
+                        <li><a href="#days">الأيام التعليمية</a></li>
+                        <li><a href="#resources">المصادر</a></li>
+                        <li><a href="#about">عن المدرب</a></li>
+                        <li><a href="#contact">تواصل معنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section" id="about">
+                    <h3 class="footer-title">عن المدرب</h3>
+                    <p>مصطفى حسين - مطور ومحاضر Flutter بأكثر من 5 سنوات خبرة في تطوير التطبيقات ونقل المعرفة للمطورين العرب.</p>
+                    <div class="social-links" style="margin-top: 15px;">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2023 دورة Flutter و Dart. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme or prefer color scheme
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        const currentTheme = localStorage.getItem('theme');
+        
+        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Navigation active link highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.day-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

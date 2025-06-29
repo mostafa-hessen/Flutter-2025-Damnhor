@@ -1,0 +1,2877 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل Flutter الشامل: الهندسة المعمارية وبناء الواجهات</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+        .code-block {
+            font-family: 'Fira Code', monospace;
+        }
+        .widget-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid;
+        }
+        .widget-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        pre{
+            direction: ltr;
+            text-align: left;
+        }
+        .architecture-diagram {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-blue-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12 shadow-xl">
+        <div class="container mx-auto px-4 text-center">
+            <div class="floating inline-block mb-6">
+                <span class="material-icons text-6xl text-yellow-300">architecture</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">دليل Flutter الشامل</h1>
+            <p class="text-xl text-blue-100">الهندسة المعمارية وبناء واجهات المستخدم</p>
+            <div class="mt-6 flex justify-center space-x-3 space-x-reverse">
+                <span class="bg-blue-500 bg-opacity-90 text-white px-4 py-2 rounded-full flex items-center">
+                    <span class="material-icons mr-2">layers</span>
+                    الهندسة المعمارية
+                </span>
+                <span class="bg-green-500 bg-opacity-90 text-white px-4 py-2 rounded-full flex items-center">
+                    <span class="material-icons mr-2">design_services</span>
+                    تصميم الواجهات
+                </span>
+                <span class="bg-purple-500 bg-opacity-90 text-white px-4 py-2 rounded-full flex items-center">
+                    <span class="material-icons mr-2">widgets</span>
+                    الـ Widgets الأساسية
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Section 1: Flutter Architecture -->
+        <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-blue-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-blue-600 text-3xl">architecture</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">هندسة Flutter المعمارية</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="text-xl text-gray-700 mb-6 leading-relaxed">
+                        Flutter تمتلك هندسة معمارية فريدة تختلف عن معظم أطر عمل التطبيقات الأخرى. تعتمد على <span class="font-bold text-blue-600">محرك رسم مخصص</span> و<span class="font-bold text-blue-600">شجرة Widgets</span> لبناء الواجهات.
+                    </p>
+                    
+                    <div class="bg-blue-50 p-6 rounded-lg border border-blue-200 mb-6">
+                        <h3 class="font-bold text-lg text-blue-800 mb-3 flex items-center">
+                            <span class="material-icons mr-2">layers</span>
+                            طبقات هندسة Flutter
+                        </h3>
+                        <div class="grid gap-4">
+                            <div class="flex items-start">
+                                <span class="bg-blue-500 text-white rounded-full p-1 mr-3 mt-1">
+                                    <span class="material-icons text-sm">flash_on</span>
+                                </span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">طبقة التطبيق (Application)</h4>
+                                    <p class="text-gray-700">تحتوي على كود التطبيق الخاص بك وشجرة الـ Widgets</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="bg-green-500 text-white rounded-full p-1 mr-3 mt-1">
+                                    <span class="material-icons text-sm">widgets</span>
+                                </span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">طبقة الإطار (Framework)</h4>
+                                    <p class="text-gray-700">تحتوي على مكتبات Flutter الأساسية مثل material و cupertino</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="bg-purple-500 text-white rounded-full p-1 mr-3 mt-1">
+                                    <span class="material-icons text-sm">settings</span>
+                                </span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">المحرك (Engine)</h4>
+                                    <p class="text-gray-700">مسؤول عن الرسم والوصول إلى الخدمات الأساسية للنظام</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="bg-red-500 text-white rounded-full p-1 mr-3 mt-1">
+                                    <span class="material-icons text-sm">layers</span>
+                                </span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">الطبقة المضمنة (Embedder)</h4>
+                                    <p class="text-gray-700">مسؤولة عن دمج Flutter مع نظام التشغيل المضيف</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="architecture-diagram">
+                    <div class="text-center mb-4">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">هندسة Flutter المعمارية</h3>
+                        <div class="flex flex-col items-center">
+                            <!-- Application Layer -->
+                            <div class="w-full bg-blue-100 p-3 rounded-t-lg border border-blue-200">
+                                <div class="flex items-center justify-center">
+                                    <span class="material-icons text-blue-600 mr-2">code</span>
+                                    <span class="font-semibold">طبقة التطبيق (كودك)</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Framework Layer -->
+                            <div class="w-11/12 bg-green-100 p-3 border border-green-200">
+                                <div class="flex items-center justify-center">
+                                    <span class="material-icons text-green-600 mr-2">widgets</span>
+                                    <span class="font-semibold">إطار Flutter</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Engine Layer -->
+                            <div class="w-10/12 bg-purple-100 p-3 border border-purple-200">
+                                <div class="flex items-center justify-center">
+                                    <span class="material-icons text-purple-600 mr-2">settings</span>
+                                    <span class="font-semibold">محرك Flutter</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Embedder Layer -->
+                            <div class="w-9/12 bg-red-100 p-3 rounded-b-lg border border-red-200">
+                                <div class="flex items-center justify-center">
+                                    <span class="material-icons text-red-600 mr-2">layers</span>
+                                    <span class="font-semibold">الطبقة المضمنة</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-4 rounded-lg">
+                        <div class="code-block text-gray-100 overflow-x-auto">
+                            <pre><code>// مثال يوضح كيفية عمل الطبقات معًا
+void main() {
+  runApp(MyApp()); // الطبقة المضمنة تبدأ تشغيل التطبيق
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp( // من طبقة الإطار (material.dart)
+      home: Scaffold( // Widget من طبقة الإطار
+        body: Center( // Widget من طبقة الإطار
+          child: Text('Hello World'), // Widget من طبقة الإطار
+        ),
+      ),
+    );
+  }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: UI Planning -->
+        <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-green-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-green-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-green-600 text-3xl">design_services</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">التفكير والتخطيط لبناء الواجهات</h2>
+            </div>
+            
+            <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                بناء واجهات مستخدم فعالة في Flutter يتطلب <span class="font-bold text-green-600">تفكيرًا منهجيًا</span> و<span class="font-bold text-green-600">تخطيطًا دقيقًا</span>. إليك دليل عملي لتصميم واجهات Flutter:
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-green-500">format_list_numbered</span>
+                        خطوات التخطيط للواجهة
+                    </h3>
+                    
+                    <div class="bg-green-50 p-6 rounded-lg border border-green-200 mb-6">
+                        <ol class="list-decimal pr-5 space-y-4 text-green-700">
+                            <li class="font-semibold">تحليل المتطلبات
+                                <p class="text-gray-700 font-normal">حدد الغرض من الشاشة وما تحتاج إلى عرضه</p>
+                            </li>
+                            <li class="font-semibold">تقسيم الواجهة إلى أجزاء
+                                <p class="text-gray-700 font-normal">قسّم الشاشة إلى مكونات صغيرة يمكن إدارتها</p>
+                            </li>
+                            <li class="font-semibold">اختيار الـ Widgets المناسبة
+                                <p class="text-gray-700 font-normal">حدد الـ Widgets التي ستستخدمها لكل جزء</p>
+                            </li>
+                            <li class="font-semibold">تنظيم الـ Widgets في شجرة
+                                <p class="text-gray-700 font-normal">خطط لترتيب الـ Widgets وكيفية تداخلها</p>
+                            </li>
+                            <li class="font-semibold">إضافة التفاعلات
+                                <p class="text-gray-700 font-normal">حدد كيف سيتفاعل المستخدم مع كل جزء</p>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-green-500">collections_bookmark</span>
+                        مصادر لتصميم الواجهات
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <a href="https://material.io/design" target="_blank" class="block bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex items-center">
+                            <span class="material-icons text-blue-500 mr-3">web</span>
+                            <div>
+                                <h4 class="font-semibold">Material Design Guidelines</h4>
+                                <p class="text-gray-600 text-sm">إرشادات تصميم Material من Google</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://flutter.dev/docs/development/ui/widgets" target="_blank" class="block bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex items-center">
+                            <span class="material-icons text-green-500 mr-3">widgets</span>
+                            <div>
+                                <h4 class="font-semibold">Flutter Widget Catalog</h4>
+                                <p class="text-gray-600 text-sm">دليل الـ Widgets الرسمي من Flutter</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://dribbble.com/" target="_blank" class="block bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex items-center">
+                            <span class="material-icons text-purple-500 mr-3">palette</span>
+                            <div>
+                                <h4 class="font-semibold">Dribbble</h4>
+                                <p class="text-gray-600 text-sm">مصدر للإلهام التصميمي</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://flutterawesome.com/" target="_blank" class="block bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow flex items-center">
+                            <span class="material-icons text-red-500 mr-3">star</span>
+                            <div>
+                                <h4 class="font-semibold">Flutter Awesome</h4>
+                                <p class="text-gray-600 text-sm">أمثلة وتصاميم Flutter رائعة</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <span class="material-icons mr-2 text-green-500">visibility</span>
+                    مثال عملي: تحليل واجهة بسيطة
+                </h3>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <h4 class="font-bold text-gray-800 mb-2">1. التصميم الأصلي</h4>
+                        <div class="bg-white p-4 rounded border border-gray-300">
+                            <div class="text-center mb-2 font-bold">صفحة الملف الشخصي</div>
+                            <div class="bg-blue-200 h-20 rounded-full mx-auto w-20 mb-3"></div>
+                            <div class="bg-gray-200 h-4 rounded mb-2"></div>
+                            <div class="bg-gray-200 h-4 rounded w-3/4 mx-auto mb-4"></div>
+                            <div class="bg-green-200 h-8 rounded mb-2"></div>
+                            <div class="bg-yellow-200 h-8 rounded"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <h4 class="font-bold text-gray-800 mb-2">2. تقسيم المكونات</h4>
+                        <div class="bg-white p-4 rounded border border-gray-300">
+                            <div class="text-xs space-y-4">
+                                <div class="text-center text-red-500 font-bold">صورة الملف الشخصي</div>
+                                <div class="text-center text-blue-500 font-bold">الاسم</div>
+                                <div class="text-center text-green-500 font-bold">الوظيفة</div>
+                                <div class="text-center text-purple-500 font-bold">زر التعديل</div>
+                                <div class="text-center text-yellow-600 font-bold">زر الإعدادات</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <h4 class="font-bold text-gray-800 mb-2">3. شجرة الـ Widgets</h4>
+                        <div class="bg-white p-4 rounded border border-gray-300 text-xs font-mono">
+                            <div class="text-green-600">Column</div>
+                            <div class="ml-4 text-blue-500">├── CircleAvatar</div>
+                            <div class="ml-4 text-gray-700">├── Text('الاسم')</div>
+                            <div class="ml-4 text-gray-700">├── Text('الوظيفة')</div>
+                            <div class="ml-4 text-purple-500">├── ElevatedButton('تعديل')</div>
+                            <div class="ml-4 text-yellow-600">└── ElevatedButton('الإعدادات')</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Widgets Types -->
+        <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-purple-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-purple-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-purple-600 text-3xl">widgets</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">أنواع الـ Widgets في Flutter</h2>
+            </div>
+            
+            <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                في Flutter، هناك <span class="font-bold text-purple-600">المئات من الـ Widgets</span> المصممة لأغراض مختلفة. يمكن تصنيفها بعدة طرق:
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Classification by Function -->
+                <div class="widget-card bg-blue-50 p-6 rounded-lg border-l-blue-400">
+                    <div class="flex items-center mb-4">
+                        <span class="material-icons text-blue-500 text-3xl mr-3">category</span>
+                        <h3 class="text-xl font-bold text-blue-800">حسب الوظيفة</h3>
+                    </div>
+                    <ul class="list-disc pr-5 space-y-2 text-gray-700">
+                        <li>Widgets التخطيط (Layout)</li>
+                        <li>Widgets النص والإدخال</li>
+                        <li>Widgetات الوسائط (صور، فيديو)</li>
+                        <li>Widgetات التمرير (Scroll)</li>
+                        <li>Widgetات التحكم (أزرار، مفاتيح)</li>
+                        <li>Widgetات التصميم (تأثيرات، أنماط)</li>
+                    </ul>
+                </div>
+                
+                <!-- Classification by State -->
+                <div class="widget-card bg-green-50 p-6 rounded-lg border-l-green-400">
+                    <div class="flex items-center mb-4">
+                        <span class="material-icons text-green-500 text-3xl mr-3">autorenew</span>
+                        <h3 class="text-xl font-bold text-green-800">حسب الحالة</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Stateless Widget</h4>
+                            <p class="text-gray-700 text-sm">لا يتغير مع الوقت (مثل: Icon, Text)</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Stateful Widget</h4>
+                            <p class="text-gray-700 text-sm">يتغير بناءً على التفاعل (مثل: Checkbox, Slider)</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                        // Stateless vs Stateful
+                    </div>
+                </div>
+                
+                <!-- Classification by Library -->
+                <div class="widget-card bg-purple-50 p-6 rounded-lg border-l-purple-400">
+                    <div class="flex items-center mb-4">
+                        <span class="material-icons text-purple-500 text-3xl mr-3">library_books</span>
+                        <h3 class="text-xl font-bold text-purple-800">حسب المكتبة</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <span class="bg-blue-100 text-blue-800 rounded p-1 mr-2">M</span>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Material</h4>
+                                <p class="text-gray-700 text-sm">تتبع إرشادات Material Design</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="bg-gray-100 text-gray-800 rounded p-1 mr-2">C</span>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Cupertino</h4>
+                                <p class="text-gray-700 text-sm">تتبع تصميم iOS</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="bg-green-100 text-green-800 rounded p-1 mr-2">B</span>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">الأساسية</h4>
+                                <p class="text-gray-700 text-sm">Widgetات أساسية مستقلة عن التصميم</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <span class="material-icons mr-2 text-purple-500">compare</span>
+                    مقارنة بين Stateless و Stateful Widgets
+                </h3>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border border-gray-200">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">المعيار</th>
+                                <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">Stateless Widget</th>
+                                <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">Stateful Widget</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">الحالة الداخلية</td>
+                                <td class="py-3 px-4 border-b">لا يوجد</td>
+                                <td class="py-3 px-4 border-b">يوجد (يمكن تغييرها)</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">إعادة البناء</td>
+                                <td class="py-3 px-4 border-b">عند تغيير الـ parent فقط</td>
+                                <td class="py-3 px-4 border-b">عند استدعاء setState()</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">الأمثلة</td>
+                                <td class="py-3 px-4 border-b">Text, Icon, Container</td>
+                                <td class="py-3 px-4 border-b">Checkbox, TextField, Slider</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">الأداء</td>
+                                <td class="py-3 px-4 border-b">أخف وأسرع</td>
+                                <td class="py-3 px-4 border-b">أثقل قليلاً</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Detailed Widgets Explanation -->
+        <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-green-500">
+        <div class="flex items-center mb-6">
+            <div class="bg-green-100 p-4 rounded-full ml-4">
+                <span class="material-icons text-green-600 text-3xl">view_compact</span>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800">ترتيب العناصر (Layouts)</h2>
+        </div>
+        
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+            الـ Layouts في Flutter تساعدنا على <span class="font-bold text-green-600">ترتيب العناصر</span> على الشاشة 
+            بالطريقة التي نريدها. إليك أهم أدوات الترتيب:
+        </p>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Column -->
+            <div class="widget-card bg-blue-50 p-6 rounded-lg border-l-blue-400">
+                <div class="flex items-center mb-4">
+                    <span class="material-icons text-blue-500 text-3xl mr-3">view_column</span>
+                    <h3 class="text-xl font-bold text-blue-800">Column</h3>
+                </div>
+                <p class="text-gray-700 mb-4">ترتيب العناصر <span class="font-semibold">رأسيًا</span> (من الأعلى للأسفل)</p>
+                <div class="bg-white p-3 rounded border border-gray-200">
+                    <div class="flex flex-col items-center space-y-2">
+                        <div class="bg-blue-200 w-8 h-8 rounded"></div>
+                        <div class="bg-blue-300 w-8 h-8 rounded"></div>
+                        <div class="bg-blue-400 w-8 h-8 rounded"></div>
+                    </div>
+                </div>
+                <div class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                    Column(children: [Widget1, Widget2, Widget3])
+                </div>
+            </div>
+            
+            <!-- Row -->
+            <div class="widget-card bg-green-50 p-6 rounded-lg border-l-green-400">
+                <div class="flex items-center mb-4">
+                    <span class="material-icons text-green-500 text-3xl mr-3">view_agenda</span>
+                    <h3 class="text-xl font-bold text-green-800">Row</h3>
+                </div>
+                <p class="text-gray-700 mb-4">ترتيب العناصر <span class="font-semibold">أفقيًا</span> (من اليمين لليسار)</p>
+                <div class="bg-white p-3 rounded border border-gray-200">
+                    <div class="flex justify-center space-x-2">
+                        <div class="bg-green-200 w-8 h-8 rounded"></div>
+                        <div class="bg-green-300 w-8 h-8 rounded"></div>
+                        <div class="bg-green-400 w-8 h-8 rounded"></div>
+                    </div>
+                </div>
+                <div class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                    Row(children: [Widget1, Widget2, Widget3])
+                </div>
+            </div>
+            
+            <!-- Stack -->
+            <div class="widget-card bg-purple-50 p-6 rounded-lg border-l-purple-400">
+                <div class="flex items-center mb-4">
+                    <span class="material-icons text-purple-500 text-3xl mr-3">layers</span>
+                    <h3 class="text-xl font-bold text-purple-800">Stack</h3>
+                </div>
+                <p class="text-gray-700 mb-4">ترتيب العناصر <span class="font-semibold">فوق بعضها</span> (طبقات)</p>
+                <div class="bg-white p-3 rounded border border-gray-200 relative h-16">
+                    <div class="bg-purple-200 w-8 h-8 rounded absolute top-0 left-4"></div>
+                    <div class="bg-purple-300 w-8 h-8 rounded absolute top-3 left-6"></div>
+                    <div class="bg-purple-400 w-8 h-8 rounded absolute top-6 left-8"></div>
+                </div>
+                <div class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                    Stack(children: [Widget1, Widget2, Widget3])
+                </div>
+            </div>
+            
+            <!-- Container -->
+            <div class="widget-card bg-yellow-50 p-6 rounded-lg border-l-yellow-400">
+                <div class="flex items-center mb-4">
+                    <span class="material-icons text-yellow-500 text-3xl mr-3">crop_square</span>
+                    <h3 class="text-xl font-bold text-yellow-800">Container</h3>
+                </div>
+                <p class="text-gray-700 mb-4">إطار قابل للتخصيص (حجم، لون، هامش، حدود)</p>
+                <div class="bg-white p-3 rounded border border-gray-200 flex justify-center">
+                    <div class="bg-yellow-200 w-12 h-12 rounded border-2 border-yellow-500"></div>
+                </div>
+                <div class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                    Container(width: 100, height: 100, color: Colors.blue)
+                </div>
+            </div>
+            
+            <!-- SizedBox -->
+            <div class="widget-card bg-red-50 p-6 rounded-lg border-l-red-400">
+                <div class="flex items-center mb-4">
+                    <span class="material-icons text-red-500 text-3xl mr-3">space_bar</span>
+                    <h3 class="text-xl font-bold text-red-800">SizedBox</h3>
+                </div>
+                <p class="text-gray-700 mb-4">مساحة فارغة بحجم معين أو لفاصل بين العناصر</p>
+                <div class="bg-white p-3 rounded border border-gray-200">
+                    <div class="flex justify-center">
+                        <div class="bg-red-200 w-8 h-8 rounded"></div>
+                        <div class="w-4"></div>
+                        <div class="bg-red-300 w-8 h-8 rounded"></div>
+                    </div>
+                </div>
+                <div class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                    SizedBox(height: 20) // أو SizedBox(width: 20)
+                </div>
+            </div>
+            
+            <!-- Center -->
+            <div class="widget-card bg-indigo-50 p-6 rounded-lg border-l-indigo-400">
+                <div class="flex items-center mb-4">
+                    <span class="material-icons text-indigo-500 text-3xl mr-3">center_focus_strong</span>
+                    <h3 class="text-xl font-bold text-indigo-800">Center</h3>
+                </div>
+                <p class="text-gray-700 mb-4">لوضع العنصر في <span class="font-semibold">منتصف</span> المساحة المتاحة</p>
+                <div class="bg-white p-3 rounded border border-gray-200 flex justify-center items-center h-16">
+                    <div class="bg-indigo-200 w-8 h-8 rounded"></div>
+                </div>
+                <div class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                    Center(child: Widget)
+                </div>
+            </div>
+        </div>
+    </section>
+        <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-amber-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-amber-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-amber-600 text-3xl">view_quilt</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">شرح مفصل لأهم الـ Widgets</h2>
+            </div>
+            
+            <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                دعونا نتعمق في فهم <span class="font-bold text-amber-600">أهم الـ Widgets الأساسية</span> في Flutter وكيفية استخدامها:
+            </p>
+
+            </section>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Section 1: AppBar -->
+        <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-blue-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-blue-600 text-3xl">web</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">AppBar</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="text-xl text-gray-700 mb-6 leading-relaxed">
+                        AppBar هو Widget أساسي في Flutter يمثل شريط التطبيق العلوي. يوفر مساحة لعرض العنوان، وأزرار الإجراءات، ويمكن تخصيصه بطرق متعددة.
+                    </p>
+                    
+                    <div class="bg-blue-50 p-6 rounded-lg border border-blue-200 mb-6">
+                        <h3 class="font-bold text-lg text-blue-800 mb-3 flex items-center">
+                            <span class="material-icons mr-2">info</span>
+                            الخصائص الرئيسية لـ AppBar
+                        </h3>
+                        <div class="grid gap-4">
+                            <div class="flex items-start">
+                                <span class="bg-blue-500 text-white rounded-full p-1 mr-3 mt-1">
+                                    <span class="material-icons text-sm">title</span>
+                                </span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">title</h4>
+                                    <p class="text-gray-700">عنوان الشريط (عادة Widget Text)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="bg-green-500 text-white rounded-full p-1 mr-3 mt-1">
+                                    <span class="material-icons text-sm">list</span>
+                                </span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">actions</h4>
+                                    <p class="text-gray-700">قائمة بأزرار الإجراءات (مثل البحث، الإعدادات)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="bg-purple-500 text-white rounded-full p-1 mr-3 mt-1">
+                                    <span class="material-icons text-sm">arrow_back</span>
+                                </span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">leading</h4>
+                                    <p class="text-gray-700">زر في بداية الشريط (عادة زر الرجوع)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="bg-red-500 text-white rounded-full p-1 mr-3 mt-1">
+                                    <span class="material-icons text-sm">palette</span>
+                                </span>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">backgroundColor</h4>
+                                    <p class="text-gray-700">لون خلفية AppBar</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="architecture-diagram">
+                    <div class="bg-gray-900 p-4 rounded-lg">
+                        <div class="code-block text-gray-100 overflow-x-auto">
+                            <pre><code>// مثال على استخدام AppBar
+AppBar(
+  title: Text('عنوان التطبيق'),
+  backgroundColor: Colors.blue,
+  leading: IconButton(
+    icon: Icon(Icons.menu),
+    onPressed: () {},
+  ),
+  actions: [
+    IconButton(
+      icon: Icon(Icons.search),
+      onPressed: () {},
+    ),
+    IconButton(
+      icon: Icon(Icons.settings),
+      onPressed: () {},
+    ),
+  ],
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 bg-white p-4 rounded-lg border border-gray-300">
+                        <div class="bg-blue-600 text-white p-3 flex items-center justify-between">
+                            <span class="material-icons">menu</span>
+                            <span class="flex-grow text-center">عنوان التطبيق</span>
+                            <div class="flex space-x-2">
+                                <span class="material-icons">search</span>
+                                <span class="material-icons">settings</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Scaffold -->
+        <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-green-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-green-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-green-600 text-3xl">view_quilt</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">Scaffold</h2>
+            </div>
+            
+            <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                Scaffold هو Widget أساسي يوفر <span class="font-bold text-green-600">هيكل الصفحة الأساسي</span> في تطبيقات Flutter. يعتبر الهيكل العظمي لواجهة المستخدم.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-green-500">view_compact</span>
+                        مكونات Scaffold الأساسية
+                    </h3>
+                    
+                    <div class="bg-green-50 p-6 rounded-lg border border-green-200 mb-6">
+                        <ol class="list-decimal pr-5 space-y-4 text-green-700">
+                            <li class="font-semibold">appBar
+                                <p class="text-gray-700 font-normal">شريط التطبيق العلوي (AppBar)</p>
+                            </li>
+                            <li class="font-semibold">body
+                                <p class="text-gray-700 font-normal">المحتوى الرئيسي للصفحة</p>
+                            </li>
+                            <li class="font-semibold">floatingActionButton
+                                <p class="text-gray-700 font-normal">زر عائم للإجراء الرئيسي</p>
+                            </li>
+                            <li class="font-semibold">drawer
+                                <p class="text-gray-700 font-normal">القائمة الجانبية (من اليمين أو اليسار)</p>
+                            </li>
+                            <li class="font-semibold">bottomNavigationBar
+                                <p class="text-gray-700 font-normal">شريط التنقل السفلي</p>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-green-500">code</span>
+                        مثال تطبيقي
+                    </h3>
+                    
+                    <div class="bg-gray-900 p-4 rounded-lg">
+                        <div class="code-block text-gray-100 overflow-x-auto">
+                            <pre><code>Scaffold(
+  appBar: AppBar(
+    title: Text('تطبيق Flutter'),
+  ),
+  drawer: Drawer(
+    child: ListView(
+      children: [
+        ListTile(title: Text('الصفحة الرئيسية')),
+        ListTile(title: Text('الإعدادات')),
+      ],
+    ),
+  ),
+  body: Center(
+    child: Text('مرحباً بك في التطبيق!'),
+  ),
+  floatingActionButton: FloatingActionButton(
+    onPressed: () {},
+    child: Icon(Icons.add),
+  ),
+  bottomNavigationBar: BottomNavigationBar(
+    items: [
+      BottomNavigationBarItem(icon: Icon(Icons.home), label: 'الرئيسية'),
+      BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'الإعدادات'),
+    ],
+  ),
+)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <span class="material-icons mr-2 text-green-500">visibility</span>
+                    تمثيل مرئي لـ Scaffold
+                </h3>
+                
+                <div class="relative h-96 bg-gray-100 rounded-lg border border-gray-300">
+                    <!-- AppBar -->
+                    <div class="bg-blue-600 text-white p-3 flex items-center justify-between">
+                        <span class="material-icons">menu</span>
+                        <span class="flex-grow text-center">تطبيق Flutter</span>
+                        <span class="w-6"></span> <!-- Empty space for symmetry -->
+                    </div>
+                    
+                    <!-- Drawer -->
+                    <div class="absolute top-0 right-0 h-full w-64 bg-white shadow-lg z-10 hidden">
+                        <div class="p-4">
+                            <h4 class="font-bold">القائمة الجانبية</h4>
+                            <ul class="mt-4 space-y-2">
+                                <li class="p-2 hover:bg-gray-100">الصفحة الرئيسية</li>
+                                <li class="p-2 hover:bg-gray-100">الإعدادات</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Body -->
+                    <div class="p-4 flex items-center justify-center h-64">
+                        <p class="text-lg">مرحباً بك في التطبيق!</p>
+                    </div>
+                    
+                    <!-- FAB -->
+                    <div class="absolute bottom-20 right-4 bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg">
+                        <span class="material-icons">add</span>
+                    </div>
+                    
+                    <!-- Bottom Navigation -->
+                    <div class="absolute bottom-0 left-0 right-0 bg-white border-t flex justify-around p-2">
+                        <div class="text-center">
+                            <span class="material-icons">home</span>
+                            <p class="text-xs">الرئيسية</p>
+                        </div>
+                        <div class="text-center">
+                            <span class="material-icons">settings</span>
+                            <p class="text-xs">الإعدادات</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    
+            
+            <!-- Container -->
+            <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-blue-500">
+                <div class="flex items-center mb-4">
+                    <span class="material-icons text-blue-500 text-3xl mr-3">crop_square</span>
+                    <h3 class="text-2xl font-bold text-gray-800">Container</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            الـ Container هو أحد أكثر الـ Widgetات استخدامًا في Flutter. يمكن اعتباره <span class="font-semibold text-blue-600">صندوقًا قابل للتخصيص</span> يمكن أن يحتوي على Widgetات أخرى.
+                        </p>
+                        
+                        <div class="bg-blue-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-blue-800 mb-2 flex items-center">
+                                <span class="material-icons mr-2">info</span>
+                                الخصائص الرئيسية:
+                            </h4>
+                            <ul class="list-disc pr-5 space-y-1 text-blue-700">
+                                <li><span class="font-semibold">child</span>: الـ Widget الذي سيحتويه</li>
+                                <li><span class="font-semibold">color</span>: لون الخلفية</li>
+                                <li><span class="font-semibold">width/height</span>: تحديد الأبعاد</li>
+                                <li><span class="font-semibold">margin/padding</span>: تحديد الهوامش والحشو</li>
+                                <li><span class="font-semibold">decoration</span>: إضافة حدود، تدرجات، ظلال</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                            <h4 class="font-semibold text-yellow-800 mb-2 flex items-center">
+                                <span class="material-icons mr-2">lightbulb</span>
+                                متى تستخدم Container؟
+                            </h4>
+                            <ul class="list-disc pr-5 space-y-1 text-yellow-700">
+                                <li>عندما تحتاج إلى مساحة محددة الأبعاد</li>
+                                <li>عندما تريد إضافة خلفية ملونة أو حدود</li>
+                                <li>عندما تريد إضافة هامش حول Widget معين</li>
+                                <li>كحاوية عامة لتجميع Widgetات أخرى</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-gray-900 p-4 rounded-lg mb-4">
+                            <div class="code-block text-gray-100 overflow-x-auto">
+                                <pre><code>// مثال على استخدام Container
+Container(
+  width: 200,
+  height: 100,
+  margin: EdgeInsets.all(10),
+  padding: EdgeInsets.all(20),
+  decoration: BoxDecoration(
+    color: Colors.blue,
+    borderRadius: BorderRadius.circular(10),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black26,
+        blurRadius: 5,
+        offset: Offset(2, 2),
+      ),
+    ],
+  ),
+  child: Text(
+    'Hello Flutter',
+    style: TextStyle(color: Colors.white),
+  ),
+)</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-4 rounded-lg border border-gray-300 flex justify-center">
+                            <div style="width: 200px; height: 100px; margin: 10px; padding: 20px; 
+                                background-color: #3b82f6; border-radius: 10px; 
+                                box-shadow: 2px 2px 5px rgba(0,0,0,0.2); 
+                                display: flex; justify-content: center; align-items: center;">
+                                <span style="color: white; font-family: 'Tajawal';">Hello Flutter</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Text -->
+            <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-green-500">
+                <div class="flex items-center mb-4">
+                    <span class="material-icons text-green-500 text-3xl mr-3">text_fields</span>
+                    <h3 class="text-2xl font-bold text-gray-800">Text</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Widget الـ Text يستخدم لعرض <span class="font-semibold text-green-600">سلسلة نصية</span> على الشاشة مع إمكانية تنسيق النص بعدة طرق.
+                        </p>
+                        
+                        <div class="bg-green-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-green-800 mb-2 flex items-center">
+                                <span class="material-icons mr-2">info</span>
+                                الخصائص الرئيسية:
+                            </h4>
+                            <ul class="list-disc pr-5 space-y-1 text-green-700">
+                                <li><span class="font-semibold">data</span>: النص المراد عرضه</li>
+                                <li><span class="font-semibold">style</span>: تنسيق النص (حجم، لون، خط، إلخ)</li>
+                                <li><span class="font-semibold">textAlign</span>: محاذاة النص</li>
+                                <li><span class="font-semibold">maxLines</span>: الحد الأقصى لعدد الأسطر</li>
+                                <li><span class="font-semibold">overflow</span>: كيفية التعامل مع النص الزائد</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg">
+                            <pre><code>// أمثلة على تنسيق النص
+Text(
+  'مرحباً بكم في Flutter',
+  style: TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: Colors.blue,
+    fontFamily: 'Tajawal',
+  ),
+  textAlign: TextAlign.center,
+)
+
+// نص متعدد الأسطر
+Text(
+  'هذا نص طويل سيتم تقسيمه لعدة أسطر عند الوصول إلى الحد الأقصى للعرض المتاح',
+  maxLines: 2,
+  overflow: TextOverflow.ellipsis,
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-white p-6 rounded-lg border border-gray-300 space-y-6">
+                            <div class="text-center">
+                                <p style="font-size: 24px; font-weight: bold; color: #3b82f6; font-family: 'Tajawal';">
+                                    مرحباً بكم في Flutter
+                                </p>
+                                <p class="text-gray-500 text-sm mt-2">مثال على نص بسيط</p>
+                            </div>
+                            
+                            <div class="border-t pt-4">
+                                <p style="font-size: 18px; color: #ef4444; font-weight: 500; text-decoration: underline;">
+                                    هذا نص بلون مختلف وتحتيه خط
+                                </p>
+                                <p class="text-gray-500 text-sm mt-2">مثال على نص بتنسيقات مختلفة</p>
+                            </div>
+                            
+                            <div class="border-t pt-4">
+                                <p style="font-size: 16px; max-width: 200px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+                                    هذا نص طويل سيتم تقسيمه لعدة أسطر عند الوصول إلى الحد الأقصى للعرض المتاح في الواجهة
+                                </p>
+                                <p class="text-gray-500 text-sm mt-2">مثال على نص متعدد الأسطر</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Image -->
+            <div class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-purple-500">
+                <div class="flex items-center mb-4">
+                    <span class="material-icons text-purple-500 text-3xl mr-3">image</span>
+                    <h3 class="text-2xl font-bold text-gray-800">Image</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Widget الـ Image يستخدم لعرض <span class="font-semibold text-purple-600">الصور</span> في تطبيق Flutter. يمكن تحميل الصور من مصادر مختلفة.
+                        </p>
+                        
+                        <div class="bg-purple-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-purple-800 mb-2 flex items-center">
+                                <span class="material-icons mr-2">info</span>
+                                طرق تحميل الصور:
+                            </h4>
+                            <ul class="list-disc pr-5 space-y-1 text-purple-700">
+                                <li><span class="font-semibold">Image.asset</span>: لتحميل الصور من مجلد assets في المشروع</li>
+                                <li><span class="font-semibold">Image.network</span>: لتحميل الصور من الإنترنت</li>
+                                <li><span class="font-semibold">Image.file</span>: لتحميل الصور من ملف في الجهاز</li>
+                                <li><span class="font-semibold">Image.memory</span>: لتحميل الصور من بيانات بايت في الذاكرة</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg">
+                            <pre><code>// مثال على تحميل صورة من الإنترنت
+Image.network(
+  'https://example.com/image.jpg',
+  width: 200,
+  height: 200,
+  fit: BoxFit.cover,
+)
+
+// مثال على تحميل صورة من assets
+Image.asset(
+  'assets/images/logo.png',
+  width: 100,
+  height: 100,
+)
+
+// إضافة صورة مع placeholder أثناء التحميل
+FadeInImage.assetNetwork(
+  placeholder: 'assets/loading.gif',
+  image: 'https://example.com/image.jpg',
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-white p-6 rounded-lg border border-gray-300 space-y-6">
+                            <div class="text-center">
+                                <div class="bg-gray-200 w-full h-40 rounded-lg flex items-center justify-center">
+                                    <span class="material-icons text-gray-400 text-4xl">image</span>
+                                </div>
+                                <p class="text-gray-500 text-sm mt-2">مثال على صورة من الإنترنت</p>
+                            </div>
+                            
+                            <div class="border-t pt-4">
+                                <div class="bg-gray-100 w-32 h-32 rounded-full mx-auto flex items-center justify-center">
+                                    <span class="material-icons text-gray-400 text-3xl">photo_camera</span>
+                                </div>
+                                <p class="text-gray-500 text-sm mt-2">مثال على صورة دائرية من assets</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                            <h4 class="font-semibold text-yellow-800 mb-2 flex items-center">
+                                <span class="material-icons mr-2">warning</span>
+                                ملاحظات مهمة:
+                            </h4>
+                            <ul class="list-disc pr-5 space-y-1 text-yellow-700">
+                                <li>للاستخدام مع <span class="font-semibold">Image.asset</span>، يجب إضافة الصور إلى مجلد assets في المشروع وتحديدها في ملف pubspec.yaml</li>
+                                <li>لتحسين الأداء مع الصور الكبيرة، يمكن استخدام <span class="font-semibold">cached_network_image</span></li>
+                                <li>لتحميل الصور بشكل متدرج، يمكن استخدام <span class="font-semibold">FadeInImage</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Icon -->
+            <div class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-red-500">
+                <div class="flex items-center mb-4">
+                    <span class="material-icons text-red-500 text-3xl mr-3">star</span>
+                    <h3 class="text-2xl font-bold text-gray-800">Icon</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Widget الـ Icon يستخدم لعرض <span class="font-semibold text-red-600">أيقونات</span> من مكتبة Material Icons أو Cupertino Icons أو أيقونات مخصصة.
+                        </p>
+                        
+                        <div class="bg-red-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-red-800 mb-2 flex items-center">
+                                <span class="material-icons mr-2">info</span>
+                                الخصائص الرئيسية:
+                            </h4>
+                            <ul class="list-disc pr-5 space-y-1 text-red-700">
+                                <li><span class="font-semibold">icon</span>: الأيقونة المراد عرضها (مثل Icons.star)</li>
+                                <li><span class="font-semibold">size</span>: حجم الأيقونة</li>
+                                <li><span class="font-semibold">color</span>: لون الأيقونة</li>
+                                <li><span class="font-semibold">semanticLabel</span>: وصف نصي للأيقونة (لإمكانية الوصول)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg">
+                            <pre><code>// أمثلة على استخدام الأيقونات
+Icon(
+  Icons.star,
+  color: Colors.amber,
+  size: 40,
+)
+
+// أيقونة مع نص بجانبها
+Row(
+  children: [
+    Icon(Icons.email, color: Colors.blue),
+    SizedBox(width: 8),
+    Text('contact@example.com'),
+  ],
+)
+
+// أيقونات من مكتبة Cupertino (تصميم iOS)
+Icon(CupertinoIcons.heart_fill, color: Colors.red)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-white p-6 rounded-lg border border-gray-300">
+                            <div class="grid grid-cols-4 gap-4 text-center">
+                                <div>
+                                    <span class="material-icons text-amber-500 text-3xl">star</span>
+                                    <p class="text-gray-500 text-sm mt-1">Icons.star</p>
+                                </div>
+                                <div>
+                                    <span class="material-icons text-blue-500 text-3xl">favorite</span>
+                                    <p class="text-gray-500 text-sm mt-1">Icons.favorite</p>
+                                </div>
+                                <div>
+                                    <span class="material-icons text-green-500 text-3xl">home</span>
+                                    <p class="text-gray-500 text-sm mt-1">Icons.home</p>
+                                </div>
+                                <div>
+                                    <span class="material-icons text-purple-500 text-3xl">settings</span>
+                                    <p class="text-gray-500 text-sm mt-1">Icons.settings</p>
+                                </div>
+                                <div>
+                                    <span class="material-icons text-red-500 text-3xl">shopping_cart</span>
+                                    <p class="text-gray-500 text-sm mt-1">Icons.shopping_cart</p>
+                                </div>
+                                <div>
+                                    <span class="material-icons text-yellow-500 text-3xl">person</span>
+                                    <p class="text-gray-500 text-sm mt-1">Icons.person</p>
+                                </div>
+                                <div>
+                                    <span class="material-icons text-indigo-500 text-3xl">search</span>
+                                    <p class="text-gray-500 text-sm mt-1">Icons.search</p>
+                                </div>
+                                <div>
+                                    <span class="material-icons text-pink-500 text-3xl">menu</span>
+                                    <p class="text-gray-500 text-sm mt-1">Icons.menu</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 border-t pt-4">
+                                <h4 class="font-semibold text-gray-800 mb-2">كيفية إضافة أيقونات مخصصة؟</h4>
+                                <p class="text-gray-700 mb-2">1. استخدم حزمة <span class="font-mono">flutter_icons</span></p>
+                                <p class="text-gray-700">2. استخدم <span class="font-mono">IconData</span> مع ملف خط مخصص</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Column and Row -->
+            <div class="mb-12 border-l-8  bg-indigo-50 rounded-xl p-6 border border-indigo-400">
+                <div class="flex items-center mb-4">
+                    <span class="material-icons text-indigo-500 text-3xl mr-3">view_column</span>
+                    <h3 class="text-2xl font-bold text-gray-800">Column و Row</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            الـ Column و Row هما Widgetات التخطيط الأساسية في Flutter لترتيب العناصر <span class="font-semibold text-indigo-600">رأسيًا</span> أو <span class="font-semibold text-indigo-600">أفقيًا</span>.
+                        </p>
+                        
+                        <div class="bg-indigo-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-indigo-800 mb-2 flex items-center">
+                                <span class="material-icons mr-2">compare</span>
+                                مقارنة بين Column و Row:
+                            </h4>
+                            <ul class="list-disc pr-5 space-y-1 text-indigo-700">
+                                <li><span class="font-semibold">Column</span>: ترتيب العناصر من الأعلى إلى الأسفل (رأسيًا)</li>
+                                <li><span class="font-semibold">Row</span>: ترتيب العناصر من اليمين إلى اليسار (أفقيًا)</li>
+                                <li>كلاهما يستخدم <span class="font-semibold">children</span> لقائمة العناصر الفرعية</li>
+                                <li>كلاهما يدعم خصائص المحاذاة والتوزيع (<span class="font-semibold">mainAxisAlignment</span> و <span class="font-semibold">crossAxisAlignment</span>)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg">
+                            <pre><code>// مثال على Column
+Column(
+  mainAxisAlignment: MainAxisAlignment.center,
+  crossAxisAlignment: CrossAxisAlignment.stretch,
+  children: [
+    Text('عنصر 1'),
+    Text('عنصر 2'),
+    Text('عنصر 3'),
+  ],
+)
+
+// مثال على Row
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+    Icon(Icons.star),
+    Icon(Icons.star),
+    Icon(Icons.star),
+  ],
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-white p-6 rounded-lg border border-gray-300 space-y-6">
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">مثال على Column</h4>
+                                <div class="flex flex-col items-center space-y-2 border p-4 rounded">
+                                    <div class="bg-blue-200 w-8 h-8 rounded"></div>
+                                    <div class="bg-blue-300 w-8 h-8 rounded"></div>
+                                    <div class="bg-blue-400 w-8 h-8 rounded"></div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-2">مثال على Row</h4>
+                                <div class="flex justify-center space-x-2 border p-4 rounded">
+                                    <div class="bg-green-200 w-8 h-8 rounded"></div>
+                                    <div class="bg-green-300 w-8 h-8 rounded"></div>
+                                    <div class="bg-green-400 w-8 h-8 rounded"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                                <h4 class="font-semibold text-yellow-800 mb-2 flex items-center">
+                                    <span class="material-icons mr-2">lightbulb</span>
+                                    نصائح مهمة:
+                                </h4>
+                                <ul class="list-disc pr-5 space-y-1 text-yellow-700">
+                                    <li>استخدم <span class="font-semibold">Expanded</span> لجعل عنصر ما يأخذ أكبر مساحة ممكنة</li>
+                                    <li>استخدم <span class="font-semibold">Flexible</span> للتحكم في مرونة العناصر</li>
+                                    <li>استخدم <span class="font-semibold">Spacer</span> لإنشاء مسافات مرنة بين العناصر</li>
+                                    <li>استخدم <span class="font-semibold">mainAxisSize</span> للتحكم في الحجم الرئيسي</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stack -->
+            <div class="mb-16 bg-white border-l-8  rounded-2xl shadow-lg p-8 border-l-8 border-amber-500">
+                <div class="flex items-center mb-4">
+                    <span class="material-icons text-amber-500 text-3xl mr-3">layers</span>
+                    <h3 class="text-2xl font-bold text-gray-800">Stack</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Widget الـ Stack يستخدم لترتيب العناصر <span class="font-semibold text-amber-600">فوق بعضها البعض</span> (طبقات). يمكن التحكم في موقع كل عنصر باستخدام Positioned Widget.
+                        </p>
+                        
+                        <div class="bg-amber-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-amber-800 mb-2 flex items-center">
+                                <span class="material-icons mr-2">info</span>
+                                الخصائص الرئيسية:
+                            </h4>
+                            <ul class="list-disc pr-5 space-y-1 text-amber-700">
+                                <li><span class="font-semibold">children</span>: قائمة العناصر المراد تكديسها</li>
+                                <li><span class="font-semibold">alignment</span>: محاذاة العناصر (الافتراضي هو topStart)</li>
+                                <li><span class="font-semibold">fit</span>: كيفية تكيف العناصر مع Stack</li>
+                                <li><span class="font-semibold">clipBehavior</span>: كيفية قص العناصر التي تتجاوز حدود Stack</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg">
+                            <pre><code>// مثال على Stack
+Stack(
+  children: [
+    Container(
+      width: 200,
+      height: 200,
+      color: Colors.blue,
+    ),
+    Positioned(
+      bottom: 10,
+      right: 10,
+      child: Container(
+        width: 100,
+        height: 100,
+        color: Colors.red,
+      ),
+    ),
+    Positioned(
+      top: 20,
+      left: 20,
+      child: Icon(Icons.star, size: 40, color: Colors.white),
+    ),
+  ],
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-white p-6 rounded-lg border border-gray-300">
+                            <h4 class="font-semibold text-gray-800 mb-4">مثال على Stack</h4>
+                            <div class="relative h-64 bg-gray-100 rounded-lg">
+                                <div class="absolute inset-0 bg-blue-500 rounded-lg w-full h-full"></div>
+                                <div class="absolute bottom-4 right-4 bg-red-500 rounded-lg w-24 h-24"></div>
+                                <div class="absolute top-6 left-6">
+                                    <span class="material-icons text-white text-4xl">star</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 grid grid-cols-3 gap-2">
+                                <div class="bg-blue-100 p-2 rounded text-center">
+                                    <span class="text-xs">الخلفية الزرقاء</span>
+                                </div>
+                                <div class="bg-red-100 p-2 rounded text-center">
+                                    <span class="text-xs">المربع الأحمر</span>
+                                </div>
+                                <div class="bg-gray-100 p-2 rounded text-center">
+                                    <span class="text-xs">أيقونة النجمة</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 bg-purple-50 p-4 rounded-lg border border-purple-200">
+                            <h4 class="font-semibold text-purple-800 mb-2 flex items-center">
+                                <span class="material-icons mr-2">warning</span>
+                                حالات استخدام Stack:
+                            </h4>
+                            <ul class="list-disc pr-5 space-y-1 text-purple-700">
+                                <li>إضافة نص فوق صورة</li>
+                                <li>إنشاء أزرار عائمة (FAB)</li>
+                                <li>تصميم عناصر متداخلة</li>
+                                <li>إنشاء تأثيرات طبقات</li>
+                                <li>إضافة علامات مائية</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Card -->
+            <div class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-green-500">
+                <div class="flex items-center mb-4">
+                    <span class="material-icons text-green-500 text-3xl mr-3">credit_card</span>
+                    <h3 class="text-2xl font-bold text-gray-800">Card</h3>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Widget الـ Card هو عنصر من عناصر <span class="font-semibold text-green-600">Material Design</span> يمثل بطاقة تحتوي على معلومات ذات صلة. يوفر Card مظهرًا ثلاثي الأبعاد مع ظل افتراضي.
+                        </p>
+                        
+                        <div class="bg-green-50 p-4 rounded-lg mb-4">
+                            <h4 class="font-semibold text-green-800 mb-2 flex items-center">
+                                <span class="material-icons mr-2">info</span>
+                                الخصائص الرئيسية:
+                            </h4>
+                            <ul class="list-disc pr-5 space-y-1 text-green-700">
+                                <li><span class="font-semibold">child</span>: المحتوى الرئيسي للبطاقة</li>
+                                <li><span class="font-semibold">elevation</span>: مستوى الارتفاع (يؤثر على الظل)</li>
+                                <li><span class="font-semibold">shape</span>: شكل البطاقة (يمكن جعلها دائرية)</li>
+                                <li><span class="font-semibold">color</span>: لون الخلفية</li>
+                                <li><span class="font-semibold">margin</span>: الهوامش حول البطاقة</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg">
+                            <pre><code>// مثال على Card
+Card(
+  elevation: 5,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(15),
+  ),
+  child: Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      ListTile(
+        leading: Icon(Icons.album),
+        title: Text('عنوان البطاقة'),
+        subtitle: Text('وصف فرعي للبطاقة'),
+      ),
+      ButtonBar(
+        children: [
+          TextButton(
+            onPressed: () {},
+            child: Text('إجراء 1'),
+          ),
+          TextButton(
+            onPressed: () {},
+            child: Text('إجراء 2'),
+          ),
+        ],
+      ),
+    ],
+  ),
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-white p-6 rounded-lg border border-gray-300">
+                            <h4 class="font-semibold text-gray-800 mb-4">مثال على Card</h4>
+                            <div class="bg-white shadow-lg rounded-xl overflow-hidden max-w-sm">
+                                <div class="p-4">
+                                    <div class="flex items-center">
+                                        <div class="bg-blue-100 p-3 rounded-full">
+                                            <span class="material-icons text-blue-500">album</span>
+                                        </div>
+                                        <div class="mr-3">
+                                            <h5 class="font-bold">عنوان البطاقة</h5>
+                                            <p class="text-gray-600 text-sm">وصف فرعي للبطاقة</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-100 px-4 py-3 flex justify-between">
+                                    <button class="text-blue-500 font-medium">إجراء 1</button>
+                                    <button class="text-blue-500 font-medium">إجراء 2</button>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 grid grid-cols-2 gap-4">
+                                <div class="bg-white shadow rounded-lg p-4">
+                                    <span class="material-icons text-gray-400">image</span>
+                                    <p class="text-sm mt-1">بطاقة بسيطة</p>
+                                </div>
+                                <div class="bg-white shadow rounded-lg p-4">
+                                    <span class="material-icons text-gray-400">collections</span>
+                                    <p class="text-sm mt-1">بطاقة مع صور</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 bg-blue-50 p-4 rounded-lg border border-blue-200">
+                            <h4 class="font-semibold text-blue-800 mb-2 flex items-center">
+                                <span class="material-icons mr-2">lightbulb</span>
+                                حالات استخدام Card:
+                            </h4>
+                            <ul class="list-disc pr-5 space-y-1 text-blue-700">
+                                <li>عرض منتجات في متجر إلكتروني</li>
+                                <li>بطاقات الأخبار أو المقالات</li>
+                                <li>بطاقات الأعضاء أو الفرق</li>
+                                <li>بطاقات الإحصائيات أو البيانات</li>
+                                <li>أي مجموعة من المعلومات ذات الصلة</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!-- 4. ListTile -->
+<section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-green-500"> <div class="flex items-center mb-6"> <div class="bg-green-100 p-4 rounded-full ml-4"> <span class="material-icons text-green-600 text-3xl">list</span> </div> <h2 class="text-3xl font-bold text-gray-800">ListTile في Flutter</h2> </div>
+<p class="text-xl text-gray-700 mb-8 leading-relaxed">
+    الـ <span class="font-bold text-green-600">ListTile</span> هو Widget متخصص لعرض صفوف في القوائم، يوفر تخطيطًا قياسيًا للعناصر مع أيقونة وعنوان ووصف فرعي.
+</p>
+
+<div class="grid md:grid-cols-2 gap-8">
+    <div>
+        <div class="bg-green-50 p-6 rounded-lg border border-green-200 mb-6">
+            <h3 class="font-bold text-lg text-green-800 mb-3 flex items-center">
+                <span class="material-icons mr-2">info</span>
+                الخصائص الرئيسية
+            </h3>
+            <ul class="list-disc pr-5 space-y-2 text-green-700">
+                <li><span class="font-semibold">leading</span>: عنصر في البداية (عادة أيقونة)</li>
+                <li><span class="font-semibold">title</span>: النص الرئيسي للعنصر</li>
+                <li><span class="font-semibold">subtitle</span>: النص الثانوي (اختياري)</li>
+                <li><span class="font-semibold">trailing</span>: عنصر في النهاية (عادة أيقونة)</li>
+                <li><span class="font-semibold">onTap</span>: دالة عند النقر على العنصر</li>
+            </ul>
+        </div>
+        
+        <div class="bg-purple-50 p-4 rounded-lg border border-purple-200">
+            <h4 class="font-semibold text-purple-800 mb-2 flex items-center">
+                <span class="material-icons mr-2">star</span>
+                مميزات ListTile
+            </h4>
+            <ul class="list-disc pr-5 space-y-1 text-purple-700">
+                <li>تخطيط متوافق مع إرشادات Material Design</li>
+                <li>دعم جيد لإمكانية الوصول (Accessibility)</li>
+                <li>تفاعل افتراضي عند النقر (ripple effect)</li>
+                <li>سهولة في إنشاء قوائم متسقة</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div>
+        <div class="bg-gray-900 p-4 rounded-lg mb-4">
+            <div class="code-block text-gray-100 overflow-x-auto">
+                <pre><code>// أمثلة على استخدام ListTile
+// 1. عنصر قائمة أساسي
+ListTile(
+leading: Icon(Icons.email),
+title: Text('البريد الإلكتروني'),
+subtitle: Text('user@example.com'),
+trailing: Icon(Icons.arrow_forward),
+onTap: () {
+// تنفيذ إجراء عند النقر
+},
+)
+
+// 2. قائمة إعدادات
+Column(
+children: [
+ListTile(
+leading: Icon(Icons.settings),
+title: Text('الإعدادات'),
+),
+ListTile(
+leading: Icon(Icons.notifications),
+title: Text('الإشعارات'),
+trailing: Switch(value: true, onChanged: (v) {}),
+),
+ListTile(
+leading: Icon(Icons.help),
+title: Text('المساعدة'),
+),
+],
+)</code></pre>
+</div>
+</div>
+
+        <div class="bg-white p-4 rounded-lg border border-gray-300">
+            <h4 class="font-semibold text-gray-800 mb-2">مثال مرئي</h4>
+            <div class="space-y-2">
+                <div class="flex items-center p-3 border rounded">
+                    <span class="material-icons text-gray-500 mr-3">email</span>
+                    <div class="flex-grow">
+                        <p class="font-medium">البريد الإلكتروني</p>
+                        <p class="text-sm text-gray-500">user@example.com</p>
+                    </div>
+                    <span class="material-icons text-gray-400">chevron_right</span>
+                </div>
+                <div class="flex items-center p-3 border rounded">
+                    <span class="material-icons text-gray-500 mr-3">phone</span>
+                    <div class="flex-grow">
+                        <p class="font-medium">الهاتف</p>
+                        <p class="text-sm text-gray-500">+966501234567</p>
+                    </div>
+                    <span class="material-icons text-gray-400">chevron_right</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- listTile -->
+<div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+        <span class="material-icons mr-2 text-green-500">compare</span>
+        متى تستخدم ListTile؟
+    </h3>
+    
+    <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-blue-50 p-4 rounded-lg">
+            <h4 class="font-semibold text-blue-800 mb-2">القوائم</h4>
+            <p class="text-gray-700">إعدادات التطبيق، قوائم التنقل، قوائم الاختيارات</p>
+        </div>
+        <div class="bg-green-50 p-4 rounded-lg">
+            <h4 class="font-semibold text-green-800 mb-2">عرض البيانات</h4>
+            <p class="text-gray-700">عرض معلومات المستخدم، عناصر البريد، الإشعارات</p>
+        </div>
+        <div class="bg-purple-50 p-4 rounded-lg">
+            <h4 class="font-semibold text-purple-800 mb-2">النماذج</h4>
+            <p class="text-gray-700">عناصر مع خيارات تفاعلية مثل مفاتيح التبديل</p>
+        </div>
+    </div>
+</div>
+</section>
+            
+        <!-- Section 4: Wrap -->
+        <section class="mb-16 bg-white border-l-8  rounded-2xl shadow-lg p-8 border-l-8 border-amber-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-amber-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-amber-600 text-3xl">wrap_text</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">Wrap</h2>
+            </div>
+            
+            <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                Widget الـ Wrap يشبه Row، ولكنه <span class="font-bold text-amber-600">يلتف إلى سطر جديد</span> عندما لا يكون هناك مساحة كافية لعرض جميع العناصر في سطر واحد.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-amber-500">info</span>
+                        خصائص Wrap
+                    </h3>
+                    
+                    <div class="bg-amber-50 p-6 rounded-lg border border-amber-200 mb-6">
+                        <ul class="list-disc pr-5 space-y-3 text-amber-700">
+                            <li class="font-semibold">direction
+                                <p class="text-gray-700 font-normal">تحديد اتجاه الالتفاف (أفقي أو رأسي)</p>
+                            </li>
+                            <li class="font-semibold">spacing
+                                <p class="text-gray-700 font-normal">المسافة بين العناصر في الاتجاه الرئيسي</p>
+                            </li>
+                            <li class="font-semibold">runSpacing
+                                <p class="text-gray-700 font-normal">المسافة بين الأسطر في الاتجاه المعاكس</p>
+                            </li>
+                            <li class="font-semibold">alignment
+                                <p class="text-gray-700 font-normal">محاذاة العناصر في الاتجاه الرئيسي</p>
+                            </li>
+                            <li class="font-semibold">runAlignment
+                                <p class="text-gray-700 font-normal">محاذاة الأسطر في الاتجاه المعاكس</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-amber-500">code</span>
+                        مثال تطبيقي
+                    </h3>
+                    
+                    <div class="bg-gray-900 p-4 rounded-lg">
+                        <div class="code-block text-gray-100 overflow-x-auto">
+                            <pre><code>Wrap(
+  spacing: 8.0, // المسافة بين العناصر
+  runSpacing: 4.0, // المسافة بين الأسطر
+  children: [
+    Chip(label: Text('Flutter')),
+    Chip(label: Text('Dart')),
+    Chip(label: Text('Android')),
+    Chip(label: Text('iOS')),
+    Chip(label: Text('Web')),
+    Chip(label: Text('Desktop')),
+    Chip(label: Text('Firebase')),
+    Chip(label: Text('Material Design')),
+  ],
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 bg-white p-4 rounded-lg border border-gray-300">
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Flutter</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Dart</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Android</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">iOS</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Web</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Desktop</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Firebase</span>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Material Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <span class="material-icons mr-2 text-amber-500">compare</span>
+                    مقارنة بين Wrap و Row
+                </h3>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-blue-800 mb-2">Row</h4>
+                        <ul class="list-disc pr-5 space-y-1 text-blue-700">
+                            <li>يعرض جميع العناصر في سطر واحد</li>
+                            <li>إذا زادت العناصر عن المساحة، يتم اقتصاصها</li>
+                            <li>مناسب عندما تعرف أن جميع العناصر ستتناسب في سطر واحد</li>
+                            <li>أداء أفضل من Wrap</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-amber-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-amber-800 mb-2">Wrap</h4>
+                        <ul class="list-disc pr-5 space-y-1 text-amber-700">
+                            <li>يلتف العناصر إلى أسطر جديدة عند الحاجة</li>
+                            <li>لا يتم اقتصاص أي عناصر</li>
+                            <li>مناسب للقوائم الديناميكية أو عندما لا تعرف عدد العناصر</li>
+                            <li>أداء أقل قليلاً من Row</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: SingleChildScrollView -->
+        <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-red-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-red-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-red-600 text-3xl">swap_vert</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">SingleChildScrollView</h2>
+            </div>
+            
+            <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                SingleChildScrollView هو Widget يسمح <span class="font-bold text-red-600">بالتمرير</span> لمحتوى أكبر من المساحة المتاحة على الشاشة. يعتبر حلاً بسيطًا للتمرير عندما يكون لديك محتوى غير معقد.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-red-500">info</span>
+                        خصائص SingleChildScrollView
+                    </h3>
+                    
+                    <div class="bg-red-50 p-6 rounded-lg border border-red-200 mb-6">
+                        <ul class="list-disc pr-5 space-y-3 text-red-700">
+                            <li class="font-semibold">scrollDirection
+                                <p class="text-gray-700 font-normal">اتجاه التمرير (أفقي أو رأسي - الافتراضي رأسي)</p>
+                            </li>
+                            <li class="font-semibold">reverse
+                                <p class="text-gray-700 font-normal">إذا كان true، يبدأ التمرير من النهاية</p>
+                            </li>
+                            <li class="font-semibold">physics
+                                <p class="text-gray-700 font-normal">يحدد سلوك التمرير (مثل BouncingScrollPhysics)</p>
+                            </li>
+                            <li class="font-semibold">padding
+                                <p class="text-gray-700 font-normal">حشو حول المحتوى</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-red-500">code</span>
+                        مثال تطبيقي
+                    </h3>
+                    
+                    <div class="bg-gray-900 p-4 rounded-lg">
+                        <div class="code-block text-gray-100 overflow-x-auto">
+                            <pre><code>SingleChildScrollView(
+  padding: EdgeInsets.all(16),
+  child: Column(
+    children: [
+      Container(height: 200, color: Colors.blue),
+      SizedBox(height: 20),
+      Container(height: 200, color: Colors.red),
+      SizedBox(height: 20),
+      Container(height: 200, color: Colors.green),
+      SizedBox(height: 20),
+      Container(height: 200, color: Colors.yellow),
+    ],
+  ),
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 bg-white p-4 rounded-lg border border-gray-300 h-64 overflow-y-auto">
+                        <div class="space-y-4">
+                            <div class="bg-blue-500 h-32 rounded-lg"></div>
+                            <div class="bg-red-500 h-32 rounded-lg"></div>
+                            <div class="bg-green-500 h-32 rounded-lg"></div>
+                            <div class="bg-yellow-500 h-32 rounded-lg"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <span class="material-icons mr-2 text-red-500">warning</span>
+                    متى تستخدم SingleChildScrollView؟
+                </h3>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-green-800 mb-2 flex items-center">
+                            <span class="material-icons mr-2">check_circle</span>
+                            حالات مناسبة
+                        </h4>
+                        <ul class="list-disc pr-5 space-y-1 text-green-700">
+                            <li>عندما يكون لديك عدد محدود من العناصر</li>
+                            <li>عندما لا تحتاج إلى تحكم دقيق في أداء التمرير</li>
+                            <li>للنماذج البسيطة أو المحتوى القصير نسبيًا</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-red-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-red-800 mb-2 flex items-center">
+                            <span class="material-icons mr-2">cancel</span>
+                            حالات غير مناسبة
+                        </h4>
+                        <ul class="list-disc pr-5 space-y-1 text-red-700">
+                            <li>عندما يكون لديك قوائم طويلة أو ديناميكية (استخدم ListView بدلاً من ذلك)</li>
+                            <li>عندما تحتاج إلى تحسين أداء التمرير</li>
+                            <li>عندما تحتاج إلى ميزات متقدمة مثل التحميل البطيء (lazy loading)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Padding -->
+   
+        <!-- Section 6: Padding -->
+        <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-blue-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-blue-600 text-3xl">space_bar</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">Padding</h2>
+            </div>
+            
+            <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                Widget الـ Padding يضيف <span class="font-bold text-blue-600">مساحة فارغة</span> حول Widget آخر. يعتبر من أهم Widgetات التخطيط في Flutter.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-blue-500">info</span>
+                        خصائص Padding
+                    </h3>
+                    
+                    <div class="bg-blue-50 p-6 rounded-lg border border-blue-200 mb-6">
+                        <ul class="list-disc pr-5 space-y-3 text-blue-700">
+                            <li class="font-semibold">padding
+                                <p class="text-gray-700 font-normal">يحدد مقدار الحشو (يستخدم EdgeInsets)</p>
+                            </li>
+                            <li class="font-semibold">child
+                                <p class="text-gray-700 font-normal">الـ Widget الذي سيتم تطبيق الحشو عليه</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                        <h4 class="font-semibold text-yellow-800 mb-2 flex items-center">
+                            <span class="material-icons mr-2">lightbulb</span>
+                            EdgeInsets
+                        </h4>
+                        <ul class="list-disc pr-5 space-y-1 text-yellow-700">
+                            <li><span class="font-semibold">EdgeInsets.all(16)</span>: حشو متساو من جميع الجهات</li>
+                            <li><span class="font-semibold">EdgeInsets.symmetric(vertical: 8, horizontal: 16)</span>: حشو متناظر</li>
+                            <li><span class="font-semibold">EdgeInsets.only(left: 8, top: 16)</span>: حشو من جهات محددة</li>
+                            <li><span class="font-semibold">EdgeInsets.fromLTRB(16, 8, 16, 8)</span>: حشو لكل جهة على حدة</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-blue-500">code</span>
+                        أمثلة على Padding
+                    </h3>
+                    
+                    <div class="bg-gray-900 p-4 rounded-lg mb-4">
+                        <div class="code-block text-gray-100 overflow-x-auto">
+                            <pre><code>// حشو متساو من جميع الجهات
+Padding(
+  padding: EdgeInsets.all(16),
+  child: Text('نص مع حشو'),
+)
+
+// حشو متناظر
+Padding(
+  padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+  child: Text('نص مع حشو رأسي وأفقي'),
+)
+
+// حشو من جهات محددة
+Padding(
+  padding: EdgeInsets.only(left: 8, top: 16),
+  child: Text('نص مع حشو من اليسار والأعلى'),
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg border border-gray-300 space-y-4">
+                        <div class="bg-blue-100 p-4">
+                            <p class="text-center">نص بدون حشو</p>
+                        </div>
+                        <div class="bg-blue-100 p-4 px-8">
+                            <p class="text-center">نص مع حشو أفقي</p>
+                        </div>
+                        <div class="bg-blue-100 p-4 py-8">
+                            <p class="text-center">نص مع حشو رأسي</p>
+                        </div>
+                        <div class="bg-blue-100 p-8">
+                            <p class="text-center">نص مع حشو من جميع الجهات</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <span class="material-icons mr-2 text-blue-500">compare</span>
+                    الفرق بين Padding و Margin
+                </h3>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-blue-800 mb-2">Padding</h4>
+                        <ul class="list-disc pr-5 space-y-1 text-blue-700">
+                            <li>يضيف مساحة داخل حدود الـ Widget</li>
+                            <li>يؤثر على المساحة الداخلية للـ Widget</li>
+                            <li>يتم تطبيقه باستخدام Widget Padding</li>
+                            <li>يؤثر على لون الخلفية إذا كان للـ Widget خلفية</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-green-800 mb-2">Margin</h4>
+                        <ul class="list-disc pr-5 space-y-1 text-green-700">
+                            <li>يضيف مساحة خارج حدود الـ Widget</li>
+                            <li>يؤثر على المساحة بين الـ Widget والعناصر المحيطة</li>
+                            <li>يتم تطبيقه عادةً باستخدام خاصية margin في Container</li>
+                            <li>لا يؤثر على لون الخلفية</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: SizedBox -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 border-l-8 border-green-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-green-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-green-600 text-3xl">crop_square</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">SizedBox</h2>
+            </div>
+            
+            <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                Widget الـ SizedBox يستخدم لإنشاء <span class="font-bold text-green-600">مساحة فارغة</span> بحجم محدد أو لتحديد حجم ثابت لـ Widget آخر.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-green-500">info</span>
+                        استخدامات SizedBox
+                    </h3>
+                    
+                    <div class="bg-green-50 p-6 rounded-lg border border-green-200 mb-6">
+                        <ul class="list-disc pr-5 space-y-3 text-green-700">
+                            <li class="font-semibold">إنشاء مسافات بين العناصر
+                                <p class="text-gray-700 font-normal">بدلاً من استخدام Padding عندما تحتاج فقط إلى مسافة بسيطة</p>
+                            </li>
+                            <li class="font-semibold">تحديد حجم ثابت لـ Widget
+                                <p class="text-gray-700 font-normal">لضمان أن يحتفظ Widget بحجم معين</p>
+                            </li>
+                            <li class="font-semibold">إنشاء مساحة فارغة
+                                <p class="text-gray-700 font-normal">كعنصر نائب (placeholder) أثناء التحميل</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                        <h4 class="font-semibold text-yellow-800 mb-2 flex items-center">
+                            <span class="material-icons mr-2">lightbulb</span>
+                            نصائح مهمة
+                        </h4>
+                        <ul class="list-disc pr-5 space-y-1 text-yellow-700">
+                            <li>استخدم SizedBox بدلاً من Container عندما تحتاج فقط إلى تحديد حجم</li>
+                            <li>SizedBox أخف وزنًا من Container لأنه لا يحتوي على خصائص إضافية</li>
+                            <li>يمكن استخدام SizedBox.shrink() لإنشاء مساحة فارغة بحجم صفر</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-green-500">code</span>
+                        أمثلة على SizedBox
+                    </h3>
+                    
+                    <div class="bg-gray-900 p-4 rounded-lg mb-4">
+                        <div class="code-block text-gray-100 overflow-x-auto">
+                            <pre><code>// إنشاء مسافة بين عنصرين
+Column(
+  children: [
+    Text('النص الأول'),
+    SizedBox(height: 20), // مسافة 20 بكسل
+    Text('النص الثاني'),
+  ],
+)
+
+// تحديد حجم ثابت لصورة
+SizedBox(
+  width: 200,
+  height: 200,
+  child: Image.network('https://example.com/image.jpg'),
+)
+
+// إنشاء مساحة فارغة
+SizedBox(width: 50, height: 50)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg border border-gray-300 space-y-4">
+                        <div class="flex items-center">
+                            <div class="bg-blue-200 w-8 h-8 rounded"></div>
+                            <div class="w-4"></div> <!-- SizedBox -->
+                            <div class="bg-blue-300 w-8 h-8 rounded"></div>
+                            <div class="w-8"></div> <!-- SizedBox -->
+                            <div class="bg-blue-400 w-8 h-8 rounded"></div>
+                        </div>
+                        <div class="border-t pt-4">
+                            <p class="text-center">مسافة أفقية بين العناصر</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-green-200 w-full h-8 rounded"></div>
+                            <div class="h-4"></div> <!-- SizedBox -->
+                            <div class="bg-green-300 w-full h-8 rounded"></div>
+                            <div class="h-8"></div> <!-- SizedBox -->
+                            <div class="bg-green-400 w-full h-8 rounded"></div>
+                        </div>
+                        <div class="border-t pt-4">
+                            <p class="text-center">مسافة رأسية بين العناصر</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <span class="material-icons mr-2 text-green-500">compare</span>
+                    مقارنة بين SizedBox و Container
+                </h3>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-blue-800 mb-2">SizedBox</h4>
+                        <ul class="list-disc pr-5 space-y-1 text-blue-700">
+                            <li>أبسط وأخف وزنًا</li>
+                            <li>يستخدم فقط لتحديد الحجم أو إنشاء مسافات</li>
+                            <li>لا يدعم الخصائص التصميمية (لون، حدود، إلخ)</li>
+                            <li>أفضل للأداء عندما تحتاج فقط إلى تحديد حجم</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-purple-800 mb-2">Container</h4>
+                        <ul class="list-disc pr-5 space-y-1 text-purple-700">
+                            <li>أكثر مرونة ويوفر خصائص تصميمية متعددة</li>
+                            <li>يدعم الحشو، الهوامش، الألوان، الحدود، الظلال</li>
+                            <li>أثقل قليلاً من SizedBox</li>
+                            <li>يستخدم عندما تحتاج إلى أكثر من مجرد تحديد حجم</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Section 8: Practical Example -->
+        <section class="mt-16 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-8 border border-blue-200">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-blue-600 text-3xl">code</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">مثال تطبيقي: صفحة إعدادات</h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="code-block bg-gray-900 text-gray-100 p-6 rounded-xl overflow-x-auto">
+                    <pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(SettingsApp());
+}
+
+class SettingsApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'صفحة الإعدادات',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        fontFamily: 'Tajawal',
+      ),
+      home: SettingsPage(),
+    );
+  }
+}
+
+class SettingsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('الإعدادات'),
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            // صورة الملف الشخصي
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 50,
+                  backgroundColor: Colors.grey[300],
+                  child: Icon(Icons.person, size: 50, color: Colors.grey[600]),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Container(
+                    padding: EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(Icons.edit, size: 20, color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 16),
+            
+            // اسم المستخدم
+            Text(
+              'أحمد محمد',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 8),
+            
+            // قسم المعلومات الشخصية
+            Card(
+              elevation: 2,
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: Icon(Icons.email),
+                      title: Text('البريد الإلكتروني'),
+                      subtitle: Text('ahmed@example.com'),
+                    ),
+                    Divider(),
+                    ListTile(
+                      leading: Icon(Icons.phone),
+                      title: Text('رقم الهاتف'),
+                      subtitle: Text('+966501234567'),
+                    ),
+                    Divider(),
+                    ListTile(
+                      leading: Icon(Icons.lock),
+                      title: Text('كلمة المرور'),
+                      subtitle: Text('********'),
+                      trailing: Icon(Icons.arrow_forward_ios),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 16),
+            
+            // قسم الإعدادات
+            Card(
+              elevation: 2,
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: Icon(Icons.notifications),
+                      title: Text('الإشعارات'),
+                      trailing: Switch(value: true, onChanged: (v) {}),
+                    ),
+                    Divider(),
+                    ListTile(
+                      leading: Icon(Icons.language),
+                      title: Text('اللغة'),
+                      subtitle: Text('العربية'),
+                      trailing: Icon(Icons.arrow_forward_ios),
+                    ),
+                    Divider(),
+                    ListTile(
+                      leading: Icon(Icons.dark_mode),
+                      title: Text('الوضع الليلي'),
+                      trailing: Switch(value: false, onChanged: (v) {}),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 24),
+            
+            // زر تسجيل الخروج
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text('تسجيل الخروج'),
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red,
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}</code></pre>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">مخرجات الكود:</h3>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <div class="border border-gray-300 rounded overflow-hidden">
+                            <!-- App Bar -->
+                            <div class="bg-blue-600 text-white p-3 flex items-center justify-between">
+                                <span class="material-icons">arrow_back</span>
+                                <span class="flex-grow text-center">الإعدادات</span>
+                                <span class="w-6"></span>
+                            </div>
+                            
+                            <!-- Body -->
+                            <div class="p-4 space-y-4">
+                                <!-- Profile Image -->
+                                <div class="flex justify-center relative">
+                                    <div class="bg-gray-300 w-24 h-24 rounded-full flex items-center justify-center">
+                                        <span class="material-icons text-gray-600 text-4xl">person</span>
+                                    </div>
+                                    <div class="absolute bottom-0 right-1/4 bg-blue-500 rounded-full p-1">
+                                        <span class="material-icons text-white text-sm">edit</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- User Name -->
+                                <div class="text-center">
+                                    <h4 class="text-xl font-bold">أحمد محمد</h4>
+                                </div>
+                                
+                                <!-- Personal Info Card -->
+                                <div class="border rounded-lg">
+                                    <div class="p-4">
+                                        <div class="flex items-center py-2">
+                                            <span class="material-icons text-gray-500 mr-3">email</span>
+                                            <div>
+                                                <p class="text-sm text-gray-500">البريد الإلكتروني</p>
+                                                <p>ahmed@example.com</p>
+                                            </div>
+                                        </div>
+                                        <div class="border-t my-2"></div>
+                                        <div class="flex items-center py-2">
+                                            <span class="material-icons text-gray-500 mr-3">phone</span>
+                                            <div>
+                                                <p class="text-sm text-gray-500">رقم الهاتف</p>
+                                                <p>+966501234567</p>
+                                            </div>
+                                        </div>
+                                        <div class="border-t my-2"></div>
+                                        <div class="flex items-center py-2">
+                                            <span class="material-icons text-gray-500 mr-3">lock</span>
+                                            <div>
+                                                <p class="text-sm text-gray-500">كلمة المرور</p>
+                                                <p>********</p>
+                                            </div>
+                                            <span class="material-icons text-gray-400">chevron_left</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Settings Card -->
+                                <div class="border rounded-lg">
+                                    <div class="p-4">
+                                        <div class="flex items-center justify-between py-2">
+                                            <div class="flex items-center">
+                                                <span class="material-icons text-gray-500 mr-3">notifications</span>
+                                                <p>الإشعارات</p>
+                                            </div>
+                                            <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                                                <input type="checkbox" checked class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                                <label class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                                            </div>
+                                        </div>
+                                        <div class="border-t my-2"></div>
+                                        <div class="flex items-center justify-between py-2">
+                                            <div class="flex items-center">
+                                                <span class="material-icons text-gray-500 mr-3">language</span>
+                                                <div>
+                                                    <p>اللغة</p>
+                                                    <p class="text-sm text-gray-500">العربية</p>
+                                                </div>
+                                            </div>
+                                            <span class="material-icons text-gray-400">chevron_left</span>
+                                        </div>
+                                        <div class="border-t my-2"></div>
+                                        <div class="flex items-center justify-between py-2">
+                                            <div class="flex items-center">
+                                                <span class="material-icons text-gray-500 mr-3">dark_mode</span>
+                                                <p>الوضع الليلي</p>
+                                            </div>
+                                            <div class="relative inline-block w-10 mr-2 align-middle select-none">
+                                                <input type="checkbox" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                                <label class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Logout Button -->
+                                <button class="w-full bg-red-500 text-white py-3 rounded-lg font-medium">
+                                    تسجيل الخروج
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                        <h4 class="font-bold text-yellow-800 mb-2 flex items-center">
+                            <span class="material-icons mr-2">lightbulb</span>
+                            ملاحظة
+                        </h4>
+                        <p class="text-yellow-700">هذا المثال يجمع بين عدة Widgets مثل Scaffold, AppBar, SingleChildScrollView, Card, ListTile, SizedBox وغيرها لإنشاء واجهة متكاملة.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        </section>
+
+
+
+      <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-purple-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-purple-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-purple-600 text-3xl">layers</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">Stack و IndexStack</h2>
+            </div>
+            
+            <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                Stack و IndexStack هما Widgetان يستخدمان لترتيب العناصر <span class="font-bold text-purple-600">فوق بعضها البعض</span> (طبقات). الفرق الرئيسي بينهما هو كيفية إدارة العناصر المرئية.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Stack -->
+                <div class="widget-card bg-purple-50 p-6 rounded-lg border-l-purple-400">
+                    <div class="flex items-center mb-4">
+                        <span class="material-icons text-purple-500 text-3xl mr-3">layers</span>
+                        <h3 class="text-xl font-bold text-purple-800">Stack</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">يرتب العناصر في طبقات، ويمكن التحكم في موقع كل عنصر باستخدام Positioned Widget.</p>
+                    <div class="bg-white p-3 rounded border border-gray-200 relative h-32">
+                        <div class="bg-purple-200 w-16 h-16 rounded absolute top-4 left-4"></div>
+                        <div class="bg-purple-300 w-16 h-16 rounded absolute top-8 left-8"></div>
+                        <div class="bg-purple-400 w-16 h-16 rounded absolute top-12 left-12"></div>
+                    </div>
+                    <div class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                        Stack(children: [Widget1, Widget2, Widget3])
+                    </div>
+                </div>
+                
+                <!-- IndexStack -->
+                <div class="widget-card bg-indigo-50 p-6 rounded-lg border-l-indigo-400">
+                    <div class="flex items-center mb-4">
+                        <span class="material-icons text-indigo-500 text-3xl mr-3">filter_none</span>
+                        <h3 class="text-xl font-bold text-indigo-800">IndexStack</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">يشبه Stack ولكن يعرض عنصرًا واحدًا فقط في كل مرة بناءً على index المحدد.</p>
+                    <div class="bg-white p-3 rounded border border-gray-200 relative h-32">
+                        <div class="bg-indigo-200 w-full h-full rounded flex items-center justify-center">
+                            <span class="text-indigo-800 font-bold">العنصر النشط (index: 1)</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs">
+                        IndexStack(index: 1, children: [Widget1, Widget2])
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <span class="material-icons mr-2 text-purple-500">compare</span>
+                    مقارنة بين Stack و IndexStack
+                </h3>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border border-gray-200">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">المعيار</th>
+                                <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">Stack</th>
+                                <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">IndexStack</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">عدد العناصر المرئية</td>
+                                <td class="py-3 px-4 border-b">جميع العناصر (بما يتناسب مع المساحة)</td>
+                                <td class="py-3 px-4 border-b">عنصر واحد فقط (حسب index)</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">الأداء</td>
+                                <td class="py-3 px-4 border-b">يتم رسم جميع العناصر</td>
+                                <td class="py-3 px-4 border-b">يتم رسم العنصر النشط فقط</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">حالات الاستخدام</td>
+                                <td class="py-3 px-4 border-b">عناصر متداخلة، نص فوق صورة، أزرار عائمة</td>
+                                <td class="py-3 px-4 border-b">عرض شاشة واحدة من عدة خيارات، تبويب المحتوى</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="mt-6 bg-gray-900 p-4 rounded-lg">
+                    <div class="code-block text-gray-100 overflow-x-auto">
+                        <pre><code>// مثال على Stack
+Stack(
+  children: [
+    Container(color: Colors.blue, width: 200, height: 200),
+    Positioned(
+      top: 20,
+      left: 20,
+      child: Container(color: Colors.red, width: 100, height: 100),
+    ),
+    Positioned(
+      bottom: 20,
+      right: 20,
+      child: Container(color: Colors.green, width: 50, height: 50),
+    ),
+  ],
+)
+
+// مثال على IndexStack
+IndexStack(
+  index: _currentIndex, // متغير يحدد العنصر المرئي
+  children: [
+    Container(color: Colors.blue, child: Text('الصفحة 1')),
+    Container(color: Colors.red, child: Text('الصفحة 2')),
+  ],
+)</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section 5: Practical Example -->
+        <section class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl shadow-lg p-8 border border-blue-200">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-blue-600 text-3xl">code</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">مثال تطبيقي: صفحة ملف شخصي</h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="code-block bg-gray-900 text-gray-100 p-6 rounded-xl overflow-x-auto">
+                    <pre><code>import 'package:flutter/material.dart';
+
+void main() {
+  runApp(ProfileApp());
+}
+
+class ProfileApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'صفحة الملف الشخصي',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        fontFamily: 'Tajawal',
+      ),
+      home: ProfilePage(),
+    );
+  }
+}
+
+class ProfilePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('الملف الشخصي'),
+        actions: [
+          IconButton(icon: Icon(Icons.settings), onPressed: () {}),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage('https://example.com/cover.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: -50,
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: NetworkImage('https://example.com/avatar.jpg'),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 60),
+            Text(
+              'أحمد محمد',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              'مطور Flutter',
+              style: TextStyle(fontSize: 16, color: Colors.grey),
+            ),
+            SizedBox(height: 20),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Card(
+                elevation: 3,
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: Icon(Icons.email),
+                        title: Text('البريد الإلكتروني'),
+                        subtitle: Text('ahmed@example.com'),
+                      ),
+                      Divider(),
+                      ListTile(
+                        leading: Icon(Icons.phone),
+                        title: Text('الهاتف'),
+                        subtitle: Text('+966501234567'),
+                      ),
+                      Divider(),
+                      ListTile(
+                        leading: Icon(Icons.location_on),
+                        title: Text('المكان'),
+                        subtitle: Text('الرياض، السعودية'),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}</code></pre>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">مخرجات الكود:</h3>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <div class="border border-gray-300 rounded overflow-hidden">
+                            <!-- App Bar -->
+                            <div class="bg-blue-600 text-white p-3 flex items-center justify-between">
+                                <span class="material-icons">arrow_back</span>
+                                <span class="flex-grow text-center">الملف الشخصي</span>
+                                <span class="material-icons">settings</span>
+                            </div>
+                            
+                            <!-- Cover Photo -->
+                            <div class="bg-gray-300 h-48 relative">
+                                <!-- Avatar -->
+                                <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
+                                    <div class="bg-gray-400 w-24 h-24 rounded-full border-4 border-white"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Profile Info -->
+                            <div class="mt-16 px-4 text-center">
+                                <h4 class="text-xl font-bold">أحمد محمد</h4>
+                                <p class="text-gray-500">مطور Flutter</p>
+                            </div>
+                            
+                            <!-- Card -->
+                            <div class="m-4 mt-6 shadow rounded-lg">
+                                <div class="p-4">
+                                    <div class="flex items-center py-2">
+                                        <span class="material-icons text-gray-500 mr-3">email</span>
+                                        <div>
+                                            <p class="text-sm text-gray-500">البريد الإلكتروني</p>
+                                            <p>ahmed@example.com</p>
+                                        </div>
+                                    </div>
+                                    <div class="border-t my-2"></div>
+                                    <div class="flex items-center py-2">
+                                        <span class="material-icons text-gray-500 mr-3">phone</span>
+                                        <div>
+                                            <p class="text-sm text-gray-500">الهاتف</p>
+                                            <p>+966501234567</p>
+                                        </div>
+                                    </div>
+                                    <div class="border-t my-2"></div>
+                                    <div class="flex items-center py-2">
+                                        <span class="material-icons text-gray-500 mr-3">location_on</span>
+                                        <div>
+                                            <p class="text-sm text-gray-500">المكان</p>
+                                            <p>الرياض، السعودية</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                        <h4 class="font-bold text-yellow-800 mb-2 flex items-center">
+                            <span class="material-icons mr-2">lightbulb</span>
+                            ملاحظة
+                        </h4>
+                        <p class="text-yellow-700">هذا المثال يجمع بين عدة Widgets مثل Stack, Column, Card, ListTile وغيرها لإنشاء واجهة متكاملة.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- //test -->
+         <!-- 1. ThemeData -->
+<section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-indigo-500"> <div class="flex items-center mb-6"> <div class="bg-indigo-100 p-4 rounded-full ml-4"> <span class="material-icons text-indigo-600 text-3xl">palette</span> </div> <h2 class="text-3xl font-bold text-gray-800">ThemeData في Flutter</h2> </div>
+<p class="text-xl text-gray-700 mb-8 leading-relaxed">
+    الـ <span class="font-bold text-indigo-600">ThemeData</span> هو كائن يحدد المظهر العام لتطبيق Flutter، حيث يحتوي على جميع الإعدادات المتعلقة بالألوان، الخطوط، الأشكال، وغيرها من الخصائص المرئية.
+</p>
+
+<div class="grid md:grid-cols-2 gap-8">
+    <div>
+        <div class="bg-indigo-50 p-6 rounded-lg border border-indigo-200 mb-6">
+            <h3 class="font-bold text-lg text-indigo-800 mb-3 flex items-center">
+                <span class="material-icons mr-2">info</span>
+                الخصائص الرئيسية
+            </h3>
+            <ul class="list-disc pr-5 space-y-2 text-indigo-700">
+                <li><span class="font-semibold">colorScheme</span>: مجموعة الألوان الأساسية للتطبيق</li>
+                <li><span class="font-semibold">textTheme</span>: أنماط النصوص المستخدمة في التطبيق</li>
+                <li><span class="font-semibold">appBarTheme</span>: إعدادات شريط التطبيق</li>
+                <li><span class="font-semibold">buttonTheme</span>: إعدادات الأزرار</li>
+                <li><span class="font-semibold">inputDecorationTheme</span>: إعدادات حقول الإدخال</li>
+            </ul>
+        </div>
+        
+        <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+            <h4 class="font-semibold text-yellow-800 mb-2 flex items-center">
+                <span class="material-icons mr-2">lightbulb</span>
+                كيفية الاستخدام
+            </h4>
+            <p class="text-gray-700">يتم تمرير ThemeData إلى widget MaterialApp ليطبق على كامل التطبيق:</p>
+            <div class="bg-gray-800 p-3 rounded mt-2 text-sm text-white">
+                MaterialApp(<br>
+                &nbsp;&nbsp;theme: ThemeData(<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;// إعدادات المظهر هنا<br>
+                &nbsp;&nbsp;),<br>
+                )
+            </div>
+        </div>
+    </div>
+    
+    <div>
+        <div class="bg-gray-900 p-4 rounded-lg mb-4">
+            <div class="code-block text-gray-100 overflow-x-auto">
+                <pre><code>// مثال شامل لـ ThemeData
+ThemeData(
+colorScheme: ColorScheme.light(
+primary: Colors.blue,
+secondary: Colors.green,
+),
+textTheme: TextTheme(
+headline1: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+bodyText1: TextStyle(fontSize: 16, color: Colors.black87),
+),
+appBarTheme: AppBarTheme(
+color: Colors.blue,
+titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+),
+elevatedButtonTheme: ElevatedButtonThemeData(
+style: ElevatedButton.styleFrom(
+primary: Colors.blue,
+padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+),
+),
+inputDecorationTheme: InputDecorationTheme(
+border: OutlineInputBorder(),
+filled: true,
+fillColor: Colors.grey[100],
+),
+)</code></pre>
+</div>
+</div>
+
+        <div class="bg-white p-4 rounded-lg border border-gray-300">
+            <h4 class="font-semibold text-gray-800 mb-2">فوائد استخدام ThemeData</h4>
+            <ul class="list-disc pr-5 space-y-1 text-gray-700">
+                <li>تطبيق مظهر موحد على كامل التطبيق</li>
+                <li>سهولة تغيير المظهر العام من مكان واحد</li>
+                <li>توفير الوقت في تكرار إعدادات المظهر</li>
+                <li>دعم أفضل لوضع الظلام (Dark Mode)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+</section>
+<!-- 2. Buttons in Flutter (جميع الأنواع) -->
+<section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-blue-500"> <div class="flex items-center mb-6"> <div class="bg-blue-100 p-4 rounded-full ml-4"> <span class="material-icons text-blue-600 text-3xl">smart_button</span> </div> <h2 class="text-3xl font-bold text-gray-800">أزرار Flutter - جميع الأنواع</h2> </div>
+<p class="text-xl text-gray-700 mb-8 leading-relaxed">
+    يوفر Flutter عدة أنواع من الأزرار لكل منها استخدام محدد ومظهر مختلف. فيما يلي الأنواع الرئيسية للأزرار في Flutter:
+</p>
+
+<div class="grid md:grid-cols-3 gap-6">
+    <!-- ElevatedButton -->
+    <div class="widget-card bg-blue-50 p-6 rounded-lg border-l-blue-400">
+        <div class="flex items-center mb-4">
+            <span class="material-icons text-blue-500 text-3xl mr-3">arrow_upward</span>
+            <h3 class="text-xl font-bold text-blue-800">ElevatedButton</h3>
+        </div>
+        <p class="text-gray-700 mb-4">زر مرتفع مع ظل، يستخدم للإجراءات الرئيسية في التطبيق.</p>
+        <div class="bg-white p-3 rounded flex justify-center">
+            <button class="bg-blue-500 text-white px-4 py-2 rounded shadow">زر مرتفع</button>
+        </div>
+        <div class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs">
+            ElevatedButton(onPressed: () {}, child: Text('زر'))
+        </div>
+    </div>
+    
+    <!-- TextButton -->
+    <div class="widget-card bg-green-50 p-6 rounded-lg border-l-green-400">
+        <div class="flex items-center mb-4">
+            <span class="material-icons text-green-500 text-3xl mr-3">text_fields</span>
+            <h3 class="text-xl font-bold text-green-800">TextButton</h3>
+        </div>
+        <p class="text-gray-700 mb-4">زر نصي بدون ارتفاع، يستخدم للإجراءات الثانوية.</p>
+        <div class="bg-white p-3 rounded flex justify-center">
+            <button class="text-green-600 px-4 py-2 rounded">زر نصي</button>
+        </div>
+        <div class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs">
+            TextButton(onPressed: () {}, child: Text('زر'))
+        </div>
+    </div>
+    
+    <!-- OutlinedButton -->
+    <div class="widget-card bg-purple-50 p-6 rounded-lg border-l-purple-400">
+        <div class="flex items-center mb-4">
+            <span class="material-icons text-purple-500 text-3xl mr-3">crop_square</span>
+            <h3 class="text-xl font-bold text-purple-800">OutlinedButton</h3>
+        </div>
+        <p class="text-gray-700 mb-4">زر بإطار، يجمع بين ميزات ElevatedButton و TextButton.</p>
+        <div class="bg-white p-3 rounded flex justify-center">
+            <button class="border border-purple-500 text-purple-600 px-4 py-2 rounded">زر بإطار</button>
+        </div>
+        <div class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs">
+            OutlinedButton(onPressed: () {}, child: Text('زر'))
+        </div>
+    </div>
+</div>
+
+<div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+    <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+        <span class="material-icons mr-2 text-blue-500">compare</span>
+        مقارنة بين أنواع الأزرار
+    </h3>
+    
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-200">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">النوع</th>
+                    <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">الاستخدام</th>
+                    <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">المظهر</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">ElevatedButton</td>
+                    <td class="py-3 px-4 border-b">الإجراءات الرئيسية والأكثر أهمية</td>
+                    <td class="py-3 px-4 border-b">خلفية ملونة مع ظل</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">TextButton</td>
+                    <td class="py-3 px-4 border-b">الإجراءات الثانوية والأقل أهمية</td>
+                    <td class="py-3 px-4 border-b">نص فقط بدون خلفية</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">OutlinedButton</td>
+                    <td class="py-3 px-4 border-b">إجراءات متوسطة الأهمية</td>
+                    <td class="py-3 px-4 border-b">إطار مع نص بدون خلفية</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">IconButton</td>
+                    <td class="py-3 px-4 border-b">أزرار الأيقونات في AppBar</td>
+                    <td class="py-3 px-4 border-b">أيقونة فقط</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                    <td class="py-3 px-4 border-b">FloatingActionButton</td>
+                    <td class="py-3 px-4 border-b">الإجراء الأساسي في الشاشة</td>
+                    <td class="py-3 px-4 border-b">زر دائري عائم</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</section>
+<!-- 3. Expanded -->
+<section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-red-500"> <div class="flex items-center mb-6"> <div class="bg-red-100 p-4 rounded-full ml-4"> <span class="material-icons text-red-600 text-3xl">expand</span> </div> <h2 class="text-3xl font-bold text-gray-800">Expanded في Flutter</h2> </div>
+<p class="text-xl text-gray-700 mb-8 leading-relaxed">
+    الـ <span class="font-bold text-red-600">Expanded</span> هو widget يستخدم داخل Column أو Row لملء المساحة المتاحة، حيث يأخذ الطفل المساحة المتبقية بناءً على عامل التمدد (flex factor).
+</p>
+
+<div class="grid md:grid-cols-2 gap-8">
+    <div>
+        <div class="bg-red-50 p-6 rounded-lg border border-red-200 mb-6">
+            <h3 class="font-bold text-lg text-red-800 mb-3 flex items-center">
+                <span class="material-icons mr-2">info</span>
+                الخصائص الرئيسية
+            </h3>
+            <ul class="list-disc pr-5 space-y-2 text-red-700">
+                <li><span class="font-semibold">child</span>: الـ Widget الذي سيتم توسيعه</li>
+                <li><span class="font-semibold">flex</span>: عامل التمدد (يحدد نسبة المساحة التي سيأخذها)</li>
+            </ul>
+        </div>
+        
+        <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+            <h4 class="font-semibold text-blue-800 mb-2 flex items-center">
+                <span class="material-icons mr-2">lightbulb</span>
+                حالات الاستخدام الشائعة
+            </h4>
+            <ul class="list-disc pr-5 space-y-1 text-blue-700">
+                <li>عندما تريد أن يأخذ عنصر مساحة أكبر من العناصر الأخرى</li>
+                <li>لتوزيع المساحة بين عدة عناصر بنسب مختلفة</li>
+                <li>لضمان استغلال كامل المساحة المتاحة</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div>
+        <div class="bg-gray-900 p-4 rounded-lg mb-4">
+            <div class="code-block text-gray-100 overflow-x-auto">
+                <pre><code>// أمثلة على استخدام Expanded
+// 1. توزيع المساحة بالتساوي
+Row(
+children: [
+Expanded(child: Container(color: Colors.red, height: 100)),
+Expanded(child: Container(color: Colors.green, height: 100)),
+Expanded(child: Container(color: Colors.blue, height: 100)),
+],
+)
+
+// 2. توزيع المساحة بنسب مختلفة
+Column(
+children: [
+Expanded(
+flex: 2, // يأخذ ضعف المساحة
+child: Container(color: Colors.amber),
+),
+Expanded(
+flex: 1, // يأخذ نصف المساحة
+child: Container(color: Colors.purple),
+),
+],
+)</code></pre>
+</div>
+</div>
+
+        <div class="bg-white p-4 rounded-lg border border-gray-300">
+            <h4 class="font-semibold text-gray-800 mb-2">الفرق بين Expanded و Flexible</h4>
+            <p class="text-gray-700">Expanded هو نوع من Flexible مع ضبط fit ليكون FlexFit.tight (يأخذ كل المساحة المتاحة)، بينما Flexible يمكن ضبطه ليكون FlexFit.loose (لا يأخذ كل المساحة بالضرورة).</p>
+        </div>
+    </div>
+</div>
+</section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center space-x-4 mb-4">
+                <a href="#" class="text-blue-300 hover:text-white">
+                    <span class="material-icons text-2xl">flutter_dash</span>
+                </a>
+                <a href="#" class="text-blue-300 hover:text-white">
+                    <span class="material-icons text-2xl">code</span>
+                </a>
+                <a href="#" class="text-blue-300 hover:text-white">
+                    <span class="material-icons text-2xl">share</span>
+                </a>
+            </div>
+            <p class="mb-2">دليل Flutter الشامل: الهندسة المعمارية وبناء واجهات المستخدم</p>
+            <p class="text-gray-400 text-sm">تم تصميم الصفحة باستخدام Tailwind CSS و Material Icons</p>
+        </div>
+    </footer>
+</body>
+</html>

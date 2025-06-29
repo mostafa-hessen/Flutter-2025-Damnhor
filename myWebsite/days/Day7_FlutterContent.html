@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>دليل Flutter: الأزرار، إدارة الحالة، حقول الإدخال والتنقل</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Tajawal", sans-serif;
+      }
+      .code-block {
+        font-family: "Fira Code", monospace;
+      }
+      .widget-card {
+        transition: all 0.3s ease;
+        border-left: 4px solid;
+      }
+      .widget-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+      .floating {
+        animation: float 6s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+      pre {
+        direction: ltr;
+        text-align: left;
+      }
+      .architecture-diagram {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-br from-gray-50 to-blue-50 text-gray-800">
+    <!-- Header -->
+    <header
+      class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12 shadow-xl"
+    >
+      <div class="container mx-auto px-4 text-center">
+        <div class="floating inline-block mb-6">
+          <span class="material-icons text-6xl text-yellow-300">widgets</span>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">دليل Flutter الشامل</h1>
+        <p class="text-xl text-blue-100">
+          الأزرار، إدارة الحالة، حقول الإدخال والتنقل
+        </p>
+        <div class="mt-6 flex justify-center space-x-3 space-x-reverse">
+          <span
+            class="bg-blue-500 bg-opacity-90 text-white px-4 py-2 rounded-full flex items-center"
+          >
+            <span class="material-icons mr-2">smart_button</span>
+            الأزرار
+          </span>
+          <span
+            class="bg-green-500 bg-opacity-90 text-white px-4 py-2 rounded-full flex items-center"
+          >
+            <span class="material-icons mr-2">toggle_on</span>
+            State Management
+          </span>
+          <span
+            class="bg-purple-500 bg-opacity-90 text-white px-4 py-2 rounded-full flex items-center"
+          >
+            <span class="material-icons mr-2">text_fields</span>
+            حقول الإدخال
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+      <!-- Section 1: Buttons in Flutter -->
+      <section
+        class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-blue-500"
+      >
+        <div class="flex items-center mb-6">
+          <div class="bg-blue-100 p-4 rounded-full ml-4">
+            <span class="material-icons text-blue-600 text-3xl"
+              >smart_button</span
+            >
+          </div>
+          <h2 class="text-3xl font-bold text-gray-800">الأزرار في Flutter</h2>
+        </div>
+
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          يوفر Flutter عدة أنواع من الأزرار لكل منها استخدام محدد ومظهر مختلف.
+          الأزرار هي عناصر تفاعلية أساسية في أي واجهة مستخدم.
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <!-- ElevatedButton -->
+          <div class="widget-card bg-blue-50 p-6 rounded-lg border-l-blue-400">
+            <div class="flex items-center mb-4">
+              <span class="material-icons text-blue-500 text-3xl mr-3"
+                >arrow_upward</span
+              >
+              <h3 class="text-xl font-bold text-blue-800">ElevatedButton</h3>
+            </div>
+            <p class="text-gray-700 mb-4">
+              زر مرتفع مع ظل، يستخدم للإجراءات الرئيسية في التطبيق.
+            </p>
+            <div class="bg-white p-3 rounded flex justify-center">
+              <button class="bg-blue-500 text-white px-4 py-2 rounded shadow">
+                زر مرتفع
+              </button>
+            </div>
+            <div
+              class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs"
+            >
+              ElevatedButton(<br />
+              &nbsp;&nbsp;onPressed: () {},<br />
+              &nbsp;&nbsp;child: Text('زر')<br />
+              )
+            </div>
+          </div>
+
+          <!-- TextButton -->
+          <div
+            class="widget-card bg-green-50 p-6 rounded-lg border-l-green-400"
+          >
+            <div class="flex items-center mb-4">
+              <span class="material-icons text-green-500 text-3xl mr-3"
+                >text_fields</span
+              >
+              <h3 class="text-xl font-bold text-green-800">TextButton</h3>
+            </div>
+            <p class="text-gray-700 mb-4">
+              زر نصي بدون ارتفاع، يستخدم للإجراءات الثانوية.
+            </p>
+            <div class="bg-white p-3 rounded flex justify-center">
+              <button class="text-green-600 px-4 py-2 rounded">زر نصي</button>
+            </div>
+            <div
+              class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs"
+            >
+              TextButton(<br />
+              &nbsp;&nbsp;onPressed: () {},<br />
+              &nbsp;&nbsp;child: Text('زر')<br />
+              )
+            </div>
+          </div>
+
+          <!-- OutlinedButton -->
+          <div
+            class="widget-card bg-purple-50 p-6 rounded-lg border-l-purple-400"
+          >
+            <div class="flex items-center mb-4">
+              <span class="material-icons text-purple-500 text-3xl mr-3"
+                >crop_square</span
+              >
+              <h3 class="text-xl font-bold text-purple-800">OutlinedButton</h3>
+            </div>
+            <p class="text-gray-700 mb-4">
+              زر بإطار، يجمع بين ميزات ElevatedButton و TextButton.
+            </p>
+            <div class="bg-white p-3 rounded flex justify-center">
+              <button
+                class="border border-purple-500 text-purple-600 px-4 py-2 rounded"
+              >
+                زر بإطار
+              </button>
+            </div>
+            <div
+              class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs"
+            >
+              OutlinedButton(<br />
+              &nbsp;&nbsp;onPressed: () {},<br />
+              &nbsp;&nbsp;child: Text('زر')<br />
+              )
+            </div>
+          </div>
+
+          <!-- IconButton -->
+          <div class="widget-card bg-red-50 p-6 rounded-lg border-l-red-400">
+            <div class="flex items-center mb-4">
+              <span class="material-icons text-red-500 text-3xl mr-3"
+                >star</span
+              >
+              <h3 class="text-xl font-bold text-red-800">IconButton</h3>
+            </div>
+            <p class="text-gray-700 mb-4">
+              زر أيقونة، يستخدم عادة في شريط التطبيق.
+            </p>
+            <div class="bg-white p-3 rounded flex justify-center">
+              <button class="text-red-500 p-2 rounded-full hover:bg-red-100">
+                <span class="material-icons">favorite</span>
+              </button>
+            </div>
+            <div
+              class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs"
+            >
+              IconButton(<br />
+              &nbsp;&nbsp;onPressed: () {},<br />
+              &nbsp;&nbsp;icon: Icon(Icons.star)<br />
+              )
+            </div>
+          </div>
+
+          <!-- FloatingActionButton -->
+          <div
+            class="widget-card bg-yellow-50 p-6 rounded-lg border-l-yellow-400"
+          >
+            <div class="flex items-center mb-4">
+              <span class="material-icons text-yellow-500 text-3xl mr-3"
+                >add</span
+              >
+              <h3 class="text-xl font-bold text-yellow-800">
+                FloatingActionButton
+              </h3>
+            </div>
+            <p class="text-gray-700 mb-4">
+              زر عائم دائري، للإجراء الأساسي في الشاشة.
+            </p>
+            <div class="bg-white p-3 rounded flex justify-center">
+              <button
+                class="bg-blue-500 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg"
+              >
+                <span class="material-icons">add</span>
+              </button>
+            </div>
+            <div
+              class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs"
+            >
+              FloatingActionButton(<br />
+              &nbsp;&nbsp;onPressed: () {},<br />
+              &nbsp;&nbsp;child: Icon(Icons.add)<br />
+              )
+            </div>
+          </div>
+
+          <!-- DropdownButton -->
+          <div
+            class="widget-card bg-indigo-50 p-6 rounded-lg border-l-indigo-400"
+          >
+            <div class="flex items-center mb-4">
+              <span class="material-icons text-indigo-500 text-3xl mr-3"
+                >arrow_drop_down</span
+              >
+              <h3 class="text-xl font-bold text-indigo-800">DropdownButton</h3>
+            </div>
+            <p class="text-gray-700 mb-4">
+              زر قائمة منسدلة لاختيار خيار من عدة خيارات.
+            </p>
+            <div class="bg-white p-3 rounded flex justify-center">
+              <div class="border rounded px-4 py-2 text-gray-700">
+                اختر...
+                <span class="material-icons text-gray-500"
+                  >arrow_drop_down</span
+                >
+              </div>
+            </div>
+            <div
+              class="mt-4 code-block bg-gray-800 text-gray-100 p-2 rounded text-xs"
+            >
+              DropdownButton(<br />
+              &nbsp;&nbsp;items: [...],<br />
+              &nbsp;&nbsp;onChanged: (value) {},<br />
+              &nbsp;&nbsp;value: selectedValue<br />
+              )
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm"
+        >
+          <h3
+            class="text-xl font-semibold text-gray-800 mb-4 flex items-center"
+          >
+            <span class="material-icons mr-2 text-blue-500">compare</span>
+            مقارنة بين أنواع الأزرار
+          </h3>
+
+          <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-200">
+              <thead class="bg-gray-100">
+                <tr>
+                  <th
+                    class="py-3 px-4 border-b text-right font-semibold text-gray-700"
+                  >
+                    النوع
+                  </th>
+                  <th
+                    class="py-3 px-4 border-b text-right font-semibold text-gray-700"
+                  >
+                    الاستخدام
+                  </th>
+                  <th
+                    class="py-3 px-4 border-b text-right font-semibold text-gray-700"
+                  >
+                    المظهر
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="hover:bg-gray-50">
+                  <td class="py-3 px-4 border-b">ElevatedButton</td>
+                  <td class="py-3 px-4 border-b">
+                    الإجراءات الرئيسية والأكثر أهمية
+                  </td>
+                  <td class="py-3 px-4 border-b">خلفية ملونة مع ظل</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="py-3 px-4 border-b">TextButton</td>
+                  <td class="py-3 px-4 border-b">
+                    الإجراءات الثانوية والأقل أهمية
+                  </td>
+                  <td class="py-3 px-4 border-b">نص فقط بدون خلفية</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="py-3 px-4 border-b">OutlinedButton</td>
+                  <td class="py-3 px-4 border-b">إجراءات متوسطة الأهمية</td>
+                  <td class="py-3 px-4 border-b">إطار مع نص بدون خلفية</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="py-3 px-4 border-b">IconButton</td>
+                  <td class="py-3 px-4 border-b">أزرار الأيقونات في AppBar</td>
+                  <td class="py-3 px-4 border-b">أيقونة فقط</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="py-3 px-4 border-b">FloatingActionButton</td>
+                  <td class="py-3 px-4 border-b">الإجراء الأساسي في الشاشة</td>
+                  <td class="py-3 px-4 border-b">زر دائري عائم</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Stateful vs Stateless Widgets -->
+      <section
+        class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-green-500"
+      >
+        <div class="flex items-center mb-6">
+          <div class="bg-green-100 p-4 rounded-full ml-4">
+            <span class="material-icons text-green-600 text-3xl"
+              >autorenew</span
+            >
+          </div>
+          <h2 class="text-3xl font-bold text-gray-800">
+            Stateful vs Stateless Widgets
+          </h2>
+        </div>
+
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          في Flutter، هناك نوعان أساسيان من الـ Widgets:
+          <span class="font-bold text-green-600">Stateless</span> و
+          <span class="font-bold text-green-600">Stateful</span>. الفرق الرئيسي
+          بينهما هو القدرة على التغيير مع الوقت.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3
+              class="text-2xl font-semibold text-gray-800 mb-4 flex items-center"
+            >
+              <span class="material-icons mr-2 text-green-500">toggle_off</span>
+              Stateless Widget
+            </h3>
+
+            <div
+              class="bg-green-50 p-6 rounded-lg border border-green-200 mb-6"
+            >
+              <ul class="list-disc pr-5 space-y-3 text-green-700">
+                <li class="font-semibold">
+                  لا يتغير مع الوقت
+                  <p class="text-gray-700 font-normal">
+                    يتم رسمه مرة واحدة ولا يتغير إلا إذا تغيرت الـ props الممررة
+                    إليه
+                  </p>
+                </li>
+                <li class="font-semibold">
+                  أمثلة
+                  <p class="text-gray-700 font-normal">
+                    Text, Icon, Container, وغيرها من الـ Widgetات الثابتة
+                  </p>
+                </li>
+                <li class="font-semibold">
+                  الأداء
+                  <p class="text-gray-700 font-normal">
+                    أخف وأسرع لأنه لا يحتاج إلى إدارة حالة
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-gray-900 p-4 rounded-lg">
+              <div class="code-block text-gray-100 overflow-x-auto">
+                <pre><code>// مثال على Stateless Widget
+class MyText extends StatelessWidget {
+  final String text;
+  
+  const MyText({required this.text});
+  
+  @override
+  Widget build(BuildContext context) {
+    return Text(text);
+  }
+}</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3
+              class="text-2xl font-semibold text-gray-800 mb-4 flex items-center"
+            >
+              <span class="material-icons mr-2 text-green-500">toggle_on</span>
+              Stateful Widget
+            </h3>
+
+            <div
+              class="bg-green-50 p-6 rounded-lg border border-green-200 mb-6"
+            >
+              <ul class="list-disc pr-5 space-y-3 text-green-700">
+                <li class="font-semibold">
+                  يتغير مع الوقت
+                  <p class="text-gray-700 font-normal">
+                    يمكنه التحديث عند تفاعل المستخدم أو تغير البيانات
+                  </p>
+                </li>
+                <li class="font-semibold">
+                  أمثلة
+                  <p class="text-gray-700 font-normal">
+                    Checkbox, TextField, Slider, وغيرها من الـ Widgetات
+                    التفاعلية
+                  </p>
+                </li>
+                <li class="font-semibold">
+                  الأداء
+                  <p class="text-gray-700 font-normal">
+                    أثقل قليلاً لأنه يحتاج إلى إدارة حالة
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-gray-900 p-4 rounded-lg">
+              <div class="code-block text-gray-100 overflow-x-auto">
+                <pre><code>// مثال على Stateful Widget
+class Counter extends StatefulWidget {
+  @override
+  _CounterState createState() => _CounterState();
+}
+
+class _CounterState extends State&lt;Counter&gt; {
+  int count = 0; // متغير الحالة
+  
+  void increment() {
+    setState(() { // تحديث الواجهة عند تغير الحالة
+      count++;
+    });
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text('Count: $count'),
+        ElevatedButton(
+          onPressed: increment,
+          child: Text('Increment'),
+        ),
+      ],
+    );
+  }
+}</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm"
+        >
+          <h3
+            class="text-xl font-semibold text-gray-800 mb-4 flex items-center"
+          >
+            <span class="material-icons mr-2 text-green-500">code</span>
+            شرح Stateful Widget بالتفصيل
+          </h3>
+
+          <div class="bg-gray-900 p-4 rounded-lg">
+            <div class="code-block text-gray-100 overflow-x-auto">
+              <pre><code>// 1. إنشاء Stateful Widget
+class MyWidget extends StatefulWidget {
+  // يمكنك تمرير props هنا عبر constructor
+  const MyWidget({Key? key}) : super(key: key);
+
+  // 2. دالة createState() التي تعيد State object
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+// 3. State class التي تحتوي على المنطق والواجهة
+class _MyWidgetState extends State&lt;MyWidget&gt; {
+  // 4. متغيرات الحالة
+  int _counter = 0;
+  bool _isActive = false;
+
+  // 5. دالة لتعديل الحالة
+  void _incrementCounter() {
+    setState(() { // 6. setState() تخبر Flutter بإعادة بناء الواجهة
+      _counter++; // تعديل الحالة
+    });
+  }
+
+  // 7. دالة build() التي تعيد الواجهة
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text('Counter: $_counter'),
+        Switch(
+          value: _isActive,
+          onChanged: (value) {
+            setState(() {
+              _isActive = value;
+            });
+          },
+        ),
+        ElevatedButton(
+          onPressed: _incrementCounter,
+          child: Text('Increment'),
+        ),
+      ],
+    );
+  }
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="mt-4 bg-blue-50 p-4 rounded-lg border border-blue-200">
+            <h4 class="font-semibold text-blue-800 mb-2 flex items-center">
+              <span class="material-icons mr-2">info</span>
+              شرح كل سطر:
+            </h4>
+            <ol class="list-decimal pr-5 space-y-2 text-blue-700">
+              <li>
+                إنشاء Stateful Widget كصنف يرث من <code>StatefulWidget</code>
+              </li>
+              <li>
+                دالة <code>createState()</code> التي تنشئ وتعيد State object
+              </li>
+              <li>State class التي تحتوي على بيانات الحالة ومنطق التعديل</li>
+              <li>
+                متغيرات الحالة التي يمكن تعديلها باستخدام
+                <code>setState()</code>
+              </li>
+              <li>دوال لتعديل الحالة عند تفاعل المستخدم</li>
+              <li>
+                <code>setState()</code> تخبر Flutter بإعادة بناء الواجهة مع
+                القيم الجديدة
+              </li>
+              <li>
+                دالة <code>build()</code> التي تعيد واجهة المستخدم بناءً على
+                الحالة الحالية
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div
+          class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm"
+        >
+          <h3
+            class="text-xl font-semibold text-gray-800 mb-4 flex items-center"
+          >
+            <span class="material-icons mr-2 text-green-500">compare</span>
+            مقارنة بين Stateless و Stateful Widgets
+          </h3>
+
+          <div class="overflow-x-auto">
+            <table class="min-w-full bg-white border border-gray-200">
+              <thead class="bg-gray-100">
+                <tr>
+                  <th
+                    class="py-3 px-4 border-b text-right font-semibold text-gray-700"
+                  >
+                    المعيار
+                  </th>
+                  <th
+                    class="py-3 px-4 border-b text-right font-semibold text-gray-700"
+                  >
+                    Stateless Widget
+                  </th>
+                  <th
+                    class="py-3 px-4 border-b text-right font-semibold text-gray-700"
+                  >
+                    Stateful Widget
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="hover:bg-gray-50">
+                  <td class="py-3 px-4 border-b">الحالة الداخلية</td>
+                  <td class="py-3 px-4 border-b">لا يوجد</td>
+                  <td class="py-3 px-4 border-b">يوجد (يمكن تغييرها)</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="py-3 px-4 border-b">إعادة البناء</td>
+                  <td class="py-3 px-4 border-b">عند تغيير الـ parent فقط</td>
+                  <td class="py-3 px-4 border-b">عند استدعاء setState()</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="py-3 px-4 border-b">الأمثلة</td>
+                  <td class="py-3 px-4 border-b">Text, Icon, Container</td>
+                  <td class="py-3 px-4 border-b">
+                    Checkbox, TextField, Slider
+                  </td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="py-3 px-4 border-b">الأداء</td>
+                  <td class="py-3 px-4 border-b">أخف وأسرع</td>
+                  <td class="py-3 px-4 border-b">أثقل قليلاً</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Switch & SwitchTile -->
+      <section
+        class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-purple-500"
+      >
+        <div class="flex items-center mb-6">
+          <div class="bg-purple-100 p-4 rounded-full ml-4">
+            <span class="material-icons text-purple-600 text-3xl"
+              >toggle_on</span
+            >
+          </div>
+          <h2 class="text-3xl font-bold text-gray-800">
+            Switch و SwitchListTile
+          </h2>
+        </div>
+
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          الـ Switch و SwitchListTile هما Widgets يستخدمان لعرض
+          <span class="font-bold text-purple-600">مفتاح تبديل</span> يمكن
+          للمستخدم تفعيله أو إلغاء تفعيله.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3
+              class="text-2xl font-semibold text-gray-800 mb-4 flex items-center"
+            >
+              <span class="material-icons mr-2 text-purple-500">toggle_on</span>
+              Switch
+            </h3>
+
+            <div
+              class="bg-purple-50 p-6 rounded-lg border border-purple-200 mb-6"
+            >
+              <ul class="list-disc pr-5 space-y-3 text-purple-700">
+                <li class="font-semibold">
+                  مفتاح تبديل بسيط
+                  <p class="text-gray-700 font-normal">بدون نص أو تسمية</p>
+                </li>
+                <li class="font-semibold">
+                  الخصائص الرئيسية
+                  <p class="text-gray-700 font-normal">
+                    value, onChanged, activeColor, inactiveThumbColor
+                  </p>
+                </li>
+                <li class="font-semibold">
+                  حالات الاستخدام
+                  <p class="text-gray-700 font-normal">
+                    عندما تحتاج فقط إلى مفتاح تبديل بدون نص
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-gray-900 p-4 rounded-lg">
+              <div class="code-block text-gray-100 overflow-x-auto">
+                <pre><code>// مثال على Switch
+bool _isSwitched = false;
+
+Switch(
+  value: _isSwitched,
+  onChanged: (value) {
+    setState(() {
+      _isSwitched = value;
+    });
+  },
+  activeColor: Colors.blue,
+  inactiveThumbColor: Colors.grey,
+)</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3
+              class="text-2xl font-semibold text-gray-800 mb-4 flex items-center"
+            >
+              <span class="material-icons mr-2 text-purple-500">list</span>
+              SwitchListTile
+            </h3>
+
+            <div
+              class="bg-purple-50 p-6 rounded-lg border border-purple-200 mb-6"
+            >
+              <ul class="list-disc pr-5 space-y-3 text-purple-700">
+                <li class="font-semibold">
+                  مفتاح تبديل مع تسمية
+                  <p class="text-gray-700 font-normal">
+                    يحتوي على نص ووصف اختياري
+                  </p>
+                </li>
+                <li class="font-semibold">
+                  الخصائص الرئيسية
+                  <p class="text-gray-700 font-normal">
+                    title, subtitle, value, onChanged, secondary
+                  </p>
+                </li>
+                <li class="font-semibold">
+                  حالات الاستخدام
+                  <p class="text-gray-700 font-normal">
+                    عندما تحتاج إلى مفتاح تبديل مع نص توضيحي
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-gray-900 p-4 rounded-lg">
+              <div class="code-block text-gray-100 overflow-x-auto">
+                <pre><code>// مثال على SwitchListTile
+bool _notificationsEnabled = true;
+
+SwitchListTile(
+  title: Text('تفعيل الإشعارات'),
+  subtitle: Text('تلقي إشعارات عند وجود تحديثات'),
+  value: _notificationsEnabled,
+  onChanged: (value) {
+    setState(() {
+      _notificationsEnabled = value;
+    });
+  },
+  secondary: Icon(Icons.notifications),
+  activeColor: Colors.green,
+)</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm"
+        >
+          <h3
+            class="text-xl font-semibold text-gray-800 mb-4 flex items-center"
+          >
+            <span class="material-icons mr-2 text-purple-500">visibility</span>
+            أمثلة مرئية
+          </h3>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-lg border border-gray-300">
+              <h4 class="font-semibold text-gray-800 mb-4">Switch</h4>
+              <div class="flex justify-between items-center">
+                <span>وضع الظلام</span>
+                <div
+                  class="relative inline-block w-12 mr-2 align-middle select-none"
+                >
+                  <input
+                    type="checkbox"
+                    class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+                  />
+                  <label
+                    class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                  ></label>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg border border-gray-300">
+              <h4 class="font-semibold text-gray-800 mb-4">SwitchListTile</h4>
+              <div class="flex items-center justify-between py-2">
+                <div class="flex items-center">
+                  <span class="material-icons text-gray-500 mr-3">wifi</span>
+                  <div>
+                    <p>اتصال Wi-Fi</p>
+                    <p class="text-sm text-gray-500">متصل بشبكة المنزل</p>
+                  </div>
+                </div>
+                <div
+                  class="relative inline-block w-12 mr-2 align-middle select-none"
+                >
+                  <input
+                    type="checkbox"
+                    checked
+                    class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+                  />
+                  <label
+                    class="toggle-label block overflow-hidden h-6 rounded-full bg-blue-500 cursor-pointer"
+                  ></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Radio & RadioListTile -->
+      <section
+        class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-red-500"
+      >
+        <div class="flex items-center mb-6">
+          <div class="bg-red-100 p-4 rounded-full ml-4">
+            <span class="material-icons text-red-600 text-3xl"
+              >radio_button_checked</span
+            >
+          </div>
+          <h2 class="text-3xl font-bold text-gray-800">
+            Radio و RadioListTile
+          </h2>
+        </div>
+
+        <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+          الـ Radio و RadioListTile هما Widgets يستخدمان لعرض
+          <span class="font-bold text-red-600">خيارات متبادلة</span> حيث يمكن
+          اختيار خيار واحد فقط من مجموعة.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3
+              class="text-2xl font-semibold text-gray-800 mb-4 flex items-center"
+            >
+              <span class="material-icons mr-2 text-red-500"
+                >radio_button_checked</span
+              >
+              Radio
+            </h3>
+
+            <div class="bg-red-50 p-6 rounded-lg border border-red-200 mb-6">
+              <ul class="list-disc pr-5 space-y-3 text-red-700">
+                <li class="font-semibold">
+                  زر اختيار بسيط
+                  <p class="text-gray-700 font-normal">بدون نص أو تسمية</p>
+                </li>
+                <li class="font-semibold">
+                  الخصائص الرئيسية
+                  <p class="text-gray-700 font-normal">
+                    value, groupValue, onChanged, activeColor
+                  </p>
+                </li>
+                <li class="font-semibold">
+                  حالات الاستخدام
+                  <p class="text-gray-700 font-normal">
+                    عندما تحتاج إلى أزرار اختيار بدون نص
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-gray-900 p-4 rounded-lg">
+              <div class="code-block text-gray-100 overflow-x-auto">
+                <pre><code>// مثال على Radio
+enum Gender { male, female }
+
+Gender _selectedGender = Gender.male;
+
+Column(
+  children: [
+    Radio&lt;Gender&gt;(
+      value: Gender.male,
+      groupValue: _selectedGender,
+      onChanged: (Gender? value) {
+        setState(() {
+          _selectedGender = value!;
+        });
+      },
+    ),
+    Radio&lt;Gender&gt;(
+      value: Gender.female,
+      groupValue: _selectedGender,
+      onChanged: (Gender? value) {
+        setState(() {
+          _selectedGender = value!;
+        });
+      },
+    ),
+  ],
+)</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3
+              class="text-2xl font-semibold text-gray-800 mb-4 flex items-center"
+            >
+              <span class="material-icons mr-2 text-red-500">list</span>
+              RadioListTile
+            </h3>
+
+            <div class="bg-red-50 p-6 rounded-lg border border-red-200 mb-6">
+              <ul class="list-disc pr-5 space-y-3 text-red-700">
+                <li class="font-semibold">
+                  زر اختيار مع تسمية
+                  <p class="text-gray-700 font-normal">
+                    يحتوي على نص ووصف اختياري
+                  </p>
+                </li>
+                <li class="font-semibold">
+                  الخصائص الرئيسية
+                  <p class="text-gray-700 font-normal">
+                    title, subtitle, value, groupValue, onChanged, secondary
+                  </p>
+                </li>
+                <li class="font-semibold">
+                  حالات الاستخدام
+                  <p class="text-gray-700 font-normal">
+                    عندما تحتاج إلى أزرار اختيار مع نص توضيحي
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-gray-900 p-4 rounded-lg">
+              <div class="code-block text-gray-100 overflow-x-auto">
+                <pre><code>// مثال على RadioListTile
+enum PaymentMethod { creditCard, paypal, bankTransfer }
+
+PaymentMethod _selectedPayment = PaymentMethod.creditCard;
+
+Column(
+  children: [
+    RadioListTile&lt;PaymentMethod&gt;(
+      title: Text('بطاقة ائتمان'),
+      value: PaymentMethod.creditCard,
+      groupValue: _selectedPayment,
+      onChanged: (PaymentMethod? value) {
+        setState(() {
+          _selectedPayment = value!;
+        });
+      },
+    ),
+    RadioListTile&lt;PaymentMethod&gt;(
+      title: Text('PayPal'),
+      value: PaymentMethod.paypal,
+      groupValue: _selectedPayment,
+      onChanged: (PaymentMethod? value) {
+        setState(() {
+          _selectedPayment = value!;
+        });
+      },
+    ),
+  ],
+)</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+          <!-- Section 1: Checkbox & CheckboxListTile -->
+        <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-blue-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-blue-600 text-3xl">check_box</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">Checkbox و CheckboxListTile</h2>
+            </div>
+            
+            <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                الـ Checkbox و CheckboxListTile هما Widgets يستخدمان لعرض <span class="font-bold text-blue-600">خيارات متعددة</span> حيث يمكن اختيار أكثر من خيار في نفس الوقت.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-blue-500">check_box_outline_blank</span>
+                        Checkbox
+                    </h3>
+                    
+                    <div class="bg-blue-50 p-6 rounded-lg border border-blue-200 mb-6">
+                        <ul class="list-disc pr-5 space-y-3 text-blue-700">
+                            <li class="font-semibold">مربع اختيار بسيط
+                                <p class="text-gray-700 font-normal">بدون نص أو تسمية</p>
+                            </li>
+                            <li class="font-semibold">الخصائص الرئيسية
+                                <p class="text-gray-700 font-normal">value, onChanged, activeColor, checkColor</p>
+                            </li>
+                            <li class="font-semibold">حالات الاستخدام
+                                <p class="text-gray-700 font-normal">عندما تحتاج فقط إلى مربع اختيار بدون نص</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-4 rounded-lg">
+                        <div class="code-block text-gray-100 overflow-x-auto">
+                            <pre><code>// مثال على Checkbox
+bool _isChecked = false;
+
+Checkbox(
+  value: _isChecked,
+  onChanged: (bool? value) {
+    setState(() {
+      _isChecked = value!;
+    });
+  },
+  activeColor: Colors.blue,
+  checkColor: Colors.white,
+)</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-blue-500">list</span>
+                        CheckboxListTile
+                    </h3>
+                    
+                    <div class="bg-blue-50 p-6 rounded-lg border border-blue-200 mb-6">
+                        <ul class="list-disc pr-5 space-y-3 text-blue-700">
+                            <li class="font-semibold">مربع اختيار مع تسمية
+                                <p class="text-gray-700 font-normal">يحتوي على نص ووصف اختياري</p>
+                            </li>
+                            <li class="font-semibold">الخصائص الرئيسية
+                                <p class="text-gray-700 font-normal">title, subtitle, value, onChanged, secondary</p>
+                            </li>
+                            <li class="font-semibold">حالات الاستخدام
+                                <p class="text-gray-700 font-normal">عندما تحتاج إلى مربع اختيار مع نص توضيحي</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-4 rounded-lg">
+                        <div class="code-block text-gray-100 overflow-x-auto">
+                            <pre><code>// مثال على CheckboxListTile
+bool _acceptTerms = false;
+
+CheckboxListTile(
+  title: Text('أوافق على الشروط والأحكام'),
+  subtitle: Text('يجب الموافقة للمتابعة'),
+  value: _acceptTerms,
+  onChanged: (bool? value) {
+    setState(() {
+      _acceptTerms = value!;
+    });
+  },
+  secondary: Icon(Icons.description),
+  activeColor: Colors.green,
+)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <span class="material-icons mr-2 text-blue-500">compare</span>
+                    مقارنة بين Checkbox و CheckboxListTile
+                </h3>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border border-gray-200">
+                        <thead class="bg-gray-100">
+                            <tr>
+                                <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">المعيار</th>
+                                <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">Checkbox</th>
+                                <th class="py-3 px-4 border-b text-right font-semibold text-gray-700">CheckboxListTile</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">التصميم</td>
+                                <td class="py-3 px-4 border-b">مربع اختيار فقط</td>
+                                <td class="py-3 px-4 border-b">مربع اختيار مع نص وأيقونة</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">الخصائص</td>
+                                <td class="py-3 px-4 border-b">value, onChanged</td>
+                                <td class="py-3 px-4 border-b">title, subtitle, secondary</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="py-3 px-4 border-b">حالات الاستخدام</td>
+                                <td class="py-3 px-4 border-b">عند الحاجة إلى مربع اختيار بسيط</td>
+                                <td class="py-3 px-4 border-b">عند الحاجة إلى مربع اختيار مع شرح</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: TextField & TextFormField -->
+        <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-green-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-green-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-green-600 text-3xl">text_fields</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">TextField و TextFormField</h2>
+            </div>
+            
+            <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                الـ TextField و TextFormField هما Widgets يستخدمان لـ <span class="font-bold text-green-600">إدخال النصوص</span> من المستخدم مع إمكانية التحقق من صحة البيانات.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-green-500">short_text</span>
+                        TextField
+                    </h3>
+                    
+                    <div class="bg-green-50 p-6 rounded-lg border border-green-200 mb-6">
+                        <ul class="list-disc pr-5 space-y-3 text-green-700">
+                            <li class="font-semibold">حقل إدخال نصي أساسي
+                                <p class="text-gray-700 font-normal">يدعم التحكم في النص والتحقق البسيط</p>
+                            </li>
+                            <li class="font-semibold">الخصائص الرئيسية
+                                <p class="text-gray-700 font-normal">controller, decoration, keyboardType, onChanged</p>
+                            </li>
+                            <li class="font-semibold">حالات الاستخدام
+                                <p class="text-gray-700 font-normal">عند الحاجة إلى حقل إدخال بسيط بدون تحقق معقد</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-4 rounded-lg">
+                        <div class="code-block text-gray-100 overflow-x-auto">
+                            <pre><code>// مثال على TextField
+TextEditingController _textController = TextEditingController();
+
+TextField(
+  controller: _textController,
+  decoration: InputDecoration(
+    labelText: 'اسم المستخدم',
+    hintText: 'أدخل اسمك',
+    border: OutlineInputBorder(),
+    prefixIcon: Icon(Icons.person),
+  ),
+  keyboardType: TextInputType.text,
+  onChanged: (value) {
+    print('النص المدخل: $value');
+  },
+)</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-green-500">article</span>
+                        TextFormField
+                    </h3>
+                    
+                    <div class="bg-green-50 p-6 rounded-lg border border-green-200 mb-6">
+                        <ul class="list-disc pr-5 space-y-3 text-green-700">
+                            <li class="font-semibold">حقل إدخال نصي متقدم
+                                <p class="text-gray-700 font-normal">يدعم التحقق من الصحة وحفظ البيانات</p>
+                            </li>
+                            <li class="font-semibold">الخصائص الرئيسية
+                                <p class="text-gray-700 font-normal">validator, autovalidateMode, onSaved</p>
+                            </li>
+                            <li class="font-semibold">حالات الاستخدام
+                                <p class="text-gray-700 font-normal">عند الحاجة إلى نماذج مع تحقق متقدم من الصحة</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-4 rounded-lg">
+                        <div class="code-block text-gray-100 overflow-x-auto">
+                            <pre><code>// مثال على TextFormField مع تحقق
+final _formKey = GlobalKey&lt;FormState&gt;();
+String _email = '';
+
+TextFormField(
+  decoration: InputDecoration(
+    labelText: 'البريد الإلكتروني',
+    hintText: 'example@domain.com',
+    border: OutlineInputBorder(),
+  ),
+  keyboardType: TextInputType.emailAddress,
+  validator: (value) {
+    if (value == null || value.isEmpty) {
+      return 'الرجاء إدخال البريد الإلكتروني';
+    }
+    if (!RegExp(r'^.+@.+\..+$').hasMatch(value)) {
+      return 'البريد الإلكتروني غير صالح';
+    }
+    return null;
+  },
+  autovalidateMode: AutovalidateMode.onUserInteraction,
+  onSaved: (value) {
+    _email = value!;
+  },
+)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <span class="material-icons mr-2 text-green-500">verified</span>
+                    التحقق من صحة البيانات (Validation)
+                </h3>
+                
+                <div class="bg-green-50 p-6 rounded-lg border border-green-200 mb-6">
+                    <ul class="list-disc pr-5 space-y-3 text-green-700">
+                        <li class="font-semibold">التحقق التلقائي (AutovalidateMode)
+                            <p class="text-gray-700 font-normal">يتحقق من الصحة أثناء الكتابة أو عند فقدان التركيز</p>
+                        </li>
+                        <li class="font-semibold">دالة validator
+                            <p class="text-gray-700 font-normal">تحدد شروط الصحة وتعيد رسالة خطأ إذا لزم الأمر</p>
+                        </li>
+                        <li class="font-semibold">دالة onSaved
+                            <p class="text-gray-700 font-normal">تخزن القيمة عند تقديم النموذج بنجاح</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-900 p-4 rounded-lg">
+                    <div class="code-block text-gray-100 overflow-x-auto">
+                        <pre><code>// مثال كامل على نموذج مع تحقق
+class MyForm extends StatefulWidget {
+  @override
+  _MyFormState createState() => _MyFormState();
+}
+
+class _MyFormState extends State&lt;MyForm&gt; {
+  final _formKey = GlobalKey&lt;FormState&gt;();
+  final _passwordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          TextFormField(
+            decoration: InputDecoration(labelText: 'كلمة المرور'),
+            obscureText: true,
+            controller: _passwordController,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'الرجاء إدخال كلمة المرور';
+              }
+              if (value.length < 6) {
+                return 'يجب أن تكون كلمة المرور 6 أحرف على الأقل';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            decoration: InputDecoration(labelText: 'تأكيد كلمة المرور'),
+            obscureText: true,
+            validator: (value) {
+              if (value != _passwordController.text) {
+                return 'كلمتا المرور غير متطابقتين';
+              }
+              return null;
+            },
+          ),
+          ElevatedButton(
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('تم التسجيل بنجاح')),
+                );
+              }
+            },
+            child: Text('تسجيل'),
+          ),
+        ],
+      ),
+    );
+  }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Navigation -->
+        <section class="mb-16 bg-white rounded-2xl shadow-lg p-8 border-l-8 border-purple-500">
+            <div class="flex items-center mb-6">
+                <div class="bg-purple-100 p-4 rounded-full ml-4">
+                    <span class="material-icons text-purple-600 text-3xl">navigation</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800">التنقل بين الشاشات (Navigation)</h2>
+            </div>
+            
+            <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                في Flutter، يتم التعامل مع التنقل بين الشاشات باستخدام <span class="font-bold text-purple-600">Navigator</span> الذي يعتمد على مبدأ المكدس (Stack).
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-purple-500">arrow_forward</span>
+                        الانتقال إلى شاشة جديدة (push)
+                    </h3>
+                    
+                    <div class="bg-purple-50 p-6 rounded-lg border border-purple-200 mb-6">
+                        <ul class="list-disc pr-5 space-y-3 text-purple-700">
+                            <li class="font-semibold">Navigator.push()
+                                <p class="text-gray-700 font-normal">يضيف شاشة جديدة إلى أعلى المكدس</p>
+                            </li>
+                            <li class="font-semibold">الخصائص الرئيسية
+                                <p class="text-gray-700 font-normal">context, route (MaterialPageRoute)</p>
+                            </li>
+                            <li class="font-semibold">حالات الاستخدام
+                                <p class="text-gray-700 font-normal">عند الانتقال إلى تفاصيل أو شاشة جديدة مع إمكانية العودة</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-4 rounded-lg">
+                        <div class="code-block text-gray-100 overflow-x-auto">
+                            <pre><code>// الانتقال إلى شاشة جديدة
+Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => DetailsScreen(),
+  ),
+);
+
+// الانتقال باستخدام اسم الطريق (Named Route)
+Navigator.pushNamed(
+  context,
+  '/details',
+  arguments: {'id': 123}, // إرسال بيانات مع الطريق
+);</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="material-icons mr-2 text-purple-500">arrow_back</span>
+                        العودة إلى الشاشة السابقة (pop)
+                    </h3>
+                    
+                    <div class="bg-purple-50 p-6 rounded-lg border border-purple-200 mb-6">
+                        <ul class="list-disc pr-5 space-y-3 text-purple-700">
+                            <li class="font-semibold">Navigator.pop()
+                                <p class="text-gray-700 font-normal">يزيل الشاشة الحالية من المكدس</p>
+                            </li>
+                            <li class="font-semibold">إرجاع البيانات
+                                <p class="text-gray-700 font-normal">يمكن إرجاع بيانات إلى الشاشة السابقة</p>
+                            </li>
+                            <li class="font-semibold">حالات الاستخدام
+                                <p class="text-gray-700 font-normal">عند الضغط على زر الرجوع أو إنهاء الشاشة</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-900 p-4 rounded-lg">
+                        <div class="code-block text-gray-100 overflow-x-auto">
+                            <pre><code>// العودة إلى الشاشة السابقة
+Navigator.pop(context);
+
+// العودة مع إرجاع بيانات
+Navigator.pop(context, 'تم الحفظ بنجاح');
+
+// استقبال البيانات في الشاشة السابقة
+var result = await Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => EditScreen()),
+);
+print('النتيجة: $result');</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <span class="material-icons mr-2 text-purple-500">sync</span>
+                    استبدال الشاشة الحالية (pushReplacement)
+                </h3>
+                
+                <div class="bg-purple-50 p-6 rounded-lg border border-purple-200 mb-6">
+                    <ul class="list-disc pr-5 space-y-3 text-purple-700">
+                        <li class="font-semibold">Navigator.pushReplacement()
+                            <p class="text-gray-700 font-normal">يستبدل الشاشة الحالية بشاشة جديدة</p>
+                        </li>
+                        <li class="font-semibold">الاستخدام الشائع
+                            <p class="text-gray-700 font-normal">بعد تسجيل الدخول أو في تدفقات لا يمكن العودة منها</p>
+                        </li>
+                        <li class="font-semibold">النسخة المسماة
+                            <p class="text-gray-700 font-normal">pushReplacementNamed() للطرق المسماة</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-900 p-4 rounded-lg">
+                    <div class="code-block text-gray-100 overflow-x-auto">
+                        <pre><code>// استبدال الشاشة الحالية
+Navigator.pushReplacement(
+  context,
+  MaterialPageRoute(
+    builder: (context) => HomeScreen(),
+  ),
+);
+
+// النسخة المسماة
+Navigator.pushReplacementNamed(context, '/home');
+
+// مثال عملي بعد تسجيل الدخول
+void _login() async {
+  bool success = await authService.login(email, password);
+  if (success) {
+    Navigator.pushReplacementNamed(context, '/dashboard');
+  }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <span class="material-icons mr-2 text-purple-500">alt_route</span>
+                    إعداد الطرق المسماة (Named Routes)
+                </h3>
+                
+                <div class="bg-purple-50 p-6 rounded-lg border border-purple-200 mb-6">
+                    <ul class="list-disc pr-5 space-y-3 text-purple-700">
+                        <li class="font-semibold">المزايا
+                            <p class="text-gray-700 font-normal">تنظيم أفضل، إمكانية الانتقال من أي مكان، تمرير وسائط</p>
+                        </li>
+                        <li class="font-semibold">الإعداد
+                            <p class="text-gray-700 font-normal">في MaterialApp أو WidgetApp باستخدام routes</p>
+                        </li>
+                        <li class="font-semibold">الوسائط
+                            <p class="text-gray-700 font-normal">يمكن استقبالها عبر ModalRoute.of(context)!.settings.arguments</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-900 p-4 rounded-lg">
+                    <div class="code-block text-gray-100 overflow-x-auto">
+                        <pre><code>// إعداد الطرق المسماة في MaterialApp
+MaterialApp(
+  title: 'My App',
+  initialRoute: '/',
+  routes: {
+    '/': (context) => HomeScreen(),
+    '/login': (context) => LoginScreen(),
+    '/profile': (context) => ProfileScreen(),
+    '/details': (context) {
+      // استقبال الوسائط
+      final args = ModalRoute.of(context)!.settings.arguments as Map;
+      return DetailsScreen(id: args['id']);
+    },
+  },
+);
+
+// الانتقال باستخدام الطرق المسماة
+Navigator.pushNamed(
+  context,
+  '/details',
+  arguments: {'id': 123},
+);</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+  </body>
+</html>

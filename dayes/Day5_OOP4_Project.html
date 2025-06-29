@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>البرمجة الكائنية (OOP) - مشروع مصنع سيارات</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+        .code-block {
+            font-family: 'Courier New', monospace;
+        }
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+        /* أنماط عامة */
+:root {
+  --primary: #4361ee;
+  --primary-dark: #3a0ca3;
+  --secondary: #f72585;
+  --dark: #212529;
+  --light: #f8f9fa;
+  --gray: #6c757d;
+  --success: #4cc9f0;
+  --warning: #f8961e;
+  --danger: #ef233c;
+  --info: #4895ef;
+}
+
+body {
+  font-family: 'Tajawal', sans-serif;
+  background-color: #f5f7fa;
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+/* الترويسة */
+header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  padding: 2rem 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  transform: rotate(30deg);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  position: relative;
+}
+
+/* الأقسام الرئيسية */
+section {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* العناوين */
+h2, h3, h4 {
+  color: var(--dark);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 50px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+/* الأيقونات */
+.icon-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-left: 1rem;
+  flex-shrink: 0;
+}
+
+/* كتل الشفرة البرمجية */
+.code-block {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.code-block::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.code-block pre {
+  margin: 0;
+}
+
+.code-block code {
+  display: block;
+  white-space: pre;
+}
+
+/* الأزرار والعلامات */
+.badge {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  font-size: 0.75em;
+  font-weight: 700;
+  line-height: 1;
+  color: white;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 50rem;
+}
+
+.badge-primary {
+  background-color: var(--primary);
+}
+
+.badge-secondary {
+  background-color: var(--secondary);
+}
+
+/* الجداول */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: right;
+  border-bottom: 1px solid #dee2e6;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: 700;
+}
+
+tr:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* التنقل بين الخطوات */
+.step {
+  position: relative;
+  padding-left: 3rem;
+  margin-bottom: 2rem;
+}
+
+.step-number {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
+}
+
+/* التأثيرات التفاعلية */
+.highlight-box {
+  border-left: 4px solid var(--primary);
+  background-color: rgba(67, 97, 238, 0.05);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+  transition: all 0.3s ease;
+}
+
+.highlight-box:hover {
+  background-color: rgba(67, 97, 238, 0.1);
+  transform: translateX(5px);
+}
+
+/* التذييل */
+footer {
+  background: linear-gradient(135deg, var(--dark), #343a40);
+  color: white;
+  padding: 3rem 0;
+  text-align: center;
+}
+
+footer p {
+  margin-bottom: 0.5rem;
+}
+
+/* تأثيرات الحركة */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ألوان حسب النوع */
+.bg-primary-light {
+  background-color: rgba(67, 97, 238, 0.1);
+  border-left: 4px solid var(--primary);
+}
+
+.bg-success-light {
+  background-color: rgba(76, 201, 240, 0.1);
+  border-left: 4px solid var(--success);
+}
+
+.bg-danger-light {
+  background-color: rgba(239, 35, 60, 0.1);
+  border-left: 4px solid var(--danger);
+}
+
+.bg-warning-light {
+  background-color: rgba(248, 150, 30, 0.1);
+  border-left: 4px solid var(--warning);
+}
+
+/* التكيف مع الأجهزة المحمولة */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+  
+  section {
+    padding: 1.5rem;
+  }
+  
+  .code-block {
+    padding: 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* تخصيص لون الشفرة البرمجية */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #6A9955;
+}
+
+.token.punctuation {
+  color: #d4d4d4;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #b5cea8;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #ce9178;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #d4d4d4;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #569cd6;
+}
+
+.token.function,
+.token.class-name {
+  color: #dcdcaa;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #d16969;
+}
+
+pre{
+    text-align: left;
+    direction: ltr;
+}
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white py-6 shadow-lg">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl font-bold">البرمجة الكائنية (OOP) - مشروع مصنع سيارات</h1>
+            <p class="mt-2 text-blue-100">تعلم مفاهيم OOP من خلال مثال عملي بلغة Dart</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Introduction Section -->
+        <section class="mb-12 bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-blue-100 p-3 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-semibold text-gray-800">مقدمة</h2>
+            </div>
+            <p class="text-gray-700 mb-4">في هذا الدرس، سنتعلم مفاهيم البرمجة الكائنية (OOP) من خلال مشروع عملي لإنشاء نظام إدارة لمصنع سيارات. سنبدأ بالبرمجة الإجرائية ثم ننتقل تدريجياً إلى OOP لنرى الفرق.</p>
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+                <p class="text-yellow-700"><span class="font-bold">الهدف:</span> فهم الفرق بين البرمجة الإجرائية والكائنية وتطبيق مبادئ OOP الأساسية.</p>
+            </div>
+        </section>
+
+        <!-- Procedural Programming Section -->
+        <section class="mb-12 bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-red-100 p-3 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-semibold text-gray-800">البرمجة الإجرائية (Procedural Programming)</h2>
+            </div>
+            
+            <p class="text-gray-700 mb-4">في البرمجة الإجرائية، ننظم الكود كمجموعة من الإجراءات (الدوال) التي تعمل على بيانات منفصلة.</p>
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-gray-800 mb-3">مثال: إدارة سيارات المصنع</h3>
+                <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                    <pre><code>// بيانات السيارات في Lists منفصلة
+List&lt;String&gt; brands = [];
+List&lt;String&gt; models = [];
+List&lt;int&gt; years = [];
+List&lt;int&gt; speeds = [];
+
+// دالة لإضافة سيارة جديدة
+void addCar(String brand, String model, int year) {
+  brands.add(brand);
+  models.add(model);
+  years.add(year);
+  speeds.add(0); // السرعة الافتراضية صفر
+}
+
+// دالة لتسريع السيارة
+void accelerate(int index, int amount) {
+  speeds[index] += amount;
+}
+
+// دالة لعرض بيانات السيارة
+void display(int index) {
+  print('Brand: ${brands[index]}');
+  print('Model: ${models[index]}');
+  print('Year: ${years[index]}');
+  print('Speed: ${speeds[index]} km/h');
+}</code></pre>
+                </div>
+            </div>
+            
+            <h3 class="text-xl font-medium text-gray-800 mb-3">مشاكل البرمجة الإجرائية</h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-200">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-2 px-4 border-b text-right font-semibold text-gray-700">العيب</th>
+                            <th class="py-2 px-4 border-b text-right font-semibold text-gray-700">الشرح</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-2 px-4 border-b text-red-600">❌ البيانات متبعثرة</td>
+                            <td class="py-2 px-4 border-b">كل خاصية موجودة في List مختلفة، ولازم دايمًا المؤشر `index` يكون متطابق بينهم</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-2 px-4 border-b text-red-600">❌ قابلية التوسع ضعيفة</td>
+                            <td class="py-2 px-4 border-b">لو حبينا نضيف خاصية زي "لون العربية" لازم نعدل كل القوائم ودوال التعامل معاها</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-2 px-4 border-b text-red-600">❌ صعب نعيد استخدام الكود</td>
+                            <td class="py-2 px-4 border-b">مفيش مفهوم الكائن (Object) فنحتاج نكتب دوال منفصلة لكل كيان</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-2 px-4 border-b text-red-600">❌ التحكم في البيانات محدود</td>
+                            <td class="py-2 px-4 border-b">أي كود ممكن يغير السرعة مباشرة، مفيش حماية أو شروط (Encapsulation)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- OOP Solution Section -->
+        <section class="mb-12 bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-green-100 p-3 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-semibold text-gray-800">الحل: البرمجة الكائنية (OOP)</h2>
+            </div>
+            
+            <p class="text-gray-700 mb-4">البرمجة الكائنية تنظم الكود في كائنات (Objects) تحتوي على البيانات والسلوكيات معاً، مما يجعل الكود أكثر تنظيماً وقابلية للصيانة والتوسع.</p>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Problem Column -->
+                <div class="bg-red-50 p-4 rounded-lg border border-red-100">
+                    <h3 class="text-lg font-medium text-red-800 mb-3">المشكلة في البرمجة الإجرائية</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <span class="text-red-500 mr-2">❌</span>
+                            <span>بيانات متفرقة</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-500 mr-2">❌</span>
+                            <span>مفيش تنظيم</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-500 mr-2">❌</span>
+                            <span>صعب نضيف خصائص</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-red-500 mr-2">❌</span>
+                            <span>مش آمن</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Solution Column -->
+                <div class="bg-green-50 p-4 rounded-lg border border-green-100">
+                    <h3 class="text-lg font-medium text-green-800 mb-3">الحل في البرمجة الكائنية</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✅</span>
+                            <span>بيانات داخل كائن واحد `Car`</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✅</span>
+                            <span>كلاس منظم بخصائص ودوال</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✅</span>
+                            <span>نضيف خصائص داخل الكلاس فقط</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-2">✅</span>
+                            <span>نستخدم `private` و`getters/setters`</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- OOP Implementation Steps -->
+        <section class="mb-12 bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-purple-100 p-3 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-semibold text-gray-800">خطوات تطبيق OOP</h2>
+            </div>
+            
+            <!-- Step 1 -->
+            <div class="mb-8">
+                <div class="flex items-center mb-3">
+                    <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-2">1</span>
+                    <h3 class="text-xl font-medium text-gray-800">إنشاء كلاس أساسي للسيارة</h3>
+                </div>
+                <p class="text-gray-700 mb-3">نبدأ بإنشاء كلاس `Car` يحتوي على الخصائص الأساسية للسيارة والدوال التي تعمل عليها.</p>
+                <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                    <pre><code>class Car {
+  String brand;
+  String model;
+  int year;
+  int speed = 0;
+
+  Car(this.brand, this.model, this.year);
+
+  void accelerate(int amount) {
+    speed += amount;
+  }
+
+  void display() {
+    print('Brand: $brand');
+    print('Model: $model');
+    print('Year: $year');
+    print('Speed: $speed km/h');
+  }
+}</code></pre>
+                </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="mb-8">
+                <div class="flex items-center mb-3">
+                    <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-2">2</span>
+                    <h3 class="text-xl font-medium text-gray-800">استخدام Abstract Class لتحديد المواصفات العامة</h3>
+                </div>
+                <p class="text-gray-700 mb-3">نستخدم `abstract class` لتحديد السلوكيات المشتركة التي يجب أن تنفذها جميع المركبات.</p>
+                <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                    <pre><code>abstract class Vehicle {
+  void start();
+  void accelerate(int speed);
+}</code></pre>
+                </div>
+                <div class="mt-3 bg-blue-50 p-4 rounded-lg">
+                    <h4 class="font-medium text-blue-800 mb-2">لماذا نستخدم Abstract Class؟</h4>
+                    <ul class="list-disc list-inside text-blue-700 space-y-1">
+                        <li>تحديد السلوكيات المشتركة (كل العربيات عندها start و accelerate)</li>
+                        <li>فرض التنفيذ على الكلاسات التي تطبق هذا الـ interface</li>
+                        <li>لا يمكن إنشاء كائنات مباشرة من الـ abstract class</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="mb-8">
+                <div class="flex items-center mb-3">
+                    <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-2">3</span>
+                    <h3 class="text-xl font-medium text-gray-800">تطبيق الـ Interface على كلاس Car</h3>
+                </div>
+                <p class="text-gray-700 mb-3">نجعل كلاس `Car` يطبق الـ `Vehicle` مما يفرض عليه تنفيذ الدوال المطلوبة.</p>
+                <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                    <pre><code>class Car implements Vehicle {
+  String brand;
+  String model;
+  int year;
+  int _speed = 0;
+
+  Car(this.brand, this.model, this.year);
+
+  @override
+  void start() {
+    print('$brand $model is starting...');
+  }
+
+  @override
+  void accelerate(int speed) {
+    _speed += speed;
+    print('$brand $model accelerated to $_speed km/h');
+  }
+
+  void displayInfo() {
+    print('Brand: $brand');
+    print('Model: $model');
+    print('Year: $year');
+    print('Speed: $_speed');
+  }
+}</code></pre>
+                </div>
+            </div>
+            
+            <!-- Step 4 -->
+            <div class="mb-8">
+                <div class="flex items-center mb-3">
+                    <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-2">4</span>
+                    <h3 class="text-xl font-medium text-gray-800">إنشاء أنواع متخصصة من السيارات (Inheritance)</h3>
+                </div>
+                <p class="text-gray-700 mb-3">نستخدم الوراثة لإنشاء أنواع متخصصة من السيارات مع تعديل السلوكيات حسب الحاجة.</p>
+                
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <h4 class="font-medium text-gray-800 mb-2">GasCar (سيارة بنزين)</h4>
+                        <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                            <pre><code>class GasCar extends Car {
+  GasCar(String brand, String model, int year) 
+      : super(brand, model, year);
+
+  @override
+  void start() {
+    print('$brand $model (Gas) starting with engine sound...');
+  }
+
+  @override
+  void accelerate(int speed) {
+    super.accelerate(speed);
+    print('$brand (Gas) engine roaring to $speed km/h!');
+  }
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <h4 class="font-medium text-gray-800 mb-2">ElectricCar (سيارة كهربائية)</h4>
+                        <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                            <pre><code>class ElectricCar extends Car {
+  ElectricCar(String brand, String model, int year) 
+      : super(brand, model, year);
+
+  @override
+  void start() {
+    print('$brand $model (Electric) starting silently...');
+  }
+
+  @override
+  void accelerate(int speed) {
+    super.accelerate(speed);
+    print('$brand (Electric) glides quietly to $speed km/h.');
+  }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-green-50 p-4 rounded-lg">
+                    <h4 class="font-medium text-green-800 mb-2">Polymorphism في العمل</h4>
+                    <p class="text-green-700">يمكننا معاملة جميع السيارات ككائنات من نوع `Vehicle` مع تنفيذ مختلف للدوال حسب النوع.</p>
+                </div>
+            </div>
+            
+            <!-- Step 5 -->
+            <div class="mb-8">
+                <div class="flex items-center mb-3">
+                    <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center mr-2">5</span>
+                    <h3 class="text-xl font-medium text-gray-800">إضافة Encapsulation و Static</h3>
+                </div>
+                <p class="text-gray-700 mb-3">نحمي البيانات ونضيف متغيرات static لحساب عدد السيارات المصنوعة.</p>
+                
+                <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4">
+                    <pre><code>class Car implements Vehicle {
+  String brand;
+  String model;
+  int year;
+  int _speed = 0; // private speed
+  String _type = "Unknown"; // private type
+  
+  static int carsCount = 0; // static counter
+
+  Car(this.brand, this.model, this.year) {
+    carsCount++; // زيادة العداد عند الإنشاء
+  }
+
+  // Getter للسرعة
+  int get speed => _speed;
+
+  // Method آمنة لتغيير السرعة
+  void increaseSpeed(int value) {
+    if (value > 0) {
+      _speed += value;
+    }
+  }
+
+  @override
+  void accelerate(int speed) {
+    increaseSpeed(speed);
+    print('Accelerated to $_speed km/h');
+  }
+  
+  // باقي الدوال...
+}</code></pre>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-purple-50 p-4 rounded-lg">
+                        <h4 class="font-medium text-purple-800 mb-2">Encapsulation</h4>
+                        <ul class="list-disc list-inside text-purple-700 space-y-1">
+                            <li>جعلنا `_speed` و `_type` private باستخدام _</li>
+                            <li>وفرنا getter للقراءة فقط</li>
+                            <li>أنشأنا method آمنة لتعديل السرعة</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-yellow-50 p-4 rounded-lg">
+                        <h4 class="font-medium text-yellow-800 mb-2">Static</h4>
+                        <ul class="list-disc list-inside text-yellow-700 space-y-1">
+                            <li>`carsCount` يحسب جميع السيارات المصنوعة</li>
+                            <li>يتشاركه جميع الكائنات من Car وأولادها</li>
+                            <li>يمكن الوصول إليه مباشرة من الكلاس</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Code and Demo -->
+        <section class="mb-12 bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-indigo-100 p-3 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-semibold text-gray-800">الكود النهائي والتجربة</h2>
+            </div>
+            
+            <div class="mb-6">
+                <h3 class="text-xl font-medium text-gray-800 mb-3">الكود الكامل</h3>
+                <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg overflow-x-auto" style="max-height: 500px;">
+                    <pre><code>abstract class Vehicle {
+  void start();
+  void accelerate(int speed);
+}
+
+class Car implements Vehicle {
+  String brand;
+  String model;
+  int year;
+  int _speed = 0;
+  String _type = "Unknown";
+  static int carsCount = 0;
+
+  Car(this.brand, this.model, this.year) {
+    carsCount++;
+  }
+
+  int get speed => _speed;
+  String get type => _type;
+
+  void increaseSpeed(int value) {
+    if (value > 0) {
+      _speed += value;
+    }
+  }
+
+  @override
+  void start() {
+    print('$brand $model is starting...');
+  }
+
+  @override
+  void accelerate(int speed) {
+    increaseSpeed(speed);
+    print('$brand $model accelerated to $_speed km/h');
+  }
+
+  void displayInfo() {
+    print('Brand: $brand');
+    print('Model: $model');
+    print('Year: $year');
+    print('Speed: $_speed');
+    print('Type: $_type');
+  }
+}
+
+class GasCar extends Car {
+  GasCar(String brand, String model, int year) : super(brand, model, year) {
+    _type = "Gas";
+  }
+
+  @override
+  void start() {
+    print('$brand $model (Gas) is starting with engine sound...');
+  }
+
+  @override
+  void accelerate(int speed) {
+    increaseSpeed(speed);
+    print('$brand (Gas) engine roaring to $speed km/h!');
+  }
+}
+
+class ElectricCar extends Car {
+  ElectricCar(String brand, String model, int year) : super(brand, model, year) {
+    _type = "Electric";
+  }
+
+  @override
+  void start() {
+    print('$brand $model (Electric) is starting silently...');
+  }
+
+  @override
+  void accelerate(int speed) {
+    increaseSpeed(speed);
+    print('$brand (Electric) glides quietly to $speed km/h.');
+  }
+}
+
+void main() {
+  GasCar gasCar = GasCar("Toyota", "Corolla", 2022);
+  ElectricCar electricCar = ElectricCar("Tesla", "Model 3", 2023);
+  GasCar gasCar2 = GasCar("Honda", "Civic", 2021);
+
+  gasCar.start();
+  gasCar.accelerate(60);
+  gasCar.displayInfo();
+
+  print('-----');
+
+  electricCar.start();
+  electricCar.accelerate(80);
+  electricCar.displayInfo();
+
+  print('-----');
+  
+  print('Total cars produced: ${Car.carsCount}');
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="bg-blue-50 p-4 rounded-lg">
+                <h3 class="text-xl font-medium text-blue-800 mb-3">مخرجات البرنامج</h3>
+                <div class="code-block bg-gray-800 text-gray-100 p-4 rounded-lg">
+                    <pre><code>Toyota Corolla (Gas) is starting with engine sound...
+Toyota (Gas) engine roaring to 60 km/h!
+Brand: Toyota
+Model: Corolla
+Year: 2022
+Speed: 60
+Type: Gas
+-----
+Tesla Model 3 (Electric) is starting silently...
+Tesla (Electric) glides quietly to 80 km/h.
+Brand: Tesla
+Model: Model 3
+Year: 2023
+Speed: 80
+Type: Electric
+-----
+Total cars produced: 2</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- OOP Principles Summary -->
+        <section class="mb-12 bg-white rounded-xl shadow-md p-6">
+            <div class="flex items-center mb-4">
+                <div class="bg-yellow-100 p-3 rounded-full mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-semibold text-gray-800">ملخص مبادئ OOP المطبقة</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Class & Object -->
+                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-all">
+                    <h3 class="font-bold text-lg text-blue-600 mb-2">Class & Object</h3>
+                    <p class="text-gray-700">عرفنا كلاسات `Car`, `GasCar`, `ElectricCar` وأنشأنا كائنات منها.</p>
+                </div>
+                
+                <!-- Encapsulation -->
+                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-all">
+                    <h3 class="font-bold text-lg text-blue-600 mb-2">Encapsulation</h3>
+                    <p class="text-gray-700">جعلنا `_speed` و `_type` private ووفرنا methods آمنة للوصول إليها.</p>
+                </div>
+                
+                <!-- Inheritance -->
+                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-all">
+                    <h3 class="font-bold text-lg text-blue-600 mb-2">Inheritance</h3>
+                    <p class="text-gray-700">`GasCar` و `ElectricCar` ورثوا من `Car` واستخدموا `super` للوصول للأب.</p>
+                </div>
+                
+                <!-- Polymorphism -->
+                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-all">
+                    <h3 class="font-bold text-lg text-blue-600 mb-2">Polymorphism</h3>
+                    <p class="text-gray-700">كل عربية لها تنفيذ مختلف لـ `start()` و `accelerate()` حسب نوعها.</p>
+                </div>
+                
+                <!-- Abstraction -->
+                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-all">
+                    <h3 class="font-bold text-lg text-blue-600 mb-2">Abstraction</h3>
+                    <p class="text-gray-700">`Vehicle` abstract class حددت المواصفات العامة دون تنفيذ.</p>
+                </div>
+                
+                <!-- Static -->
+                <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-all">
+                    <h3 class="font-bold text-lg text-blue-600 mb-2">Static</h3>
+                    <p class="text-gray-700">`carsCount` يحسب جميع السيارات المصنوعة ويشارك بين الكائنات.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>مشروع تعليمي لشرح مفاهيم البرمجة الكائنية (OOP) بلغة Dart</p>
+            <p class="mt-2 text-gray-400">تم تصميم الصفحة باستخدام Tailwind CSS</p>
+        </div>
+    </footer>
+
+    <script>
+        // يمكن إضافة أي تفاعلات JavaScript هنا إذا لزم الأمر
+        document.querySelectorAll('pre code').forEach((block) => {
+            // يمكن إضافة highlight.js هنا إذا أردنا تلوين الشفرة
+            block.innerHTML = block.innerHTML.trim();
+        });
+    </script>
+</body>
+</html>

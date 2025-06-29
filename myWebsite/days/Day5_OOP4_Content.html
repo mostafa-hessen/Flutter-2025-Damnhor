@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعلم البرمجة كائنية التوجه بطريقة مبسطة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background-color: rgba(251, 191, 36, 0.3);
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+        
+        .highlight:hover:after {
+            height: 50%;
+            background-color: rgba(251, 191, 36, 0.5);
+        }
+        
+        .code-block {
+            font-family: 'Courier New', Courier, monospace;
+            background: #1e293b;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .car-animation {
+            animation: drive 12s linear infinite;
+        }
+        
+        @keyframes drive {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100vw); }
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        pre{
+            text-align: left;
+            direction: ltr;
+        }
+        .card-hover{
+            overflow-x: scroll;
+        }
+          
+        .hero-gradient {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .highlight {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .highlight:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background-color: rgba(251, 191, 36, 0.3);
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+        
+        .highlight:hover:after {
+            height: 50%;
+            background-color: rgba(251, 191, 36, 0.5);
+        }
+        
+        .code-block {
+            font-family: 'Courier New', Courier, monospace;
+            background: #1e293b;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .car-animation {
+            animation: drive 12s linear infinite;
+        }
+        
+        @keyframes drive {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100vw); }
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        pre {
+            text-align: left;
+            direction: ltr;
+        }
+        
+        .scroll-container {
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #8b5cf6 #e2e8f0;
+        }
+        
+        .scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .scroll-container::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        
+        .scroll-container::-webkit-scrollbar-thumb {
+            background-color: #8b5cf6;
+            border-radius: 10px;
+        }
+        
+        .concept-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 28px;
+        }
+        
+        .concept-card {
+            transition: all 0.3s ease;
+            border-top: 4px solid transparent;
+        }
+        
+        .concept-card:hover {
+            border-top-color: #8b5cf6;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+        <!-- شريط التنقل -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <div class="w-10 h-10 rounded-full hero-gradient flex items-center justify-center text-white font-bold text-xl">OOP</div>
+                <h1 class="text-xl font-bold text-gray-800">البرمجة الكائنية</h1>
+            </div>
+            <div class="hidden md:flex space-x-6 space-x-reverse">
+                <a href="#encapsulation" class="text-gray-700 hover:text-purple-600 font-medium">التغليف</a>
+                <a href="#inheritance" class="text-gray-700 hover:text-purple-600 font-medium">الوراثة</a>
+                <a href="#abstract" class="text-gray-700 hover:text-purple-600 font-medium">الكائنات المجردة</a>
+                <a href="#interface" class="text-gray-700 hover:text-purple-600 font-medium">الواجهات</a>
+                <a href="#static" class="text-gray-700 hover:text-purple-600 font-medium">الثوابت</a>
+            </div>
+            <button class="md:hidden text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+   <!-- قسم البطل -->
+    <header class="hero-gradient text-white py-16">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0 animate__animated animate__fadeInRight">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">تعلم البرمجة الكائنية <span class="highlight">ببساطة</span></h1>
+                <p class="text-xl mb-6">أساسيات البرمجة الكائنية التوجه (OOP) 
+                    مع أمثلة عملية بلغة Dart معي Eng/Mostafa Hussein
+                </p>
+                <div class="flex space-x-4 space-x-reverse">
+                    <a href="#encapsulation" class="bg-white text-purple-600 px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition">ابدأ التعلم</a>
+                    <a href="#exercises" class="border-2 border-white px-6 py-2 rounded-full font-bold hover:bg-white hover:text-purple-600 transition">تمارين عملية</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center animate__animated animate__fadeInLeft">
+                <div class="relative">
+                    <div class="w-64 h-64 bg-white bg-opacity-20 rounded-full absolute -top-10 -right-10"></div>
+                    <div class="w-64 h-64 bg-white bg-opacity-10 rounded-full absolute -bottom-10 -left-10"></div>
+                    <div class="relative z-10 floating">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1903/1903162.png" alt="OOP Illustration" class="w-64 h-64 object-contain">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-16" id="start">
+        <!-- Hero Section -->
+        <section class="mb-24 bg-white rounded-2xl shadow-xl overflow-hidden animate__animated animate__fadeInUp">
+            <div class="md:flex">
+                <div class="md:flex-1 p-10">
+                    <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold mb-2">بداية الرحلة</div>
+                    <h2 class="text-4xl font-extrabold text-gray-900 mb-6">ليه نستخدم الـ OOP أصلاً؟</h2>
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        تخيل معايا عندك أكتر من <span class="highlight font-medium">عربية لعب</span>، وكل عربية ليها:
+                    </p>
+                    <ul class="space-y-3 text-gray-600 mb-8">
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span class="flex-1">لون</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span class="flex-1">نوع</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span class="flex-1">سرعة</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-500 mr-3 mt-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span class="flex-1">وزرار يشغلها</span>
+                        </li>
+                    </ul>
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        لو كتبت كود عادي لكل عربية لوحدها، الدنيا هتبقى زحمة ومكركبة ومليانة تكرار ومش منظمة.
+                    </p>
+                </div>
+                <div class="md:flex-1 bg-indigo-50 flex items-center justify-center p-8 relative">
+                    <div class="relative w-full h-64">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3034/3034883.png" alt="Toy Cars" class="w-40 h-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 floating">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3034/3034883.png" alt="Toy Cars" class="w-32 h-32 absolute top-1/4 left-1/4 transform -translate-x-1/2 -translate-y-1/2 text-red-500 floating" style="animation-delay: 0.5s;">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3034/3034883.png" alt="Toy Cars" class="w-24 h-24 absolute top-3/4 right-1/4 transform -translate-x-1/2 -translate-y-1/2 text-blue-500 floating" style="animation-delay: 1s;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Section -->
+        <section class="mb-24">
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-800 relative">
+                <span class="relative inline-block">
+                    المشاكل من غير OOP
+                    <span class="absolute bottom-0 left-0 w-full h-2 bg-yellow-300 rounded-full"></span>
+                </span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Without OOP -->
+                <div class="bg-red-50 border-l-4 border-red-500 rounded-xl p-8 card-hover transform transition-all duration-300 hover:scale-[1.02]">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-red-100 p-3 rounded-full mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-red-800">كود عادي (بدون OOP)</h3>
+                    </div>
+                    <div class="code-block p-4 mb-6">
+                        <pre class="text-green-400 text-sm"><code>// بيانات عربية 1
+String car1Name = "BMW";
+String car1Color = "أحمر";
+int car1Speed = 100;
+
+void driveCar1() {
+  print("السيارة $car1Name تمشي بسرعة $car1Speed");
+}
+
+// بيانات عربية 2
+String car2Name = "Kia";
+String car2Color = "أزرق";
+int car2Speed = 80;
+
+void driveCar2() {
+  print("السيارة $car2Name تمشي بسرعة $car2Speed");
+}</code></pre>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-red-700 mb-3 text-lg">العيوب:</h4>
+                        <ul class="space-y-3 text-red-600">
+                            <li class="flex items-start">
+                                <span class="mr-3 mt-1">✗</span>
+                                <span>تكرار كبير جدًا للكود</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 mt-1">✗</span>
+                                <span>صعب تضيف ميزة جديدة لكل العربيات</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 mt-1">✗</span>
+                                <span>لو غيرت حاجة، لازم تعدل في كل مكان</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- With OOP -->
+                <div class="bg-green-50 border-l-4 border-green-500 rounded-xl p-8 card-hover transform transition-all duration-300 hover:scale-[1.02]">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-green-800">كود باستخدام OOP</h3>
+                    </div>
+                    <div class="code-block p-4 mb-6">
+                        <pre class="text-green-400 text-sm"><code>class Car {
+  String name;
+  String color;
+  int speed;
+
+  // Constructor: بيدينا القيم لما نعمل عربية
+  Car(this.name, this.color, this.speed);
+
+  // دالة بتخلي العربية تمشي
+  void drive() {
+    print("السيارة $name لونها $color تمشي بسرعة $speed");
+  }
+}
+
+void main() {
+  Car car1 = Car("BMW", "أحمر", 100);
+  Car car2 = Car("Kia", "أزرق", 80);
+
+  car1.drive();
+  car2.drive();
+}</code></pre>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-green-700 mb-3 text-lg">المميزات:</h4>
+                        <ul class="space-y-3 text-green-600">
+                            <li class="flex items-start">
+                                <span class="mr-3 mt-1">✓</span>
+                                <span>لا يوجد تكرار للكود</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 mt-1">✓</span>
+                                <span>إضافة ميزات جديدة سهلة</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-3 mt-1">✓</span>
+                                <span>التعديل في مكان واحد فقط</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section class="mb-24 bg-white rounded-2xl shadow-xl overflow-hidden animate__animated animate__fadeIn">
+            <div class="px-8 py-6 bg-gradient-to-r from-blue-600 to-blue-700">
+                <h2 class="text-2xl font-bold text-white flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                    الفرق بين الكود العادي و OOP
+                </h2>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-8 py-4 text-right text-sm font-medium text-gray-500 uppercase tracking-wider">الشيء</th>
+                            <th class="px-8 py-4 text-right text-sm font-medium text-gray-500 uppercase tracking-wider">كود عادي</th>
+                            <th class="px-8 py-4 text-right text-sm font-medium text-gray-500 uppercase tracking-wider">OOP</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-8 py-4 whitespace-nowrap text-sm font-medium text-gray-900">التكرار</td>
+                            <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">كتير جدًا</span>
+                            </td>
+                            <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">قليل جدًا</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-8 py-4 whitespace-nowrap text-sm font-medium text-gray-900">التنظيم</td>
+                            <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">مش منظم</span>
+                            </td>
+                            <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">منظم جدًا</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-8 py-4 whitespace-nowrap text-sm font-medium text-gray-900">التعديل</td>
+                            <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">صعب تعدل كل عربية</span>
+                            </td>
+                            <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">تعدل مرة واحدة في الكلاس</span>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-8 py-4 whitespace-nowrap text-sm font-medium text-gray-900">الاستخدام</td>
+                            <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">كل عربية بكود خاص</span>
+                            </td>
+                            <td class="px-8 py-4 whitespace-nowrap text-sm text-gray-500">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">كل العربيات من نفس الكلاس</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- OOP Principles -->
+        <section class="mb-24">
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-800 relative">
+                <span class="relative inline-block">
+                    مبادئ البرمجة كائنية التوجه
+                    <span class="absolute bottom-0 left-0 w-full h-2 bg-purple-300 rounded-full"></span>
+                </span>
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Encapsulation -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover group">
+                    <div class="bg-purple-600 p-6 text-center relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-10">
+                            <div class="flex items-center justify-center h-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-white group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-purple-700">التغليف (Encapsulation)</h3>
+                        <p class="text-gray-600 mb-4">إخفاء البيانات الداخلية وتوفير واجهة للتعامل مع الكائن</p>
+                        <div class="code-block p-3 rounded-lg">
+                            <pre class="text-xs text-purple-200"><code>class Wallet {
+  double _balance; // خاص
+  void deposit() { ... } // عام
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inheritance -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover group">
+                    <div class="bg-blue-600 p-6 text-center relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-10">
+                            <div class="flex items-center justify-center h-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                                </svg>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-white group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-blue-700">الوراثة (Inheritance)</h3>
+                        <p class="text-gray-600 mb-4">إمكانية إنشاء كلاس جديد بناءً على كلاس موجود</p>
+                        <div class="code-block p-3 rounded-lg">
+                            <pre class="text-xs text-blue-200"><code>class Employee { ... }
+class Manager extends Employee { ... }</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Polymorphism -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover group">
+                    <div class="bg-green-600 p-6 text-center relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-10">
+                            <div class="flex items-center justify-center h-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-white group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-green-700">تعدد الأشكال (Polymorphism)</h3>
+                        <p class="text-gray-600 mb-4">إمكانية تنفيذ نفس العملية بطرق مختلفة</p>
+                        <div class="code-block p-3 rounded-lg">
+                            <pre class="text-xs text-green-200"><code>class Animal { speak() { } }
+class Dog extends Animal { 
+  speak() { print("هاو هاو"); }
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Abstraction -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover group">
+                    <div class="bg-yellow-600 p-6 text-center relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-10">
+                            <div class="flex items-center justify-center h-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-white group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3 text-yellow-700">التجريد (Abstraction)</h3>
+                        <p class="text-gray-600 mb-4">إظهار الوظائف الأساسية وإخفاء التفاصيل</p>
+                        <div class="code-block p-3 rounded-lg">
+                            <pre class="text-xs text-yellow-200"><code>abstract class Shape {
+  abstract void draw();
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Real World Example -->
+        <section class="mb-24 bg-gradient-to-r from-indigo-100 to-purple-100 rounded-2xl p-10 shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-20 -top-20 w-64 h-64 bg-purple-200 rounded-full opacity-20"></div>
+            <div class="absolute -left-20 -bottom-20 w-64 h-64 bg-indigo-200 rounded-full opacity-20"></div>
+            
+            <div class="relative">
+                <h2 class="text-3xl font-bold text-center mb-12 text-indigo-800">مثال واقعي: نظام المدرسة</h2>
+                
+                <div class="grid md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                            بدون OOP
+                        </h3>
+                        <div class="code-block p-5 rounded-lg">
+                            <pre class="text-green-400 text-sm"><code>String student1Name = "أحمد";
+int student1Age = 10;
+String student1Class = "5A";
+
+void study1() {
+  print("$student1Name بيذاكر في فصله $student1Class");
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            باستخدام OOP
+                        </h3>
+                        <div class="code-block p-5 rounded-lg">
+                            <pre class="text-green-400 text-sm"><code>class Student {
+  String name;
+  int age;
+  String className;
+
+  Student(this.name, this.age, this.className);
+
+  void study() {
+    print("$name بيذاكر في فصله $className");
+  }
+}
+
+void main() {
+  Student s1 = Student("أحمد", 10, "5A");
+  Student s2 = Student("سارة", 9, "4B");
+
+  s1.study();
+  s2.study();
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+                </section>
+                <section id="concepts" class="py-16 px-4 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">🧱 مفاهيم OOP الأساسية</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Class & Object -->
+                <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 p-3 rounded-full mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Class & Object</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        الكلاس هو القالب الذي يحدد الخصائص والوظائف، والكائن هو النسخة الفعلية منه.
+                    </p>
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <pre class="text-sm text-gray-800"><code>class Car { ... }
+Car bmw = Car();</code></pre>
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="https://illustrations.popsy.co/amber/cookie.svg" alt="Class and Object" class="w-32">
+                    </div>
+                </div>
+                
+                <!-- Encapsulation -->
+                <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 p-3 rounded-full mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Encapsulation</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        إخفاء البيانات الداخلية وتوفير واجهة للتعامل مع الكائن.
+                    </p>
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <pre class="text-sm text-gray-800"><code>class Wallet {
+  double _balance;
+  
+  void deposit(double amount) {
+    if (amount > 0) _balance += amount;
+  }
+}</code></pre>
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="https://illustrations.popsy.co/amber/vault.svg" alt="Encapsulation" class="w-32">
+                    </div>
+                </div>
+                
+                <!-- Inheritance -->
+                <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Inheritance</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        قدرة الكلاس على وراثة خصائص ووظائف كلاس آخر.
+                    </p>
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <pre class="text-sm text-gray-800"><code>class Animal { ... }
+class Dog extends Animal { ... }</code></pre>
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="https://illustrations.popsy.co/amber/genetic-data.svg" alt="Inheritance" class="w-32">
+                    </div>
+                </div>
+                
+                <!-- Polymorphism -->
+                <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Polymorphism</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        قدرة الكائنات على اتخاذ أشكال متعددة واستجابة مختلفة لنفس الرسالة.
+                    </p>
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <pre class="text-sm text-gray-800"><code>class Animal {
+  void speak() => print("...");
+}
+
+class Dog extends Animal {
+  @override
+  void speak() => print("هاو هاو");
+}</code></pre>
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="https://illustrations.popsy.co/amber/designer-girl.svg" alt="Polymorphism" class="w-32">
+                    </div>
+                </div>
+                
+                <!-- Abstraction -->
+                <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-red-100 p-3 rounded-full mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Abstraction</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        إظهار الوظائف الأساسية وإخفاء تفاصيل التنفيذ.
+                    </p>
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <pre class="text-sm text-gray-800"><code>abstract class Shape {
+  void draw(); // دالة مجردة
+}
+
+class Circle extends Shape {
+  @override
+  void draw() { ... }
+}</code></pre>
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="https://illustrations.popsy.co/amber/designer.svg" alt="Abstraction" class="w-32">
+                    </div>
+                </div>
+                
+                <!-- Static -->
+                <div class="bg-white p-6 rounded-xl shadow-md card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Static</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        متغيرات أو دوال مشتركة بين كل الكائنات من نفس الكلاس.
+                    </p>
+                    <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                        <pre class="text-sm text-gray-800"><code>class MathUtils {
+  static const double pi = 3.14;
+  
+  static double square(double n) => n * n;
+}
+
+// الاستخدام
+double area = MathUtils.pi * MathUtils.square(5);</code></pre>
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="https://illustrations.popsy.co/amber/lightbulb-moment.svg" alt="Static" class="w-32">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- form  -->
+             
+<section class="mb-20 bg-white rounded-xl mt-4 shadow-xl overflow-hidden p-4 mt-4">
+            <div class="md:flex">
+                <div class="md:w-1/2 bg-indigo-600 p-8 text-white flex flex-col justify-center">
+                    <h2 class="text-3xl font-bold mb-4">جرب بنفسك!</h2>
+                    <p class="mb-6">غير القيم وشوف كيف الكائنات تتصرف:</p>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block mb-2">اسم السيارة:</label>
+                            <input type="text" id="carName" value="BMW" class="w-full px-4 py-2 rounded text-gray-800">
+                        </div>
+                        <div>
+                            <label class="block mb-2">لون السيارة:</label>
+                            <input type="text" id="carColor" value="أحمر" class="w-full px-4 py-2 rounded text-gray-800">
+                        </div>
+                        <div>
+                            <label class="block mb-2">سرعة السيارة:</label>
+                            <input type="number" id="carSpeed" value="120" class="w-full px-4 py-2 rounded text-gray-800">
+                        </div>
+                        <button onclick="createCar()" class="bg-white text-indigo-600 px-6 py-2 rounded-lg font-bold hover:bg-gray-100 transition-colors">أنشئ سيارة</button>
+                    </div>
+                </div>
+                <div class="md:w-1/2 p-8 bg-gray-50">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">النتيجة:</h3>
+                    <div id="output" class="bg-gray-200 p-4 rounded-lg min-h-32">
+                <p class="text-green-600 font-bold">تم إنشاء كائن سيارة جديد:</p>
+                <p class="mt-2">الاسم: <span class="font-bold">BMW</span></p>
+                <p>اللون: <span class="font-bold">أحمرn</span></p>
+                <p>السرعة: <span class="font-bold">120 كم/س</span></p>
+                <div class="mt-4 p-3 bg-blue-100 text-blue-800 rounded-lg">
+                    <p class="font-bold">النتيجة عند استدعاء دالة drive():</p>
+                    <p>السيارة BMW لونها أحمرn تمشي بسرعة 120</p>
+                </div>
+            </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-bold mb-2">الكود المستخدم:</h4>
+                        <div class="bg-gray-800 rounded-lg p-4 overflow-x-auto">
+                            <pre class="text-green-400 text-sm"><code>class Car {
+  constructor(name, color, speed) {
+    this.name = name;
+    this.color = color;
+    this.speed = speed;
+  }
+  
+  drive() {
+    return `السيارة ${this.name} لونها ${this.color} تمشي بسرعة ${this.speed}`;
+  }
+}
+
+const myCar = new Car("BMW", "أحمر", 120);
+myCar.drive();</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- قسم المفاهيم الأساسية -->
+    <section class="py-16   rounded-xl mt-4   bg-white" id="concepts">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">المفاهيم الأساسية للبرمجة الكائنية</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- بطاقة التغليف -->
+                <div class="concept-card bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md" id="encapsulation">
+                    <div class="concept-icon bg-purple-100 text-purple-600 mb-4">
+                        🔐
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center text-gray-800">التغليف (Encapsulation)</h3>
+                    <p class="text-gray-600 text-center">إخفاء البيانات وحمايتها من التعديل المباشر، والسماح بالوصول إليها فقط عبر واجهات محددة.</p>
+                </div>
+                
+                <!-- بطاقة الوراثة -->
+                <div class="concept-card bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md" id="inheritance">
+                    <div class="concept-icon bg-blue-100 text-blue-600 mb-4">
+                        🧬
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center text-gray-800">الوراثة (Inheritance)</h3>
+                    <p class="text-gray-600 text-center">إمكانية إنشاء كلاس جديد يرث خصائص ووظائف كلاس موجود بالفعل.</p>
+                </div>
+                
+                <!-- بطاقة تعدد الأشكال -->
+                <div class="concept-card bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md" id="polymorphism">
+                    <div class="concept-icon bg-green-100 text-green-600 mb-4">
+                        🎭
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center text-gray-800">تعدد الأشكال (Polymorphism)</h3>
+                    <p class="text-gray-600 text-center">إمكانية تنفيذ نفس الوظيفة بطرق مختلفة حسب الكائن الذي يستدعيها.</p>
+                </div>
+                
+                <!-- بطاقة التجريد -->
+                <div class="concept-card bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md" id="abstraction">
+                    <div class="concept-icon bg-yellow-100 text-yellow-600 mb-4">
+                        ✨
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center text-gray-800">التجريد (Abstraction)</h3>
+                    <p class="text-gray-600 text-center">إظهار الوظائف الأساسية فقط وإخفاء تفاصيل التنفيذ الداخلية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم شرح التغليف -->
+    <section class="py-16  px-3 rounded-xl mt-4  bg-gray-50" id="encapsulation-details">
+        <div class="container mx-auto px-4">
+            <div class="max-w-10xl bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 text-xl mr-4">
+                            🔐
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">التغليف (Encapsulation)</h2>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">🎈 تخيل إن معاك "محفظة إلكترونية" زي Vodafone Cash:</h3>
+                        <ul class="list-disc pr-5 space-y-2 text-gray-600">
+                            <li>فيها فلوس (balance)</li>
+                            <li>تقدر تحط فلوس (deposit)</li>
+                            <li>تقدر تسحب (withdraw)</li>
+                            <li>بس <span class="font-bold">ماينفعش أي حد يغير الرصيد من بره الكلاس</span>!</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-8 p-4 bg-yellow-50 border-r-4 border-yellow-400 rounded">
+                        <h3 class="text-lg font-semibold mb-2 text-gray-700">✨ يعني إيه Encapsulation؟</h3>
+                        <p class="text-gray-600">يعني نغلف البيانات ونحميها، ونخلي الناس تتعامل معاها من <span class="font-bold">بوابات معينة (getters & setters)</span> بس.</p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">🏦 مثال بسيط على <span class="highlight">محفظة إلكترونية</span>:</h3>
+                        <div class="code-block scroll-container">
+                            <pre class="p-4 text-gray-200"><code>class Wallet {
+  String _owner; // خاص - برا الكلاس مش شايفه
+  double _balance = 0; // خاص - محدش يقدر يعدله مباشرة
+
+  Wallet(this._owner);
+
+  // Getter لعرض الرصيد
+  double get balance => _balance;
+
+  // إيداع
+  void deposit(double amount) {
+    if (amount > 0) {
+      _balance += amount;
+      print("تم إضافة $amount جنيه. الرصيد الحالي: $_balance");
+    } else {
+      print("المبلغ غير صحيح");
+    }
+  }
+
+  // سحب
+  void withdraw(double amount) {
+    if (amount <= _balance) {
+      _balance -= amount;
+      print("تم سحب $amount جنيه. الرصيد الحالي: $_balance");
+    } else {
+      print("رصيد غير كافي");
+    }
+  }
+}
+
+void main() {
+  Wallet myWallet = Wallet("مصطفى");
+
+  myWallet.deposit(200);
+  myWallet.withdraw(50);
+  print("الرصيد النهائي: ${myWallet.balance}");
+
+  // محاولة لتعديل الرصيد من بره (مش هتشتغل)
+  // myWallet._balance = 100000; ❌
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">🧠 ليه ده مهم؟</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-purple-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-purple-700 mb-2">أمان</h4>
+                                <p class="text-gray-600">محدش يعدل البيانات بطريقه غلط.</p>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-blue-700 mb-2">تحكم</h4>
+                                <p class="text-gray-600">تقدر تضيف شروط وقت السحب أو الإيداع.</p>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <h4 class="font-bold text-green-700 mb-2">تنظيم</h4>
+                                <p class="text-gray-600">الكود شكله شيك وسهل تتبعه.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التمرين العملي -->
+    <section class="py-16   rounded-xl mt-4 bg-white" id="exercises">
+        <div class="container mx-auto px-4">
+            <div class="max-w-10xl ">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-xl mr-4">
+                        🏧
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">تمرين عملي: ماكينة ATM</h2>
+                </div>
+                
+                <div class="bg-gray-50 p-6 rounded-lg mb-8">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-700">✍️ المطلوب منك:</h3>
+                    <p class="text-gray-600 mb-4">اعمل كلاس <code class="bg-gray-200 px-2 py-1 rounded">ATM</code> فيه:</p>
+                    <ul class="list-disc pr-5 space-y-2 text-gray-600">
+                        <li>بيانات خاصة: <code class="bg-gray-200 px-2 py-1 rounded">_balance</code></li>
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">deposit(amount)</code></li>
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">withdraw(amount)</code></li>
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">checkBalance()</code></li>
+                        <li>مفيش حد يعدل الرصيد مباشرة</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-700">✅ مثال لحله:</h3>
+                    <div class="code-block scroll-container">
+                        <pre class="p-4 text-gray-200"><code>class ATM {
+  double _balance = 1000;
+
+  double get balance => _balance;
+
+  void deposit(double amount) {
+    if (amount > 0) {
+      _balance += amount;
+      print("تم إيداع $amount. الرصيد الحالي: $_balance");
+    } else {
+      print("قيمة الإيداع غير صحيحة");
+    }
+  }
+
+  void withdraw(double amount) {
+    if (amount <= _balance) {
+      _balance -= amount;
+      print("تم سحب $amount. الرصيد الحالي: $_balance");
+    } else {
+      print("رصيد غير كافي");
+    }
+  }
+
+  void checkBalance() {
+    print("رصيدك الحالي: $_balance");
+  }
+}
+
+void main() {
+  ATM atm = ATM();
+  atm.checkBalance();
+  atm.deposit(500);
+  atm.withdraw(200);
+  atm.checkBalance();
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الوراثة -->
+    <section class="py-16  px-3  rounded-xl mt-4 bg-gray-50" id="inheritance">
+        <div class="container mx-auto px-4">
+            <div class="max-w-410xl bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xl mr-4">
+                            🧬
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">الوراثة (Inheritance)</h2>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">التعريف</h3>
+                        <p class="text-gray-600">الوراثة معناها إن كلاس (فئة) جديدة تقدر ترث الخصائص والدوال من كلاس موجود أصلاً، وبكده تقدر تستخدم وتعدل أو تضيف عليها بدون ما تعيد كتابة نفس الكود.</p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">مثال واقعي</h3>
+                        <p class="text-gray-600 mb-4">فكر معايا في حياة الطلبة:</p>
+                        <ul class="list-disc pr-5 space-y-2 text-gray-600">
+                            <li>عندنا فئة عامة اسمها <span class="font-bold">"موظف"</span> (Employee).</li>
+                            <li>عندنا فئات فرعية زي <span class="font-bold">"طالب دوام جزئي"</span> و <span class="font-bold">"طالب دوام كامل"</span> اللي هما أنواع موظفين، كل واحد ليه وظائف وخصائص معينة.</li>
+                            <li>كل هؤلاء الموظفين يشتركوا في خصائص عامة (اسم، رقم تعريف، راتب)، لكن في نفس الوقت عندهم تصرفات مختلفة.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">مثال برمجي (Dart)</h3>
+                        <div class="code-block scroll-container">
+                            <pre class="p-4 text-gray-200"><code>class Employee {
+  String name;
+  double salary;
+
+  Employee(this.name, this.salary);
+
+  void work() {
+    print("$name يعمل براتب $salary");
+  }
+}
+
+class PartTimeStudent extends Employee {
+  int hours;
+
+  PartTimeStudent(String name, double salary, this.hours) : super(name, salary);
+
+  void study() {
+    print("$name يدرس $hours ساعات في الأسبوع");
+  }
+
+  @override
+  void work() {
+    print("$name يعمل دوام جزئي براتب $salary");
+  }
+}
+
+void main() {
+  PartTimeStudent ali = PartTimeStudent("علي", 5000, 20);
+  ali.work();   // علي يعمل دوام جزئي براتب 5000
+  ali.study();  // علي يدرس 20 ساعات في الأسبوع
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8 p-4 bg-blue-50 border-r-4 border-blue-400 rounded">
+                        <h3 class="text-lg font-semibold mb-2 text-gray-700">الفائدة العملية</h3>
+                        <p class="text-gray-600">في شغلك أو مشروعك، بدل ما تكتب كود مكرر لكل نوع موظف أو كائن مختلف، تستخدم الوراثة عشان تعيد استخدام الكود وتنظمه.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الكلاسات المجردة -->
+    <section class="py-16   rounded-xl mt-4 bg-white" id="abstract">
+        <div class="container mx-auto px-4">
+            <div class="max-w-10xl bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 text-xl mr-4">
+                            ✨
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">Abstract Class مع Extends (الكلاس المجرد + الوراثة)</h2>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">التعريف</h3>
+                        <p class="text-gray-600">الكلاس المجرد هو قالب لا يمكن إنشاء كائن منه مباشرة، لكنه يحدد دوال يجب أن تُنفذ في الكلاسات اللي تورثه.</p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">مثال واقعي</h3>
+                        <p class="text-gray-600 mb-4">تخيل عندك تطبيق بنظام توصيل طلبات:</p>
+                        <ul class="list-disc pr-5 space-y-2 text-gray-600">
+                            <li>عندك كلاس مجرد اسمه <span class="font-bold">DeliveryPerson</span> يعرف وظيفة أساسية وهي التوصيل <code class="bg-gray-200 px-2 py-1 rounded">deliver()</code>.</li>
+                            <li>عندك كلاس فرعي مثل <span class="font-bold">BikeCourier</span> و <span class="font-bold">CarCourier</span> كل واحد منهم له طريقة مختلفة للتوصيل.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">مثال برمجي (Dart)</h3>
+                        <div class="code-block scroll-container">
+                            <pre class="p-4 text-gray-200"><code>abstract class DeliveryPerson {
+  String name;
+
+  DeliveryPerson(this.name);
+
+  void deliver();  // دالة مجردة لازم تنفذ في الكلاسات الفرعية
+}
+
+class BikeCourier extends DeliveryPerson {
+  BikeCourier(String name) : super(name);
+
+  @override
+  void deliver() {
+    print("$name يوصل الطلب بالدراجة");
+  }
+}
+
+class CarCourier extends DeliveryPerson {
+  CarCourier(String name) : super(name);
+
+  @override
+  void deliver() {
+    print("$name يوصل الطلب بالسيارة");
+  }
+}
+
+void main() {
+  List&lt;DeliveryPerson&gt; couriers = [BikeCourier("أحمد"), CarCourier("محمود")];
+  
+  for (var courier in couriers) {
+    courier.deliver();
+  }
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8 p-4 bg-yellow-50 border-r-4 border-yellow-400 rounded">
+                        <h3 class="text-lg font-semibold mb-2 text-gray-700">الفائدة العملية</h3>
+                        <p class="text-gray-600">تقدر تنشئ نظام معياري، تعرف فيه الوظائف الأساسية وتترك التفاصيل للكلاسات المتخصصة، وهذا يسهل صيانة الكود وتطويره.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الواجهات -->
+    <section class="py-16  rounded-xl mt-4  bg-gray-50" id="interface">
+        <div class="container mx-auto px-4">
+            <div class="max-w-10xl bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xl mr-4">
+                            📜
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">Interface (الواجهة)</h2>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">التعريف</h3>
+                        <p class="text-gray-600">الواجهة هي عقد يحدد مجموعة من الدوال التي يجب على الكلاس الذي ينفذها (implements) أن يقدمها.
+                        في Dart، الواجهات تتحقق باستخدام <code class="bg-gray-200 px-2 py-1 rounded">abstract class</code> أو <code class="bg-gray-200 px-2 py-1 rounded">class</code> مع <code class="bg-gray-200 px-2 py-1 rounded">implements</code>.</p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">مثال واقعي</h3>
+                        <p class="text-gray-600 mb-4">تخيل نظام للدفع في متجر إلكتروني:</p>
+                        <ul class="list-disc pr-5 space-y-2 text-gray-600">
+                            <li>عندنا واجهة <span class="font-bold">PaymentMethod</span> تحتوي على دالة <code class="bg-gray-200 px-2 py-1 rounded">pay(amount)</code></li>
+                            <li>هناك عدة طرق دفع: بطاقة ائتمان، PayPal، ومحفظة إلكترونية. كل طريقة تنفيذ مختلف.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">مثال برمجي (Dart)</h3>
+                        <div class="code-block scroll-container">
+                            <pre class="p-4 text-gray-200"><code>abstract class PaymentMethod {
+  void pay(double amount);
+}
+
+class CreditCard implements PaymentMethod {
+  @override
+  void pay(double amount) {
+    print("تم الدفع $amount باستخدام بطاقة الائتمان");
+  }
+}
+
+class PayPal implements PaymentMethod {
+  @override
+  void pay(double amount) {
+    print("تم الدفع $amount باستخدام PayPal");
+  }
+}
+
+void main() {
+  PaymentMethod method = CreditCard();
+  method.pay(150.0);  // تم الدفع 150 باستخدام بطاقة الائتمان
+
+  method = PayPal();
+  method.pay(200.0);  // تم الدفع 200 باستخدام PayPal
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8 p-4 bg-green-50 border-r-4 border-green-400 rounded">
+                        <h3 class="text-lg font-semibold mb-2 text-gray-700">الفائدة العملية</h3>
+                        <p class="text-gray-600">لو انت بتبني نظام فيه أكثر من طريقة لتنفيذ وظيفة واحدة (مثل الدفع، الإشعارات، أو تسجيل الدخول)، بتستخدم الواجهات لتوحيد الكود مع السماح بتنفيذات مختلفة.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الثوابت -->
+    <section class="py-16 bg-white" id="static">
+        <div class="container mx-auto px-4">
+            <div class="max-w-10xl  bg-white rounded-xl shadow-md overflow-hidden card-hover">
+                <div class="p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-xl mr-4">
+                            ⚡
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">Static (المتغيرات والدوال الثابتة)</h2>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">التعريف</h3>
+                        <p class="text-gray-600">المتغير أو الدالة الثابتة هي شيء مشترك بين كل الكائنات ولا يحتاج إنشاء كائن للوصول إليه. تستخدم لحفظ بيانات أو وظائف عامة.</p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">مثال واقعي</h3>
+                        <p class="text-gray-600 mb-4">في تطبيق Flutter: عندك <span class="font-bold">ثيم ثابت</span> لكل التطبيق أو <span class="font-bold">اعدادات عامة</span>:</p>
+                        <ul class="list-disc pr-5 space-y-2 text-gray-600">
+                            <li>ثابت لتحديد الهوامش (padding)</li>
+                            <li>ثابت لعنوان URL لواجهة برمجة التطبيقات</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-gray-700">مثال Flutter عملي</h3>
+                        <div class="code-block scroll-container">
+                            <pre class="p-4 text-gray-200"><code>class AppSettings {
+  static const double defaultPadding = 16.0;
+  static const String apiEndpoint = "https://api.myapp.com";
+  
+  static void printSettings() {
+    print("Padding: $defaultPadding, API URL: $apiEndpoint");
+  }
+}
+
+void main() {
+  print(AppSettings.defaultPadding);   // 16.0
+  AppSettings.printSettings();          // Padding: 16.0, API URL: https://api.myapp.com
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8 p-4 bg-red-50 border-r-4 border-red-400 rounded">
+                        <h3 class="text-lg font-semibold mb-2 text-gray-700">الفائدة العملية</h3>
+                        <p class="text-gray-600">لو عندك قيمة أو وظيفة مش بتتغير أو تخص التطبيق كله مش كائن معين، تستخدم <code class="bg-gray-200 px-2 py-1 rounded">static</code> علشان توفر الموارد وتسهّل الاستخدام.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <section >
+        <!-- Class و Object -->
+        <div class="concept-card bg-white p-6 rounded-lg shadow-md mb-8 border-l-4 border-blue-500">
+            <h2 class="text-2xl font-bold mb-4 text-blue-700 flex items-center">
+                <span class="bg-blue-100 text-blue-600 p-2 rounded-full mr-3">1</span>
+                Class و Object
+            </h2>
+            <h3 class="text-xl font-semibold mb-3 text-gray-700">مثال حقيقي: نموذج بيانات (Data Model) للـUser في التطبيق</h3>
+            <div class="code-block bg-gray-800 text-blue-300 p-4 rounded overflow-x-auto mb-4">
+                <pre>class User {
+  String name;
+  int age;
+
+  User(this.name, this.age);
+}
+
+void main() {
+  User user1 = User('أحمد', 25);  // object من class User
+  print('الاسم: ${user1.name}, العمر: ${user1.age}');
+}</pre>
+            </div>
+            <div class="bg-blue-50 p-4 rounded-lg">
+                <h4 class="font-bold text-blue-700 mb-2">استخدام عملي:</h4>
+                <p>عادة كل بيانات تُجلب من API أو قاعدة بيانات تتحول لأوبجكت لتسهيل التعامل معها في واجهة المستخدم (مثلاً: عرض اسم المستخدم في الصفحة الرئيسية).</p>
+            </div>
+        </div>
+
+        <!-- Encapsulation -->
+        <div class="concept-card bg-white p-6 rounded-lg shadow-md mb-8 border-l-4 border-purple-500">
+            <h2 class="text-2xl font-bold mb-4 text-purple-700 flex items-center">
+                <span class="bg-purple-100 text-purple-600 p-2 rounded-full mr-3">2</span>
+                Encapsulation (التغليف)
+            </h2>
+            <h3 class="text-xl font-semibold mb-3 text-gray-700">مثال حقيقي: حماية بيانات داخل كلاس وإخفاؤها</h3>
+            <div class="code-block bg-gray-800 text-purple-300 p-4 rounded overflow-x-auto mb-4">
+                <pre>class BankAccount {
+  double _balance = 0; // خاص
+
+  double get balance => _balance;  // طريقة قراءة فقط
+
+  void deposit(double amount) {
+    if (amount > 0) _balance += amount;
+  }
+
+  void withdraw(double amount) {
+    if (amount > 0 && amount <= _balance) _balance -= amount;
+  }
+}
+
+void main() {
+  BankAccount acc = BankAccount();
+  acc.deposit(100);
+  acc.withdraw(50);
+  print(acc.balance);  // 50
+}</pre>
+            </div>
+            <div class="bg-purple-50 p-4 rounded-lg">
+                <h4 class="font-bold text-purple-700 mb-2">استخدام عملي:</h4>
+                <p>في التطبيقات المالية أو المحفظة الإلكترونية، نحمي بيانات الرصيد ولا نسمح بالتعديل المباشر، فقط من خلال دوال محددة.</p>
+            </div>
+        </div>
+
+        <!-- Inheritance و super -->
+        <div class="concept-card bg-white p-6 rounded-lg shadow-md mb-8 border-l-4 border-green-500">
+            <h2 class="text-2xl font-bold mb-4 text-green-700 flex items-center">
+                <span class="bg-green-100 text-green-600 p-2 rounded-full mr-3">3</span>
+                Inheritance و super
+            </h2>
+            <h3 class="text-xl font-semibold mb-3 text-gray-700">مثال حقيقي: بناء Widget مخصص يرث من StatelessWidget</h3>
+            <div class="code-block bg-gray-800 text-green-300 p-4 rounded overflow-x-auto mb-4">
+                <pre>import 'package:flutter/material.dart';
+
+class MyButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onPressed;
+
+  MyButton(this.text, this.onPressed);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(onPressed: onPressed, child: Text(text));
+  }
+}
+
+class RedButton extends MyButton {
+  RedButton(String text, VoidCallback onPressed)
+      : super(text, onPressed);  // استدعاء constructor الأب
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(primary: Colors.red),
+      child: Text(text),
+    );
+  }
+}</pre>
+            </div>
+            <div class="bg-green-50 p-4 rounded-lg">
+                <h4 class="font-bold text-green-700 mb-2">استخدام عملي:</h4>
+                <p>تخصيص Widgets عن طريق الوراثة لتغيير الشكل أو الوظائف مع إعادة استخدام الكود.</p>
+            </div>
+        </div>
+
+        <!-- Polymorphism -->
+        <div class="concept-card bg-white p-6 rounded-lg shadow-md mb-8 border-l-4 border-yellow-500">
+            <h2 class="text-2xl font-bold mb-4 text-yellow-700 flex items-center">
+                <span class="bg-yellow-100 text-yellow-600 p-2 rounded-full mr-3">4</span>
+                Polymorphism (تعدد الأشكال)
+            </h2>
+            <h3 class="text-xl font-semibold mb-3 text-gray-700">مثال حقيقي: Widgets تستخدم polymorphism عند التعامل مع قائمة متنوعة</h3>
+            <div class="code-block bg-gray-800 text-yellow-300 p-4 rounded overflow-x-auto mb-4">
+                <pre>abstract class Animal {
+  void speak();
+}
+
+class Dog implements Animal {
+  @override
+  void speak() => print("هاو هاو");
+}
+
+class Cat implements Animal {
+  @override
+  void speak() => print("مياو");
+}
+
+void main() {
+  List<Animal> animals = [Dog(), Cat()];
+  animals.forEach((animal) => animal.speak());
+}</pre>
+            </div>
+            <div class="bg-yellow-50 p-4 rounded-lg">
+                <h4 class="font-bold text-yellow-700 mb-2">استخدام عملي:</h4>
+                <p>في Flutter، كل Widget يرث من Widget لكن كل نوع منهم يعرض ويعمل بشكل مختلف. تستطيع التعامل معهم جميعًا عبر نوع مشترك.</p>
+            </div>
+        </div>
+
+        <!-- Abstract مع Extends -->
+        <div class="concept-card bg-white p-6 rounded-lg shadow-md mb-8 border-l-4 border-red-500">
+            <h2 class="text-2xl font-bold mb-4 text-red-700 flex items-center">
+                <span class="bg-red-100 text-red-600 p-2 rounded-full mr-3">5</span>
+                Abstract مع Extends
+            </h2>
+            <h3 class="text-xl font-semibold mb-3 text-gray-700">مثال حقيقي: إنشاء قاعدة لشاشات التطبيق</h3>
+            <div class="code-block bg-gray-800 text-red-300 p-4 rounded overflow-x-auto mb-4">
+                <pre>import 'package:flutter/material.dart';
+
+abstract class BasePage extends StatelessWidget {
+  Widget buildContent();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('تطبيق')),
+      body: buildContent(),
+    );
+  }
+}
+
+class HomePage extends BasePage {
+  @override
+  Widget buildContent() {
+    return Center(child: Text('الصفحة الرئيسية'));
+  }
+}</pre>
+            </div>
+            <div class="bg-red-50 p-4 rounded-lg">
+                <h4 class="font-bold text-red-700 mb-2">استخدام عملي:</h4>
+                <p>لإنشاء هيكل موحد لجميع صفحات التطبيق مع إمكانية تخصيص المحتوى.</p>
+            </div>
+        </div>
+
+        <!-- Interface -->
+        <div class="concept-card bg-white p-6 rounded-lg shadow-md mb-8 border-l-4 border-indigo-500">
+            <h2 class="text-2xl font-bold mb-4 text-indigo-700 flex items-center">
+                <span class="bg-indigo-100 text-indigo-600 p-2 rounded-full mr-3">6</span>
+                Interface (implements)
+            </h2>
+            <h3 class="text-xl font-semibold mb-3 text-gray-700">مثال حقيقي: التعامل مع عدة طرق للإشعارات</h3>
+            <div class="code-block bg-gray-800 text-indigo-300 p-4 rounded overflow-x-auto mb-4">
+                <pre>abstract class Notifier {
+  void notify(String message);
+}
+
+class PushNotifier implements Notifier {
+  @override
+  void notify(String message) {
+    print('Push: $message');
+  }
+}
+
+class EmailNotifier implements Notifier {
+  @override
+  void notify(String message) {
+    print('Email: $message');
+  }
+}</pre>
+            </div>
+            <div class="bg-indigo-50 p-4 rounded-lg">
+                <h4 class="font-bold text-indigo-700 mb-2">استخدام عملي:</h4>
+                <p>نفس الطريقة تُستخدم في Flutter مع واجهات تتيح تعدد التنفيذ.</p>
+            </div>
+        </div>
+
+        <!-- Static -->
+        <div class="concept-card bg-white p-6 rounded-lg shadow-md mb-8 border-l-4 border-pink-500">
+            <h2 class="text-2xl font-bold mb-4 text-pink-700 flex items-center">
+                <span class="bg-pink-100 text-pink-600 p-2 rounded-full mr-3">7</span>
+                Static
+            </h2>
+            <h3 class="text-xl font-semibold mb-3 text-gray-700">مثال حقيقي: Colors.red و TextTheme مثلاً</h3>
+            <div class="code-block bg-gray-800 text-pink-300 p-4 rounded overflow-x-auto mb-4">
+                <pre>void main() {
+  print(Colors.red);  // Static property من class Colors
+}</pre>
+            </div>
+            <div class="bg-pink-50 p-4 rounded-lg">
+                <h4 class="font-bold text-pink-700 mb-2">استخدام عملي:</h4>
+                <p><code>Colors</code> كلاس يحتوي على ثوابت ألوان تُستخدم في كل مكان، لا تحتاج إنشاء object.</p>
+            </div>
+        </div>
+
+        <!-- Enum -->
+        <div class="concept-card bg-white p-6 rounded-lg shadow-md mb-8 border-l-4 border-teal-500">
+            <h2 class="text-2xl font-bold mb-4 text-teal-700 flex items-center">
+                <span class="bg-teal-100 text-teal-600 p-2 rounded-full mr-3">8</span>
+                Enum
+            </h2>
+            <h3 class="text-xl font-semibold mb-3 text-gray-700">مثال حقيقي: حالة تحميل البيانات في التطبيق</h3>
+            <div class="code-block bg-gray-800 text-teal-300 p-4 rounded overflow-x-auto mb-4">
+                <pre>enum LoadingStatus { loading, completed, error }
+
+void main() {
+  LoadingStatus status = LoadingStatus.loading;
+
+  switch (status) {
+    case LoadingStatus.loading:
+      print("جاري التحميل...");
+      break;
+    case LoadingStatus.completed:
+      print("تم التحميل!");
+      break;
+    case LoadingStatus.error:
+      print("حدث خطأ");
+      break;
+  }
+}</pre>
+            </div>
+            <div class="bg-teal-50 p-4 rounded-lg">
+                <h4 class="font-bold text-teal-700 mb-2">استخدام عملي:</h4>
+                <p>تستخدم في Flutter كثيرًا لتنظيم حالات البيانات (مثل تحميل البيانات، الخطأ، النجاح).</p>
+            </div>
+        </div>
+
+        </section>
+</main>
+
+                    <script>
+        function createCar() {
+            const name = document.getElementById('carName').value;
+            const color = document.getElementById('carColor').value;
+            const speed = document.getElementById('carSpeed').value;
+            
+            const output = document.getElementById('output');
+            output.innerHTML = `
+                <p class="text-green-600 font-bold">تم إنشاء كائن سيارة جديد:</p>
+                <p class="mt-2">الاسم: <span class="font-bold">${name}</span></p>
+                <p>اللون: <span class="font-bold">${color}</span></p>
+                <p>السرعة: <span class="font-bold">${speed} كم/س</span></p>
+                <div class="mt-4 p-3 bg-blue-100 text-blue-800 rounded-lg">
+                    <p class="font-bold">النتيجة عند استدعاء دالة drive():</p>
+                    <p>السيارة ${name} لونها ${color} تمشي بسرعة ${speed}</p>
+                </div>
+            `;
+            
+            // Add animation
+            output.classList.add('animate-pulse');
+            setTimeout(() => {
+                output.classList.remove('animate-pulse');
+            }, 1000);
+        }
+    </script>
+
+                </body>
+
+                </html>
+                
